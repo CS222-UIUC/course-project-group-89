@@ -1,6 +1,8 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    branches: [ "Sammy", "Esther", "Emily", "Jessica"]
 
 jobs:
   build:
