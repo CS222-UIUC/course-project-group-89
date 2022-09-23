@@ -22,9 +22,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas
           pip install Flask
-
+          pip install requests app
       - name: Test with pytest
         run: |
           pip install pytest
           pip install pytest-cov
-          pytest ./tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
