@@ -23,8 +23,7 @@ jobs:
           pip install pandas
           pip install Flask
           pip install requests
-          pip install os
-          pip install datatime
+
       - name: Test with pytest
         run: |
           pip install pytest
