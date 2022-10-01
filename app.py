@@ -1,4 +1,4 @@
-'" this module is for the app "'
+'" this module is for the app where it renders a template and has two functions (testing for emily 10/1/22)"'
 
 import os
 from flask import Flask, render_template, request, jsonify
