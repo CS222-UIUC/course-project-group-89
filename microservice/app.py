@@ -3,26 +3,26 @@
 import os
 import requests
 import pandas as pd
+from flask import Flask, jsonify
 
-def fetchIfNotExists(url, fileName):
-  if not os.path.exists(fileName):
-    r = requests.get(url, stream=True)
-    with open(fileName, 'wb') as fd:
-      for chunk in r.iter_content(chunk_size=4096):
-        fd.write(chunk)
+def fetch_if_not_exists(url, file_name):
+    if not os.path.exists(file_name):
+        r = requests.get(url, stream=True)
+        with open(file_name, 'wb') as fd:
+            for chunk in r.iter_content(chunk_size=4096):
+                fd.write(chunk)
 
 # Ensure we have a GPA dataset and a courses dataset
-fetchIfNotExists("https://raw.githubusercontent.com/illinois/courses-dataset/master/course-schedule/2021-fall.csv", "courses.csv")
+fetch_if_not_exists(
+  "https://raw.githubusercontent.com/illinois/courses-dataset/master/course-schedule/2021-fall.csv", "courses.csv")
 
 # Open both as a pandas
 df_courses = pd.read_csv("courses.csv")
 
-
-from flask import Flask, jsonify
 app = Flask(__name__)
 
 @app.route('/<subject>/<number>/')
-def GET_subject_number(subject, number):
+def get_subject_number(subject, number):
   # Prep result:
   result = { "course": f"{subject} {number}" }
 
