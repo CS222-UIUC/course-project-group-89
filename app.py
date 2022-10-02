@@ -1,9 +1,10 @@
-'" this module is for the app where it renders a template and has two functions (testing for emily 10/1/22)"'
+'''this module renders a template and has two functions (testing for emily 10/1/22)'''
 
-import os
-from flask import Flask, render_template, request, jsonify
-import requests
-from datetime import datetime, timedelta, time
+# import os
+# from datetime import datetime, timedelta, time
+from flask import Flask, render_template
+# request, jsonify
+# import requests
 
 app = Flask(__name__)
 
