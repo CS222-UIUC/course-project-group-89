@@ -1,5 +1,3 @@
-'''Microservice for courses /waf'''
-
 import os
 # from typing import Type
 import requests
@@ -25,11 +23,13 @@ df_courses = pd.read_csv("courses.csv")
 
 app = Flask(__name__)
 
+#Check to see if class exists --> Needs modifiying for our needs
+
 @app.route('/<subject>/<number>/')
 def get_subject_number(subject, number):
     '''Grabs course #'''
     # Prep result:
-    result = { "course": f"{subject} {number}" }
+    result = { "course": f"{subject} {number}" } 
 
     # Cast `number` as an int and ensure `subject` is all caps:
     try:
@@ -56,10 +56,10 @@ def get_subject_number(subject, number):
         if len(course_lec) > 0:
             courses = course_lec
 
-        # Get the first result's data:
-        selected_course = courses.iloc[0]
-        result["Start Time"] = selected_course["Start Time"]
-        result["Days of Week"] = selected_course["Days of Week"]
+        # # Get the first result's data:
+        # selected_course = courses.iloc[0]
+        # result["Start Time"] = selected_course["Start Time"]
+        # result["Days of Week"] = selected_course["Days of Week"]
         status_code = 200
 
     return jsonify(result), status_code
