@@ -1,7 +1,7 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
-import os
+# import os
 # from typing import Type
-import requests
+# import requests
 import pandas as pd
 from flask import Flask, jsonify
 
@@ -13,11 +13,6 @@ from flask import Flask, jsonify
 #             for chunk in req.iter_content(chunk_size=4096):
 #                 fd.write(chunk)
 
-
-# # Ensure we have a GPA dataset and a courses dataset
-# fetch_if_not_exists(
-#   "https://raw.githubusercontent.com/illinois/courses-dataset/master/course-schedule/2021-fall.csv",
-#   "courses.csv")
 
 # Open both as a pandas
 df_courses = pd.read_csv("courses.csv")
