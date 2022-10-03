@@ -11,7 +11,8 @@ class TestMerge(unittest.TestCase):
             course_requirements.df_cs, course_requirements.df_cs_stats)
         ans = ["CS124", "CS128", "CS173", "MATH241", "MATH257", "CS222",
                "CS225", "CS233", "CS341", "CS357", "CS374", "CS421"]
-        self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
+        self.assertTrue('foo'.isupper())
+#         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
     def test_cs_astr(self):
         """to test cs + astro courses"""
         common_courses = course_requirements.merge(
