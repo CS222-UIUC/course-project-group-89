@@ -15,7 +15,7 @@ from flask import Flask, jsonify
 
 
 # Open both as a pandas
-df_courses = pd.read_csv("courses.csv")
+df_courses = pd.read_csv("./github/courses.csv")
 
 app = Flask(__name__)
 
