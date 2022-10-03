@@ -21,6 +21,7 @@ jobs:
         pip install pandas
         pip install Flask
         pip install requests
+        pip install pytest
 
     - name: Analysing the code with pylint
       run: |
