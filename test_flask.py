@@ -20,3 +20,7 @@ def pytest_sessionstart():
     '''Sets up compiler'''
     os.system("make clean")
     os.system("make")
+    os.system("python -m flask run")
+
+# def no_class(test_client):
+
