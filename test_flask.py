@@ -23,4 +23,3 @@ def pytest_sessionstart():
     os.system("python -m flask run")
 
 # def no_class(test_client):
-
