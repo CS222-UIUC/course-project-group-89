@@ -1,9 +1,14 @@
-from app import app
+'''Test Case to ensure Flask is running'''
+# import json
+# import io
+import os
 import pytest
-import json, io, os
+from app import app
+
 
 @pytest.fixture(scope='module')
 def test_client():
+    '''Sets up client server'''
     flask_app = app
     with flask_app.test_client() as testing_client:
         # Establish an application context
@@ -12,5 +17,6 @@ def test_client():
 
 @pytest.fixture(autouse=True, scope='session')
 def pytest_sessionstart():
+    '''Sets up compiler'''
     os.system("make clean")
     os.system("make")
