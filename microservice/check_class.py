@@ -1,22 +1,23 @@
+'''this module renders a template and has two functions (testing for emily 10/1/22)'''
 import os
 # from typing import Type
 import requests
 import pandas as pd
 from flask import Flask, jsonify
 
-def fetch_if_not_exists(url, file_name):
-    '''function to retrieve UIUC GPA dataset and Courses dataset'''
-    if not os.path.exists(file_name):
-        req = requests.get(url, stream=True)
-        with open(file_name, 'wb') as fd:
-            for chunk in req.iter_content(chunk_size=4096):
-                fd.write(chunk)
+# def fetch_if_not_exists(url, file_name):
+#     '''function to retrieve UIUC GPA dataset and Courses dataset'''
+#     if not os.path.exists(file_name):
+#         req = requests.get(url, stream=True)
+#         with open(file_name, 'wb') as fd:
+#             for chunk in req.iter_content(chunk_size=4096):
+#                 fd.write(chunk)
 
 
-# Ensure we have a GPA dataset and a courses dataset
-fetch_if_not_exists(
-  "https://raw.githubusercontent.com/illinois/courses-dataset/master/course-schedule/2021-fall.csv",
-  "courses.csv")
+# # Ensure we have a GPA dataset and a courses dataset
+# fetch_if_not_exists(
+#   "https://raw.githubusercontent.com/illinois/courses-dataset/master/course-schedule/2021-fall.csv",
+#   "courses.csv")
 
 # Open both as a pandas
 df_courses = pd.read_csv("courses.csv")
@@ -29,7 +30,7 @@ app = Flask(__name__)
 def get_subject_number(subject, number):
     '''Grabs course #'''
     # Prep result:
-    result = { "course": f"{subject} {number}" } 
+    result = { "course": f"{subject} {number}" }
 
     # Cast `number` as an int and ensure `subject` is all caps:
     try:
@@ -44,7 +45,7 @@ def get_subject_number(subject, number):
     courses = df_courses[ (df_courses["Subject"] == subject)
                         & (df_courses["Number"] == number)
                         & (df_courses["Start Time"] != "")
-                        & (df_courses["Start Time"] != "ARRANGED") ] 
+                        & (df_courses["Start Time"] != "ARRANGED") ]
 
     if len(courses) == 0:
         # Provide an error:
