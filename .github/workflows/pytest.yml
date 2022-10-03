@@ -30,6 +30,11 @@ jobs:
           pip install pytest-cov
           pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
           
-      - name: Unit Test
+      - name: General Unit Test
         run: |
           python test_flask.py
+      
+      - name: Backend Test
+        working-directory: ./backend
+        run: |
+          python test_backend.py
