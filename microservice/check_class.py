@@ -35,7 +35,7 @@ def get_subject_number(subject, number):
     try:
         number = int(number)
     except TypeError:
-        result["error"] = f"Course number `{number}` is not a number"
+        result["error"] = f"Course number `{number}` is not a number, try again"
         status_code = 404
         return jsonify(result), status_code
     subject = subject.upper()
@@ -48,7 +48,7 @@ def get_subject_number(subject, number):
 
     if len(courses) == 0:
         # Provide an error:
-        result["error"] = f"No course data available for {subject} {number}"
+        result["error"] = f"No course data for {subject} {number}"
         status_code = 404
     else:
         # Prefer LEC sections (for courses with discussions/labs)

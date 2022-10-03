@@ -17,4 +17,5 @@ def index():
 def main():
     "'this function is for main'"
     print("hi")
+    print("testing for Sammy")
     #backend file
