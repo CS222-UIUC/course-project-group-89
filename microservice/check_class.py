@@ -2,8 +2,8 @@
 # import os
 # from typing import Type
 # import requests
-import pandas as pd
-from flask import Flask, jsonify
+# import pandas as pd
+# from flask import Flask, jsonify
 
 # def fetch_if_not_exists(url, file_name):
 #     '''function to retrieve UIUC GPA dataset and Courses dataset'''
