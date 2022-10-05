@@ -40,10 +40,17 @@
       <h1>What Classes have you taken</h1>
 
       <div class="form-group row">
+        
         <label for="course1" class="col-sm-2 col-form-label">Course:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="course" name="course" placeholder="Course Subject and Number">
+          <input type="text" class="form-control selectpicker"   id="course" name="course" placeholder="Course Subject and Number">
+            Choose a Course Subject and Number  <SELECT name="course">
+            {% for c in cs_req %}
+            <option value= "{{c}}" SELECTED>{{c}}</option>"
+            {% endfor %}
+            </SELECT>
         </div>
+        
       </div>
 
       <button onclick="sendPOST();" class="btn btn-secondary">Add to List</button>
@@ -51,5 +58,10 @@
       <div id="content">
       </div>
     </div>
+    <script>
+      $(document).ready(function(){
+        $('.selectpicker').selectpicker();
+      })
+    </script>
   </body>
 </html>
