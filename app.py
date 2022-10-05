@@ -29,5 +29,4 @@ def main():
 
 def index():
     """Function printing python version."""
-    "'this function is for index.html'"
     return render_template("index.html")
