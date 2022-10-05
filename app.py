@@ -15,7 +15,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def dropdown():
-    cs_req = ["CS124", "CS128", "CS173", "MATH241", "MATH257", "CS210", "CS211", "CS222", "CS225", "CS233", "CS341", "CS357", "CS361", "CS374", "CS421"]
+    cs_req = ["CS124", "CS128", "CS173", "MATH241", "MATH257", 
+    "CS210", "CS211", "CS222", "CS225", "CS233", "CS341",
+    "CS357", "CS361", "CS374", "CS421"]
     return render_template('index.html', cs_req=cs_req)
 
 def main():
