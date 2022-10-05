@@ -24,7 +24,7 @@ jobs:
           pip install Flask
           pip install requests
 
-      - name: Test with pytest
+      - name: Test with pytest -here
         run: |
           pip install pytest
           pip install pytest-cov
