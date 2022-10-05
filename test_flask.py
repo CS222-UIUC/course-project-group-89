@@ -26,3 +26,10 @@ def pytest_sessionstart():
 
 
 # def drop_down_menu(test_client):
+
+
+# def check_boxes(test_client):
+
+# def core_classes(test_client):
+
+# def gen_eds(test_client):

@@ -2,7 +2,7 @@
 
 # import os
 # from datetime import datetime, timedelta, time
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 # request, jsonify
 # import requests
 
@@ -14,7 +14,11 @@ def index():
     "'this function is for index.html'"
     return render_template("index.html")
 
+
+@app.route('/class', methods=["POST"])
 def main():
     "'this function is for main'"
+    course = request.form["course"]
+    print("course: ", course)
     print("hi")
     #backend file
