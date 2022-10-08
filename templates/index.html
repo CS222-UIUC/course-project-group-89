@@ -37,14 +37,13 @@
   </head>
   <body>
     <div class="container">
-      <h1>What Classes have you taken</h1>
+      <h1>What Major are you</h1>
 
       <div class="form-group row">
         
-        <label for="course1" class="col-sm-2 col-form-label">Course:</label>
+        <label for="course1" class="col-sm-2 col-form-label">Major:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control selectpicker"   id="course" name="course" placeholder="Course Subject and Number">
-            Choose a Course Subject and Number  <SELECT name="course">
+            Choose a Major <SELECT name="course">
             {% for c in cs_req %}
             <option value= "{{c}}" SELECTED>{{c}}</option>"
             {% endfor %}
@@ -53,7 +52,7 @@
         
       </div>
 
-      <button onclick="sendPOST();" class="btn btn-secondary">Add to List</button>
+      <button onclick="sendPOST();" class="btn btn-secondary">Submit</button>
 
       <div id="content">
       </div>
