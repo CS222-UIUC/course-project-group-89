@@ -13,6 +13,14 @@ app = Flask(__name__)
 # def index():
 #   return render_template("index.html")
 
+# Comment
+#comment
+@app.route('/')
+def dropdown():
+    """Function printing python version."""
+    cs_req = ["CS + ASTRONOMY", "CS + STAT", "CS + GGIS"]
+
+
 @app.route('/')
 def dropdown():
     """Function printing python version."""
@@ -21,6 +29,14 @@ def dropdown():
 
 @app.route('/major', methods=["POST"])
 def main():
+    """Function printing python version."""
+    app.run()
+    return render_template('index.html')
+#backend file
+
+def index():
+    """Function printing python version."""
+    return render_template("index.html")
     "'this function is for main'"
     major = request.form["major"]
     print("major: ", major)
@@ -31,3 +47,4 @@ def main():
 def index():
     """Function printing python version."""
     return render_template("index.html")
+
