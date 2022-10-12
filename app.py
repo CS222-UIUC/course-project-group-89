@@ -12,11 +12,12 @@ app = Flask(__name__)
 #@app.route('/')
 # def index():
 #   return render_template("index.html")
-# comment
+# Comment
+#comment
 @app.route('/')
 def dropdown():
     """Function printing python version."""
-    cs_req = ["CS", "CS + STAT", "CS + GIS"]
+    cs_req = ["CS + ASTRONOMY", "CS + STAT", "CS + GGIS"]
     return render_template('index.html', cs_req=cs_req)
 
 def main():
