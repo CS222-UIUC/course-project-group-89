@@ -23,3 +23,13 @@ def pytest_sessionstart():
     os.system("python -m flask run")
 
 # def no_class(test_client):
+
+
+# def drop_down_menu(test_client):
+
+
+# def check_boxes(test_client):
+
+# def core_classes(test_client):
+
+# def gen_eds(test_client):
