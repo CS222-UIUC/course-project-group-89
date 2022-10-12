@@ -9,16 +9,25 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # Route for "/" (frontend):
+#@app.route('/')
+# def index():
+#   return render_template("index.html")
+
 @app.route('/')
-def index():
-    "'this function is for index.html'"
-    return render_template("index.html")
+def dropdown():
+    """Function printing python version."""
+    cs_req = ["CS + GIS", "CS+Astro", "CS + STAT", "CS"]
+    return render_template('index.html', cs_req=cs_req)
 
-
-@app.route('/class', methods=["POST"])
+@app.route('/major', methods=["POST"])
 def main():
     "'this function is for main'"
-    course = request.form["course"]
-    print("course: ", course)
-    print("hi")
+    major = request.form["major"]
+    print("major: ", major)
+    #Have backend team return the info in this function
     #backend file
+    return render_template("index.html")
+
+def index():
+    """Function printing python version."""
+    return render_template("index.html")
