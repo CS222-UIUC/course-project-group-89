@@ -12,7 +12,7 @@ app = Flask(__name__)
 #@app.route('/')
 # def index():
 #   return render_template("index.html")
-
+# comment
 @app.route('/')
 def dropdown():
     """Function printing python version."""
