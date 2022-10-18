@@ -2,10 +2,11 @@
 import pandas as pd
 
 # Individual DataFrames per major
-df_cs = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "MATH241", "MATH257",
-"CS210", "CS211", "CS222", "CS225", "CS233", "CS341", "CS357", "CS361", "CS374", "CS421"]},)
+df_cs_ggis = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "CS222",
+"CS225","CS211", "CS233", "CS341", "CS340", "CS374", "CS421", "MATH231", "MATH257", "STAT200",
+"STAT212", "CS361", "GGIS371", "GGIS379", "GGIS380"]})
 df_cs_stats = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "CS222", "CS225",
-"MATH241", "CS233", "CS341", "CS340",  "CS357", "MATH257", "MATH415", "MATH416", "CS374",
+"MATH241", "MATH231", "CS233", "CS341", "CS340",  "CS357", "MATH257", "MATH415", "MATH416", "CS374",
 "CS421", "STAT107", "STAT200", "STAT212", "STAT400", "STAT410", "STAT425", "STAT426"]})
 df_cs_astronomy = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "CS222",
 "CS225",  "CS233", "CS341", "CS340", "STAT200", "STAT212", "CS361", "CS374", "CS421", "MATH221",
