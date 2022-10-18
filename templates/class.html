@@ -9,7 +9,7 @@
     <title>CS 240: Weather Microservice</title>
     <script>
     function sendPOST() {
-      let formData = { course: $("#course").val() };
+      let formData = { class: $("#class").val() };
 
     // -------------------------------------------------
       //THIS NEED TO BE CHANGED AND UPDATED FOR CS 222 WORK
@@ -33,27 +33,29 @@
       //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
       // })
     };
-    </script>    
+    </script>   
+    
+ 
   </head>
   <body>
     <div class="container">
-      <h1>What Major are you</h1>
+      <h1>What Classes have you taken</h1>
       <div class="form-group row">
-        
-        <label for="course1" class="col-sm-2 col-form-label">Course:</label>
-        <div class="col-sm-10">
-            Choose a Major <SELECT name="course">
-            {% for c in cs_req %}
-            <option value= "{{c}}" SELECTED>{{c}}</option>"
-            {% endfor %}
-            </SELECT>
+        <label for="course1" class="exampleFormControlSelect2">Classes:</label>
+        <div class="checkboxes">
+            <label class="col-md-12">
+                    {% for c in cs_req %}
+                    <div> 
+                        <input type="checkbox" option value = "{{c}}" SELECTED>{{c}}</option>
+                    </div>
+                    {% endfor %}
+                  
+            </label>
         </div>
-        
+ 
       </div>
 
-      <button onclick="sendPOST();" class="btn btn-secondary">
-        <a href="./class">Submit</a>
-      </button>
+      <button onclick="sendPOST();" class="btn btn-secondary">Submit</button>
 
       <div id="content">
       </div>
