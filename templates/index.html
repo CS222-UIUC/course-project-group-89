@@ -20,21 +20,21 @@
 
     
       $.post("/major", formData)
-      .done(function (data) {
-        let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
-        let meetingDateStr = meetingDate.toLocaleString('en-US', {
-          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
-        })
+      // .done(function (data) {
+      //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
+      //   let meetingDateStr = meetingDate.toLocaleString('en-US', {
+      //     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
+      //   })
 
-        let forecastDate = new Date(Date.parse(data.forecastTime));
-        let forecastDateStr = forecastDate.toLocaleString('en-US', {
-          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
-        })        
-        $("#content").html(`<hr><h3>Weather for the next ${data.course} meeting</h3><ul><li>Next Meeting: ${meetingDateStr}</li><li>Forecast Time: ${forecastDateStr}</li><li>Temperature: ${data.temperature}°F</li><li>Forecast: ${data.shortForecast}</li></ul>`);
-      })
-      .fail(function (data) {
-        $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
-      })
+      //   let forecastDate = new Date(Date.parse(data.forecastTime));
+      //   let forecastDateStr = forecastDate.toLocaleString('en-US', {
+      //     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
+      //   })        
+      //   $("#content").html(`<hr><h3>Weather for the next ${data.course} meeting</h3><ul><li>Next Meeting: ${meetingDateStr}</li><li>Forecast Time: ${forecastDateStr}</li><li>Temperature: ${data.temperature}°F</li><li>Forecast: ${data.shortForecast}</li></ul>`);
+      // })
+      // .fail(function (data) {
+      //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
+      // })
     };
     </script>    
   </head>
