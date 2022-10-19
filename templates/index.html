@@ -8,15 +8,18 @@
 
     <title>CS 240: Weather Microservice</title>
     <script>
+    function myFunction() {
+        window.location.href="./class";  
+    }
     function sendPOST() {
-      let formData = { course: $("#course").val() };
+      let formData = { major: $("#major").val() };
 
     // -------------------------------------------------
       //THIS NEED TO BE CHANGED AND UPDATED FOR CS 222 WORK
     // -------------------------------------------------
 
     
-      // $.post("/weather", formData)
+      $.post("/major", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
       //   let meetingDateStr = meetingDate.toLocaleString('en-US', {
@@ -39,22 +42,18 @@
     <div class="container">
       <h1>What Major are you</h1>
       <div class="form-group row">
-        
-        <label for="course1" class="col-sm-2 col-form-label">Course:</label>
         <div class="col-sm-10">
-            Choose a Major <SELECT name="course">
+            Choose a Major 
+            <SELECT name="major" id="major">
             {% for c in cs_req %}
-            <option value= "{{c}}" SELECTED>{{c}}</option>"
+            <option value= "{{c}}" SELECTED>{{c}}</option> 
             {% endfor %}
             </SELECT>
         </div>
-        
       </div>
-
-      <button onclick="sendPOST();" class="btn btn-secondary">
-        <a href="./class">Submit</a>
+      <button onclick="sendPOST();myFunction()" 
+      class="btn btn-secondary">Submit</a> 
       </button>
-
       <div id="content">
       </div>
     </div>
