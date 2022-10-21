@@ -8,10 +8,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Route for "/" (frontend):
-#@app.route('/')
-# def index():
-#   return render_template("index.html")
 major_global = ""
 @app.route('/')
 def dropdown():
