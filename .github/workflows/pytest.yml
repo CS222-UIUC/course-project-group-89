@@ -27,8 +27,7 @@ jobs:
       - name: Test with pytest -here
         run: |
           pip install pytest
-          pip install pytest-cov
-          pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          pytest --doctest-modules --junitxml=junit/test-results.xml
       
       - name: Pytest Coverage Comment
         uses: MishaKav/pytest-coverage-comment@v1.1.35
@@ -39,8 +38,4 @@ jobs:
       - name: General Unit Test
         run: |
           python test_flask.py
-      
-      - name: Backend Test
-        working-directory: ./backend
-        run: |
-          python test_backend.py
+
