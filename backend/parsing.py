@@ -27,6 +27,13 @@ def sort_core_classes(major_):
 
 df_core_classes = sort_core_classes("cs + astronomy")
 
+def sort_common_courses(user_one_courses, user_two_courses):
+    '''takes 2 different user's DF of the courses they can take and
+    returns courses they can take together'''
+    common_courses = user_one_courses.merge(
+        user_two_courses, how = 'inner', on='Subject and Number')
+    return common_courses
+
 def check_credit_hours(selected_classes, major_requirements, credit_limit):
     '''Takes User1's DF of selected courses. Returns additional courses within credit limit'''
     num_credits = selected_classes['Credit Hours'].dropna().str.extract(r"(\d+)").astype(int).sum()
