@@ -1,11 +1,11 @@
 "'this module reades into the courses.csv'"
 from queue import Empty
+import os
 import pandas as pd
 import course_requirements
-import os
 #/Users/sammysharief/CS_222/course-project-group-89/backend/courses.csv
 print(os.getcwd())
-df_ = pd.read_csv('../backend/courses.csv')
+df_ = pd.read_csv('.../backend/courses.csv')
 
 df_['Subject and Number'] = df_['Subject'] + df_['Number'].map(str)
 df_ = df_.drop(columns = ['Subject', 'Number'])
