@@ -2,7 +2,7 @@
 from queue import Empty
 import pandas as pd
 import course_requirements
-df_ = pd.read_csv('microservice/courses.csv')
+df_ = pd.read_csv('/microservice/courses.csv')
 df_['Subject and Number'] = df_['Subject'] + df_['Number'].map(str)
 df_ = df_.drop(columns = ['Subject', 'Number'])
 
