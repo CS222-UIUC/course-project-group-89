@@ -3,7 +3,7 @@ from queue import Empty
 import pandas as pd
 import course_requirements
 #/Users/sammysharief/CS_222/course-project-group-89/backend/courses.csv
-df_ = pd.read_csv('course-project-group-89/backend/courses.csv')
+df_ = pd.read_csv('../course-project-group-89/backend/courses.csv')
 df_['Subject and Number'] = df_['Subject'] + df_['Number'].map(str)
 df_ = df_.drop(columns = ['Subject', 'Number'])
 
