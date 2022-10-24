@@ -36,3 +36,12 @@ jobs:
           pytest-coverage-path: ./pytest-coverage.txt
           junitxml-path: ./pytest.xml
           
+      - name: General Unit Test
+        run: |
+          python test_flask.py
+
+      - name: Backend Test
+        working-directory: ./backend
+        run: |
+          python test_backend.py
+          
