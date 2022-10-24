@@ -2,8 +2,10 @@
 import unittest
 import course_requirements
 import pandas as pd
-from parsing import df_, df_core_classes, check_credit_hours
-
+from parsing import df_core_classes, check_credit_hours
+df_ = pd.read_csv('/microservice/courses.csv')
+df_['Subject and Number'] = df_['Subject'] + df_['Number'].map(str)
+df_ = df_.drop(columns = ['Subject', 'Number'])
 class TestMerge(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
     def test_cs_stats(self):
