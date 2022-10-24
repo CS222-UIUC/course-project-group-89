@@ -22,7 +22,7 @@ def main():
     print("in main(), major: ", major)
     with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
         curr_file.write(major)
-        curr_file.write("\n")  
+        curr_file.write("\n")
     curr_file.close()
     # MAJOR_GLOBAL = major
     # print("MAJOR_GLOBAL: ", MAJOR_GLOBAL)
@@ -81,6 +81,6 @@ def classes():
 
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         curr_file.write(classes_taken)
-        curr_file.write("\n")  
+        curr_file.write("\n")
     curr_file.close()
     return render_template("class.html")
