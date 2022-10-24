@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route('/')
 def dropdown():
     """Function printing python version."""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "CS + STATS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"]
     return render_template('index.html', cs_req=cs_req)
 
 @app.route('/major', methods=["POST"])
@@ -63,7 +63,7 @@ def checkboxes():
     cs_req = []
     if major == "CS":
         cs_req = df_cs
-    elif major == "CS + STATS":
+    elif major == "Stats & CS":
         cs_req = df_cs_stats
         # return render_template("class.html", cs_req= df_cs_stats)
     elif major == "CS + GGIS":
