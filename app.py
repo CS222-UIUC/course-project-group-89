@@ -20,9 +20,9 @@ def main():
     "'this function is for main'"
     major = request.form["major"]
     print("in main(), major: ", major)
-    curr_file = open("store_user_input.txt", "w+", encoding="utf8")
-    curr_file.write(major)
-    curr_file.write("\n")
+    with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
+        curr_file.write(major)
+        curr_file.write("\n")  
     curr_file.close()
     # MAJOR_GLOBAL = major
     # print("MAJOR_GLOBAL: ", MAJOR_GLOBAL)
@@ -78,8 +78,9 @@ def classes():
     "'Handle return of checkboxes'"
     classes_taken = request.form["class"]
     print("classes_taken: ", classes_taken)
-    curr_file = open("store_user_input.txt", "a", encoding="utf8")
-    curr_file.write(classes_taken)
-    curr_file.write("\n")
+
+    with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
+        curr_file.write(classes_taken)
+        curr_file.write("\n")  
     curr_file.close()
     return render_template("class.html")
