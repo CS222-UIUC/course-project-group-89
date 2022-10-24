@@ -20,10 +20,10 @@ def main():
     "'this function is for main'"
     major = request.form["major"]
     print("in main(), major: ", major)
-    f = open("store_user_input.txt", "w+")
-    f.write(major)
-    f.write("\n")
-    f.close()
+    curr_file = open("store_user_input.txt", "w+", encoding="utf8")
+    curr_file.write(major)
+    curr_file.write("\n")
+    curr_file.close()
     # MAJOR_GLOBAL = major
     # print("MAJOR_GLOBAL: ", MAJOR_GLOBAL)
     #Have backend team return the info in this function
@@ -57,38 +57,29 @@ def checkboxes():
     "STAT 212", "CS 361", "GGIS 371", "GGIS 379", "GGIS 380"]
 
     major = ""
-    with open("store_user_input.txt") as f:
-        major = f.readline().rstrip()
+    with open("store_user_input.txt", "r", encoding="utf8") as curr_file:
+        major = curr_file.readline().rstrip()
     print("in checkboxes(): ", major)
+    cs_req = []
     if major == "CS":
-        print(major, "should be CS here")
-        f.close()
-        return render_template("class.html", cs_req= df_cs)
+        cs_req = df_cs
     elif major == "CS + STATS":
-        print(major, "should be CS + STATS here")
-        f.close()
-        return render_template("class.html", cs_req= df_cs_stats)
+        cs_req = df_cs_stats
+        # return render_template("class.html", cs_req= df_cs_stats)
     elif major == "CS + GGIS":
-        print(major, "should be CS + GGIS here")
-        f.close()
-        return render_template("class.html", cs_req= df_cs_ggis)
+        cs_req = df_cs_ggis
     elif major == "CS + ASTRO":
-        f.close()
-        return render_template("class.html", cs_req= df_cs_astronomy)
-    else:
-        f.close()
-        print("something is wrong here")
-        return None
-
-
+        cs_req = df_cs_astronomy
+    curr_file.close()
+    return render_template("class.html", cs_req= cs_req)
 
 @app.route('/class', methods=["POST"])
 def classes():
     "'Handle return of checkboxes'"
     classes_taken = request.form["class"]
     print("classes_taken: ", classes_taken)
-    f = open("store_user_input.txt", "a")
-    f.write(classes_taken)
-    f.write("\n")
-    f.close()
+    curr_file = open("store_user_input.txt", "a", encoding="utf8")
+    curr_file.write(classes_taken)
+    curr_file.write("\n")
+    curr_file.close()
     return render_template("class.html")
