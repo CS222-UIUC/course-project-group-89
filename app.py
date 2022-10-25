@@ -35,12 +35,14 @@ def main():
 def friendmajor():
     #Have backend team return the info in this function
     #backend file
+    """Function printing python version."""
     cs_req = ["CS + GIS", "CS + ASTRO", "CS + STAT", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 
 @app.route('/class', methods=["POST", "GET"])
 def classes():
+    """Function printing python version."""
     df_cs =  ["CS124", "CS128", "CS173", "MATH241", "MATH257",
     "CS210", "CS211", "CS222", "CS225", "CS233", "CS341", "CS357", "CS361", "CS374", "CS421"]
     df_cs_stats =  ["CS124", "CS128", "CS173", "CS222", "CS225",
@@ -60,6 +62,7 @@ def classes():
 
 @app.route('/friendclass', methods=["POST", "GET"])
 def friendclasses():
+    """Function printing python version."""
     df_cs =  ["CS124", "CS128", "CS173", "MATH241", "MATH257",
     "CS210", "CS211", "CS222", "CS225", "CS233", "CS341", "CS357", "CS361", "CS374", "CS421"]
     df_cs_stats =  ["CS124", "CS128", "CS173", "CS222", "CS225",
