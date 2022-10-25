@@ -53,9 +53,9 @@ def classes():
     "MATH220", "MATH225", "MATH257", "MATH231", "PHYS211", "PHYS212", "MATH241",
     "ASTR210", "ASTR310", "ASTR404", "ASTR405", "ASTR406", "ASTR414"]
     place_holder = ""
-    if (place_holder == "CS"):
+    if place_holder == "CS":
         return render_template("class.html", cs_req= df_cs)
-    elif (place_holder == "CS + STATS"):
+    if place_holder == "CS + STATS":
         return render_template("class.html", cs_req= df_cs_stats)
     else:
         return render_template("class.html", cs_req= df_cs_astronomy)
@@ -73,9 +73,9 @@ def friendclasses():
     "MATH220", "MATH225", "MATH257", "MATH231", "PHYS211", "PHYS212", "MATH241",
     "ASTR210", "ASTR310", "ASTR404", "ASTR405", "ASTR406", "ASTR414"]
     place_holder = ""
-    if (place_holder == "CS"):
+    if place_holder == "CS":
         return render_template("class.html", cs_req= df_cs)
-    elif (place_holder == "CS + STATS"):
+    if place_holder == "CS + STATS":
         return render_template("class.html", cs_req= df_cs_stats)
     else:
         return render_template("friendclass.html", cs_req= df_cs_astronomy)
