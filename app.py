@@ -57,8 +57,7 @@ def classes():
         return render_template("class.html", cs_req= df_cs)
     if place_holder == "CS + STATS":
         return render_template("class.html", cs_req= df_cs_stats)
-    else:
-        return render_template("class.html", cs_req= df_cs_astronomy)
+    return render_template("class.html", cs_req= df_cs_astronomy)
 
 @app.route('/friendclass', methods=["POST", "GET"])
 def friendclasses():
@@ -77,8 +76,7 @@ def friendclasses():
         return render_template("class.html", cs_req= df_cs)
     if place_holder == "CS + STATS":
         return render_template("class.html", cs_req= df_cs_stats)
-    else:
-        return render_template("friendclass.html", cs_req= df_cs_astronomy)
+    return render_template("friendclass.html", cs_req= df_cs_astronomy)
 
 
 
