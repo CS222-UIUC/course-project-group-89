@@ -3,7 +3,6 @@ import unittest
 import course_requirements
 import pandas as pd
 from parsing import df_, df_core_classes, check_credit_hours
-
 class TestMerge(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
     def test_cs_stats(self):
@@ -18,7 +17,8 @@ class TestMerge(unittest.TestCase):
         common_courses = course_requirements.merge(
             course_requirements.df_cs_ggis, course_requirements.df_cs_astronomy)
         ans = ["CS124", "CS128", "CS173", "MATH231", "MATH257", "CS222",
-               "CS225", "CS233", "CS340", "CS341", "CS361", "CS374", "CS421", "STAT200", "STAT212"]
+               "CS225", "CS233", "CS340", "CS341", "CS361", "CS374", "CS421", "STAT200",
+              "STAT212"]
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
     def test_stat_astr(self):
         """to test stat & astro merged courses"""
