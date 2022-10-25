@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+'''this module renders a template and has two functions (testing for emily 10/1/22)'''
 import os
+from flask import Flask, render_template, request
 from parsing import sort_core_classes
 
 app = Flask(__name__)
@@ -73,7 +74,6 @@ def friendclasses():
 @app.route('/class', methods=["GET"])
 def checkboxes():
     "'checboxes for class.html'"
-    
     # df_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
     # "CS 210", "CS 211", "CS 222", "CS 225", "CS 233",
     # "CS 341", "CS 357", "CS 361", "CS 374", "CS 421"]

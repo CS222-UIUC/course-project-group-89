@@ -1,7 +1,7 @@
 """This module will include testing for various majors for backend"""
 import unittest
-import course_requirements
 import pandas as pd
+import course_requirements
 from parsing import df_, df_core_classes, check_credit_hours
 class TestMerge(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
