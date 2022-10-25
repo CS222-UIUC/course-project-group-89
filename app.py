@@ -30,7 +30,6 @@ def main():
     #backend file
     return render_template("index.html")
 
-<<<<<<< HEAD
 
 @app.route('/friendmajor', methods=["POST", "GET"])
 def friendmajor():
@@ -78,7 +77,7 @@ def friendclasses():
     else:
         return render_template("friendclass.html", cs_req= df_cs_astronomy)
 
-=======
+
 
 @app.route('/class', methods=["GET"])
 def checkboxes():
@@ -92,7 +91,6 @@ def checkboxes():
     "MATH 257", "MATH 415", "MATH 416", "CS 374", "CS 421",
     "STAT 107", "STAT 200", "STAT 212", "STAT 400",
     "STAT 410", "STAT 425", "STAT 426"]
->>>>>>> c6014eaa2c407373dbcd15bf93fce60ea287ba87
 
     df_cs_astronomy =  ["CS 124", "CS 128", "CS 173", "CS 222",
     "CS 225",  "CS 233", "CS 341", "CS 340", "STAT 200",
