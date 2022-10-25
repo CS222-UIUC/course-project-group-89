@@ -124,14 +124,14 @@ def checkboxes():
     curr_file.close()
     return render_template("class.html", cs_req= cs_req)
 
-@app.route('/class', methods=["POST"])
-def classes():
-    "'Handle return of checkboxes'"
-    classes_taken = request.form["class"]
-    print("classes_taken: ", classes_taken)
+# @app.route('/class', methods=["POST"])
+# def classes():
+#     "'Handle return of checkboxes'"
+#     classes_taken = request.form["class"]
+#     print("classes_taken: ", classes_taken)
 
-    with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-        curr_file.write(classes_taken)
-        curr_file.write("\n")
-    curr_file.close()
-    return render_template("class.html")
+#     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
+#         curr_file.write(classes_taken)
+#         curr_file.write("\n")
+#     curr_file.close()
+#     return render_template("class.html")
