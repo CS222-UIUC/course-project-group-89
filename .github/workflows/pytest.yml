@@ -36,6 +36,11 @@ jobs:
         run: pytest
 
           
+      - name: Report via Environment
+        env:
+          pytest_github_report: true
+        run: pytest
+          
       - name: Unit Test
         run: |
           python test_flask.py
