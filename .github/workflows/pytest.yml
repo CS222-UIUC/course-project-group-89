@@ -23,11 +23,17 @@ jobs:
           pip install pandas
           pip install Flask
           pip install requests
+          
       - name: Test with pytest
         run: |
           pip install pytest
           pip install pytest-cov
           pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          
+      - name: Report via Environment
+        env:
+          pytest_github_report: true
+        run: pytest
           
       - name: Unit Test
         run: |
