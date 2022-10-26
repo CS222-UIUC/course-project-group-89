@@ -2,7 +2,9 @@
 import unittest
 import pandas as pd
 import course_requirements
-from parsing import df_, df_core_classes, check_credit_hours
+import pandas as pd
+from parsing import df_, df_core_classes, check_credit_hours, remove
+
 class TestMerge(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
     def test_cs_stats(self):
@@ -41,6 +43,11 @@ class TestCreditHours(unittest.TestCase):
 
         available_classes = check_credit_hours(user1, df_core_classes, 18)
         assert available_classes['CRN'].count() == 2
+    def test2(self):
+        """gets rid of all CS124 classes after user1 selects it"""
+        remove("CS124", df_core_classes)
+        condition = 'CS124' in set(df_core_classes['Subject and Number'])
+        assert condition is False
 
 if __name__ == '__main__':
     unittest.main()
