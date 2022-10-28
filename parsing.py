@@ -5,7 +5,7 @@ import course_requirements
 
 df_ = pd.read_csv('courses.csv')
 
-df_['Subject and Number'] = df_['Subject'] + df_['Number'].map(str)
+df_['Subject and Number'] = df_['Subject'] + " " + df_['Number'].map(str)
 df_ = df_.drop(columns = ['Subject', 'Number'])
 
 def sort_core_classes(major_):
@@ -13,10 +13,11 @@ def sort_core_classes(major_):
     df_user_information = pd.DataFrame(columns = df_.columns.tolist())
     core_course_list = Empty
     if major_ == "CS + MATH":
-        print("math major over here")
+        # print("math major over here")
         # print(course_requirements.MATH)
         # print("math major over here")
         core_course_list = course_requirements.df_cs_math.values.tolist()
+        # print(core_course_list)
     elif major_ == "STAT & CS":
         core_course_list = course_requirements.df_cs_stats.values.tolist()
     elif major_ == "CS + ASTRO":
@@ -36,10 +37,10 @@ def get_unique_classes(df_classes):
     # list_to_return = df_to_return['Subject and Number'].tolist()
     return df_to_return
 
-df_user_backend = sort_core_classes("CS + MATH")
-print(df_user_backend)
-df_user_frontend = get_unique_classes(df_user_backend)
-print(df_user_frontend)
+# df_user_backend = sort_core_classes("CS + MATH")
+# print(df_user_backend)
+# df_user_frontend = get_unique_classes(df_user_backend)
+# print(df_user_frontend)
 
 def sort_common_courses(user_one_courses, user_two_courses):
     '''takes 2 different user's DF of the courses they can take and
