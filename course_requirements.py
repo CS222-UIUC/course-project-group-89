@@ -2,16 +2,20 @@
 import pandas as pd
 
 # Individual DataFrames per major
-df_cs_ggis = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "CS222",
-"CS225","CS211", "CS233", "CS341", "CS340", "CS374", "CS421", "MATH231", "MATH257", "STAT200",
-"STAT212", "CS361", "GGIS371", "GGIS379", "GGIS380"]})
-df_cs_stats = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "CS222", "CS225",
-"MATH241", "MATH231", "CS233", "CS341", "CS340",  "CS357", "MATH257", "MATH415", "MATH416", "CS374",
-"CS421", "STAT107", "STAT200", "STAT212", "STAT400", "STAT410", "STAT425", "STAT426"]})
-df_cs_astronomy = pd.DataFrame({"technical requirements" : ["CS124", "CS128", "CS173", "CS222",
-"CS225",  "CS233", "CS341", "CS340", "STAT200", "STAT212", "CS361", "CS374", "CS421", "MATH221",
-"MATH220", "MATH225", "MATH257", "MATH231", "PHYS211", "PHYS212", "MATH241",
-"ASTR210", "ASTR310", "ASTR404", "ASTR405", "ASTR406", "ASTR414"]})
+df_cs_ggis = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222",
+"CS 225","CS 211", "CS 233", "CS 341", "CS 340", "CS 374", "CS 421", "MATH 231", "MATH 257",
+"STAT 200","STAT 212", "CS 361", "GGIS 371", "GGIS 379", "GGIS 380"]})
+df_cs_stats = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222",
+"CS 225","MATH 241", "MATH 231", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257", "MATH 415",
+"MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200", "STAT 212", "STAT 400", "STAT 410",
+"STAT 425", "STAT 426"]})
+df_cs_math = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222",
+"CS 225","CS 233", "CS 341", "CS 340",  "CS 357", "CS 374", "CS 421", "CS 450",
+"MATH 220", "MATH 231","MATH 241", "MATH 257", "MATH 416",]})
+df_cs_astronomy = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222",
+"CS 225",  "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374", "CS 421",
+"MATH 221","MATH 220", "MATH 225", "MATH 257", "MATH 231", "PHYS 211", "PHYS 212", "MATH 241",
+"ASTR 210", "ASTR 310", "ASTR 404", "ASTR4 05", "ASTR 406", "ASTR 414"]})
 df_cs = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "MATH 241",
 "MATH 257", "CS 210", "CS 211", "CS 222", "CS 225", "CS 233",
 "CS 341", "CS 357", "CS 361", "CS 374", "CS 421"]})

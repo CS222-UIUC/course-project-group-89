@@ -5,25 +5,42 @@ import course_requirements
 
 df_ = pd.read_csv('courses.csv')
 
-df_['Subject and Number'] = df_['Subject'] + df_['Number'].map(str)
+df_['Subject and Number'] = df_['Subject'] + " " + df_['Number'].map(str)
 df_ = df_.drop(columns = ['Subject', 'Number'])
 
 def sort_core_classes(major_):
     '''returns core classes given a major'''
     df_user_information = pd.DataFrame(columns = df_.columns.tolist())
     core_course_list = Empty
-    if major_ == "cs + ggis":
-        core_course_list = course_requirements.df_cs_ggis.values.tolist()
-    elif major_ == "cs + stat":
+    if major_ == "CS + MATH":
+        # print("math major over here")
+        # print(course_requirements.MATH)
+        # print("math major over here")
+        core_course_list = course_requirements.df_cs_math.values.tolist()
+        # print(core_course_list)
+    elif major_ == "STAT & CS":
         core_course_list = course_requirements.df_cs_stats.values.tolist()
-    elif major_ == "cs + astronomy":
+    elif major_ == "CS + ASTRO":
         core_course_list = course_requirements.df_cs_astronomy.values.tolist()
     for course in core_course_list:
         entry = df_.loc[df_['Subject and Number'] == course[0]]
+        # print("entry: ", entry)
         df_user_information = pd.concat([df_user_information, entry])
     return df_user_information
 
-df_core_classes = sort_core_classes("cs + astronomy")
+def get_unique_classes(df_classes):
+    '''this function returns a list of the unique core courses given someone's major'''
+    # df_classes: dataframe from getting user's major to include all possible major-related courses
+    # df_to_return: gets unique major-related courses from inputted dataframe
+    df_to_return = df_classes.drop_duplicates(subset=['Subject and Number'])
+    # list_to_return: converts all 'Subject and Number' items in column into list to return
+    # list_to_return = df_to_return['Subject and Number'].tolist()
+    return df_to_return
+
+# df_user_backend = sort_core_classes("CS + MATH")
+# print(df_user_backend)
+# df_user_frontend = get_unique_classes(df_user_backend)
+# print(df_user_frontend)
 
 def sort_common_courses(user_one_courses, user_two_courses):
     '''takes 2 different user's DF of the courses they can take and
