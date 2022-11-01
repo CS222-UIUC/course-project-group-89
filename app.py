@@ -7,16 +7,19 @@ from parsing import sort_core_classes
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
-    "CS 210", "CS 211", "CS 222", "CS 225", "CS 233", "CS 341", "CS 357", "CS 361", "CS 374", "CS 421"]
-    
+    "CS 210", "CS 211", "CS 222", "CS 225", "CS 233", "CS 341",
+    "CS 357", "CS 361", "CS 374", "CS 421"]
+
 class_cs_stats =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "MATH 241", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257", "MATH 415", "MATH 416", "CS 374",
-    "CS 421", "STAT 107", "STAT 200", "STAT 212", "STAT 400", "STAT 410", "STAT 425", "STAT 426"]
-    
-class_cs_astro =  ["CS 124", "CS 128", "CS 173", "CS 222",
-    "CS 225",  "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374", "CS 421", "MATH 221",
-    "MATH 220", "MATH 225", "MATH 257", "MATH 231", "PHYS 211", "PHYS 212", "MATH 241",
-    "ASTR 210", "ASTR 310", "ASTR 404", "ASTR 405", "ASTR 406", "ASTR 414"]
+    "MATH 241", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257",
+    "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200",
+     "STAT 212", "STAT 400", "STAT 410", "STAT 425", "STAT 426"]
+ 
+class_cs_astro =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
+    "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374",
+    "CS 421", "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
+    "PHYS 211", "PHYS 212", "MATH 241", "ASTR 210", "ASTR 310", "ASTR 404",
+    "ASTR 405", "ASTR 406", "ASTR 414"]
 
 class_cs_ggis = ["Needs to be Removed"]
 # Route for "/" (frontend):
@@ -37,9 +40,7 @@ def main():
         curr_file.write("\n")
     curr_file.close()
     return render_template("index.html")
-'''
-"CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"
-'''
+
 @app.route('/class', methods=["GET"])
 def checkboxes():
     "'checboxes for class.html'"
@@ -73,11 +74,12 @@ def store_classes():
 @app.route('/classinfo', methods=["GET"])
 def class_info_main():
     """Function printing python version."""
-    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", 
-    "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
+    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm",
+    "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
 
-    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-    
+    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+    14, 15, 16, 17, 18]
+
     return render_template('classinfo.html', time_range=time_range, credit_hours = credit_hours)
 '''
 NOW GET FRIEND'S CLASS
@@ -114,14 +116,10 @@ def friendclasses():
 @app.route('/friendclassinfo', methods=["GET"])
 def friend_class_info_main():
     """Function printing python version."""
-    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", 
-    "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
+    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm",
+    "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
 
-    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-    
+    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+    14, 15, 16, 17, 18]
+
     return render_template('friendclassinfo.html', time_range=time_range, credit_hours = credit_hours)
-
-
-
-
-
