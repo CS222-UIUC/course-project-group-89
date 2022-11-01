@@ -1,6 +1,6 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
 import os
-from flask import Flask, render_template, request
+from flask import Flask, session, render_template, request
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
@@ -60,12 +60,13 @@ def checkboxes():
 @app.route('/class', methods=["POST"])
 def store_classes():
     "'checboxes for class.html'"
-    courses = request.form["courses"]
-    print("in main(), major: ", courses)
-    with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
-        curr_file.write(courses)
-        curr_file.write("\n")
-    curr_file.close()
+    print("hi")
+    courses = request.form.getlist("courses")
+    print("in main()POST, courses: ", courses)
+    # with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
+    #     curr_file.write(courses)
+    #     curr_file.write("\n")
+    # curr_file.close()
     return render_template("class.html")
 
 @app.route('/classinfo', methods=["GET"])

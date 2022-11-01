@@ -22,10 +22,22 @@ def pytest_sessionstart():
     os.system("make")
     os.system("python -m flask run")
 
-# def no_class(test_client):
+def no_class(test_client):
+ '''Sets up no_class server'''
+    flask_app = app
+    with flask_app.test_client() as testing_client:
+        # Establish an application context
+        with flask_app.app_context():
+            yield testing_client
 
 
-# def drop_down_menu(test_client):
+ def drop_down_menu(test_client):
+    '''Sets up drop down server'''
+    flask_app = app
+    with flask_app.test_client() as testing_client:
+        # Establish an application context
+        with flask_app.app_context():
+            yield testing_client
 
 
 # def check_boxes(test_client):
