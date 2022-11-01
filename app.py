@@ -117,5 +117,5 @@ def friend_class_info_main():
     credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
     14, 15, 16, 17, 18]
 
-    return render_template('friendclassinfo.html', 
+    return render_template('friendclassinfo.html',
     time_range=time_range, credit_hours = credit_hours)
