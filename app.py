@@ -70,6 +70,15 @@ def store_classes():
     curr_file.close()
     return render_template("class.html")
 
+@app.route('/classinfo', methods=["GET"])
+def class_info_main():
+    """Function printing python version."""
+    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", 
+    "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
+
+    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    
+    return render_template('classinfo.html', time_range=time_range, credit_hours = credit_hours)
 '''
 NOW GET FRIEND'S CLASS
 '''
@@ -100,6 +109,17 @@ def friendclasses():
         cs_req = class_cs
     curr_file.close()
     return render_template("friendclass.html", cs_req = cs_req)
+
+
+@app.route('/friendclassinfo', methods=["GET"])
+def friend_class_info_main():
+    """Function printing python version."""
+    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", 
+    "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
+
+    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    
+    return render_template('friendclassinfo.html', time_range=time_range, credit_hours = credit_hours)
 
 
 
