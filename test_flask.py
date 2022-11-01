@@ -22,13 +22,19 @@ def pytest_sessionstart():
     os.system("make")
     os.system("python -m flask run")
 
-def no_class(test_client):
-    test_client()
+# def no_class(test_client):
+    # os.system("make clean")
+    # os.system("make")
+    # os.system("python -m flask run")
+#     test_client()
  
 
 
- def drop_down_menu(test_client):
-    test_client()
+#  def drop_down_menu(test_client):
+#     os.system("make clean")
+#     os.system("make")
+#     os.system("python -m flask run")
+#     test_client()
 
 
 
