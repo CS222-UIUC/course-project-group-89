@@ -2,7 +2,7 @@
 import unittest
 import pandas as pd
 import course_requirements
-from parsing import df_, df_core_classes, check_credit_hours, remove
+from parsing import df_, check_credit_hours, get_all_classes, sort_core_classes, remaining_classes
 
 class TestMerge(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
@@ -10,23 +10,23 @@ class TestMerge(unittest.TestCase):
         """to test based on ggis + stats courses"""
         common_courses = course_requirements.merge(
             course_requirements.df_cs_ggis, course_requirements.df_cs_stats)
-        ans = ["CS124", "CS128", "CS173", "MATH257", "MATH231", "CS222",
-               "CS225", "CS233", "CS340", "CS341", "CS374", "CS421", "STAT200", "STAT212"]
+        ans = ["CS 124", "CS 128", "CS 173", "MATH 257", "MATH 231", "CS 222",
+               "CS 225", "CS 233", "CS 340", "CS 341", "CS 374", "CS 421", "STAT 200", "STAT 212"]
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
     def test_cs_astr(self):
         """to test ggis + astro courses"""
         common_courses = course_requirements.merge(
             course_requirements.df_cs_ggis, course_requirements.df_cs_astronomy)
-        ans = ["CS124", "CS128", "CS173", "MATH231", "MATH257", "CS222",
-               "CS225", "CS233", "CS340", "CS341", "CS361", "CS374", "CS421", "STAT200",
-              "STAT212"]
+        ans = ["CS 124", "CS 128", "CS 173", "MATH 231", "MATH 257", "CS 222",
+               "CS 225", "CS 233", "CS 340", "CS 341", "CS 361", "CS 374", "CS 421", "STAT 200",
+              "STAT 212"]
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
     def test_stat_astr(self):
         """to test stat & astro merged courses"""
         common_courses = course_requirements.merge(
             course_requirements.df_cs_stats, course_requirements.df_cs_astronomy)
-        ans = ["CS124", "CS128", "CS173", "MATH241", "MATH231", "MATH257", "CS222",
-               "CS225", "CS233", "CS341", "CS340", "CS374", "CS421", "STAT200", "STAT212"]
+        ans = ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 231", "MATH 257", "CS 222",
+               "CS 225", "CS 233", "CS 341", "CS 340", "CS 374", "CS 421", "STAT 200", "STAT 212"]
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
 
 class TestCreditHours(unittest.TestCase):
@@ -39,15 +39,26 @@ class TestCreditHours(unittest.TestCase):
         user1= pd.concat([user1, df_.loc[df_['CRN']==46074]])
         user1= pd.concat([user1, df_.loc[df_['CRN']==30855]])
         user1= pd.concat([user1, df_.loc[df_['CRN']==68851]])
-
+        df_core_classes = get_all_classes(sort_core_classes("STAT & CS"))
         available_classes = check_credit_hours(user1, df_core_classes, 18)
         assert available_classes['CRN'].count() == 2
     def test2(self):
         """gets rid of all CS124 classes after user1 selects it"""
-        remove("CS124", df_core_classes)
-        condition = 'CS124' in set(df_core_classes['Subject and Number'])
-        assert condition is False
+        selected_subjects = ['CS 124', 'CS 128', 'CS 225', 'CS 173', 'CS 222',
+        'MATH 231', 'MATH 241', 'MATH 257', 'STAT 107', 'STAT 400', 'STAT 410', 'STAT 425']
+        ans = ["CS 233", "CS 341", "CS 340", "CS 357", "MATH 415",
+        "MATH 416", "CS 374","CS 421", "STAT 426"]
+        calculated = remaining_classes(selected_subjects, 'STAT & CS')
+        print(calculated)
+        self.assertCountEqual(calculated, ans)
+    def test3(self):
+        """gets rid of all CS124 classes after user1 selects it"""
+        selected_subjects = ['CS 124', 'CS 128', 'CS 225', 'CS 173', 'CS 222',
+        'MATH 231', 'MATH 241', 'MATH 257', 'STAT 107', 'STAT 200', 'STAT 212',
+        'STAT 400', 'STAT 410', 'STAT 425', 'CS 340']
+        ans = ["CS 357", "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 426"]
+        calculated = remaining_classes(selected_subjects, 'STAT & CS')
+        self.assertCountEqual(calculated, ans)
 
 if __name__ == '__main__':
     unittest.main()
-    
