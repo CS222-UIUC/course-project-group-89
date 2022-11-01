@@ -71,6 +71,37 @@ def check_credit_hours(selected_classes, major_requirements, credit_limit):
     valid_courses = major_requirements.loc[major_requirements['Num Credits'] <= credits_left]
     return valid_courses
 
+def remove_stat_equivalents(selected_subjects, list_differences):
+    '''updates list_differences w/o duplicate STAT classes'''
+    if 'STAT 107' in selected_subjects:
+        if 'STAT 200' in list_differences:
+            list_differences.remove('STAT 200')
+        if 'STAT 212' in list_differences:
+            list_differences.remove('STAT 212')
+    elif 'STAT 212' in selected_subjects:
+        if 'STAT 200' in list_differences:
+            list_differences.remove('STAT 200')
+        if 'STAT 107' in list_differences:
+            list_differences.remove('STAT 107')
+    elif 'STAT 200' in selected_subjects:
+        if 'STAT 107' in list_differences:
+            list_differences.remove('STAT 107')
+        if 'STAT 212' in list_differences:
+            list_differences.remove('STAT 212')
+    return list_differences
+
+def remove_cs_equivalents(selected_subjects, list_differences):
+    '''updates list_differences w/o duplicate CS classes'''
+    if 'CS 340' in selected_subjects:
+        if 'CS 341' in list_differences:
+            list_differences.remove('CS 341')
+        if 'CS 233' in list_differences:
+            list_differences.remove('CS 233')
+    elif 'CS 341' in selected_subjects or 'CS 233' in selected_subjects:
+        if 'CS 340' in list_differences:
+            list_differences.remove('CS 340')
+    return list_differences
+
 def remaining_classes(selected_subjects, major):
     '''selected_subjects => user1_selected_subjects or user2_selected_subjects,
     returns list of remaining classes from requirements excluding selected_subjects'''
@@ -80,27 +111,8 @@ def remaining_classes(selected_subjects, major):
     for element in list_requirements:
         if element not in selected_subjects:
             difference.append(element)
-    if 'CS 340' in selected_subjects:
-        if 'CS 341' in difference:
-            difference.remove('CS 341')
-        if 'CS 233' in difference:
-            difference.remove('CS 233')
-    if 'CS 341' in selected_subjects or 'CS 233' in selected_subjects:
-        if 'CS 340' in difference:
-            difference.remove('CS 340')
-    if 'STAT 107' in selected_subjects:
-        if 'STAT 200' in difference:
-            difference.remove('STAT 200')
-        if 'STAT 212' in difference:
-            difference.remove('STAT 212')
-    if 'STAT 212' in selected_subjects:
-        if 'STAT 200' in difference:
-            difference.remove('STAT 200')
-        if 'STAT 107' in difference:
-            difference.remove('STAT 107')
-    if 'STAT 200' in selected_subjects:
-        if 'STAT 107' in difference:
-            difference.remove('STAT 107')
-        if 'STAT 212' in difference:
-            difference.remove('STAT 212')
+
+    difference = remove_stat_equivalents(selected_subjects, difference)
+    difference = remove_cs_equivalents(selected_subjects, difference)
+
     return difference
