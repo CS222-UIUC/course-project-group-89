@@ -1,9 +1,6 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
 import os
-import numpy as np
-import pandas as pd
 from flask import Flask, render_template, request
-from parsing import sort_core_classes
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
@@ -14,7 +11,7 @@ class_cs_stats =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
     "MATH 241", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257",
     "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200",
      "STAT 212", "STAT 400", "STAT 410", "STAT 425", "STAT 426"]
- 
+
 class_cs_astro =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
     "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374",
     "CS 421", "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
@@ -81,9 +78,7 @@ def class_info_main():
     14, 15, 16, 17, 18]
 
     return render_template('classinfo.html', time_range=time_range, credit_hours = credit_hours)
-'''
-NOW GET FRIEND'S CLASS
-'''
+
 # Getting major of second user for "/friendmajor" (frontend):
 @app.route('/friendmajor', methods=["POST", "GET"])
 def friendmajor():
@@ -122,4 +117,5 @@ def friend_class_info_main():
     credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
     14, 15, 16, 17, 18]
 
-    return render_template('friendclassinfo.html', time_range=time_range, credit_hours = credit_hours)
+    return render_template('friendclassinfo.html', 
+    time_range=time_range, credit_hours = credit_hours)
