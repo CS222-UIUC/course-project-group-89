@@ -27,7 +27,6 @@ def pytest_sessionstart():
     # os.system("make")
     # os.system("python -m flask run")
 #     test_client()
- 
 
 
 #  def drop_down_menu(test_client):
