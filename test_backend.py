@@ -4,29 +4,79 @@ import pandas as pd
 import course_requirements
 from parsing import df_, check_credit_hours, get_all_classes, sort_core_classes, remaining_classes
 
+class TestSortCoreClasses(unittest.TestCase):
+    '''this test class is to test that it returns the proper dataframe of all core classes'''
+    def test_cs_math(self):
+        '''test backend on CS + MATH courses'''
+        core_classes = sort_core_classes("CS + MATH")
+        ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['CS 233'], ['CS 341'],
+               ['CS 340'], ['CS 357'], ['CS 374'], ['CS 421'], ['CS 450'], ['MATH 220'],
+               ['MATH 231'], ['MATH 241'], ['MATH 257'], ['MATH 416']]
+        self.assertCountEqual(core_classes.values.tolist(), ans)
+    def test_cs_astro(self):
+        '''test backend STAT & CS courses'''
+        core_classes = sort_core_classes("CS + ASTRO")
+        ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['CS 233'], ['CS 341'],
+               ['CS 340'], ['STAT 200'], ['STAT 212'], ['CS 361'], ['CS 374'], ['CS 421'],
+               ['MATH 221'], ['MATH 220'], ['MATH 225'], ['MATH 257'], ['MATH 231'], ['PHYS 211'],
+               ['PHYS 212'], ['MATH 241'], ['ASTR 210'], ['ASTR 310'], ['ASTR 404'], ['ASTR4 05'],
+               ['ASTR 406'], ['ASTR 414']]
+        self.assertCountEqual(core_classes.values.tolist(), ans)
+    def test_cs_stat(self):
+        '''test backend on STAT & CS courses'''
+        core_classes = sort_core_classes("STAT & CS")
+        ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['MATH 241'],
+               ['MATH 231'], ['CS 233'], ['CS 341'], ['CS 340'], ['CS 357'], ['MATH 257'],
+               ['MATH 415'], ['MATH 416'], ['CS 374'], ['CS 421'], ['STAT 107'], ['STAT 200'],
+               ['STAT 212'], ['STAT 400'], ['STAT 410'], ['STAT 425'], ['STAT 426']]
+        self.assertCountEqual(core_classes.values.tolist(), ans)
+class TestSGetAllClasses(unittest.TestCase):
+    '''this test class is to test that it returns the proper dataframe of all classes
+    & their information'''
+    def test_cs_math(self):
+        '''test backend on CS + MATH courses & getting their information'''
+        core_classes = get_all_classes(sort_core_classes("CS + ASTRO"))
+        ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['CS 233'], ['CS 341'],
+               ['CS 340'], ['CS 357'], ['CS 374'], ['CS 421'], ['CS 450'], ['MATH 220'],
+               ['MATH 231'], ['MATH 241'], ['MATH 257'], ['MATH 416']]
+        self.assertCountEqual(core_classes.values.tolist(), ans)
+    def test_cs_astro(self):
+        '''test backend STAT & CS courses & getting their information'''
+        core_classes = get_all_classes(sort_core_classes("CS + ASTRO"))
+        ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['CS 233'], ['CS 341'],
+               ['CS 340'], ['STAT 200'], ['STAT 212'], ['CS 361'], ['CS 374'], ['CS 421'],
+               ['MATH 221'], ['MATH 220'], ['MATH 225'], ['MATH 257'], ['MATH 231'], ['PHYS 211'],
+               ['PHYS 212'], ['MATH 241'], ['ASTR 210'], ['ASTR 310'], ['ASTR 404'], ['ASTR4 05'],
+               ['ASTR 406'], ['ASTR 414']]
+        self.assertCountEqual(core_classes.values.tolist(), ans)
+    def test_cs_stat(self):
+        '''test backend on STAT & CS courses & getting their information'''
+        core_classes = get_all_classes(sort_core_classes("STAT & CS"))
+        ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['MATH 241'],
+               ['MATH 231'], ['CS 233'], ['CS 341'], ['CS 340'], ['CS 357'], ['MATH 257'],
+               ['MATH 415'], ['MATH 416'], ['CS 374'], ['CS 421'], ['STAT 107'], ['STAT 200'],
+               ['STAT 212'], ['STAT 400'], ['STAT 410'], ['STAT 425'], ['STAT 426']]
+        self.assertCountEqual(core_classes.values.tolist(), ans)
+
 class TestMerge(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
     def test_cs_stats(self):
         """to test based on ggis + stats courses"""
         common_courses = course_requirements.merge(
             course_requirements.df_cs_ggis, course_requirements.df_cs_stats)
-        ans = ["CS 124", "CS 128", "CS 173", "MATH 257", "MATH 231", "CS 222",
-               "CS 225", "CS 233", "CS 340", "CS 341", "CS 374", "CS 421", "STAT 200", "STAT 212"]
+        ans = []
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
     def test_cs_astr(self):
         """to test ggis + astro courses"""
         common_courses = course_requirements.merge(
             course_requirements.df_cs_ggis, course_requirements.df_cs_astronomy)
-        ans = ["CS 124", "CS 128", "CS 173", "MATH 231", "MATH 257", "CS 222",
-               "CS 225", "CS 233", "CS 340", "CS 341", "CS 361", "CS 374", "CS 421", "STAT 200",
-              "STAT 212"]
+        ans = []
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
     def test_stat_astr(self):
         """to test stat & astro merged courses"""
         common_courses = course_requirements.merge(
             course_requirements.df_cs_stats, course_requirements.df_cs_astronomy)
-        ans = ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 231", "MATH 257", "CS 222",
-               "CS 225", "CS 233", "CS 341", "CS 340", "CS 374", "CS 421", "STAT 200", "STAT 212"]
+        ans = []
         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
 
 class TestCreditHours(unittest.TestCase):
