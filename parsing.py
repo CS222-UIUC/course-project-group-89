@@ -46,10 +46,13 @@ def get_all_classes(df_course_list):
 #     list_to_return = df_to_return['Subject and Number'].tolist()
 #     return df_to_return
 
-df_user_backend = sort_core_classes("CS + MATH")
+# df_user_backend = sort_core_classes("STAT & CS")
 # print(df_user_backend)
-df_user_frontend = get_all_classes(df_user_backend)
+# print(type(df_user_backend))
+# print(df_user_backend.values.tolist())
+df_user_frontend = get_all_classes(sort_core_classes("STAT & CS"))
 # print(df_user_frontend)
+print(df_user_frontend.iloc[0].values.tolist())
 
 def sort_common_courses(user_one_courses, user_two_courses):
     '''takes 2 different user's DF of the courses they can take and
@@ -116,3 +119,6 @@ def remaining_classes(selected_subjects, major):
     difference = remove_cs_equivalents(selected_subjects, difference)
 
     return difference
+
+# def sort_in_time_frame(start_time, end_time, df_classes):
+    
