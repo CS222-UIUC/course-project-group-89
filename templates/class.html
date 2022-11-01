@@ -10,7 +10,7 @@
     <script>
     function myFunction() {
         window.location.href="./classinfo";  
-    }
+    } 
     function sendPOST() {
       let formData = { class: $("#class").val() };
       $.post("/class", formData)
@@ -26,9 +26,9 @@
       //   })        
       //   $("#content").html(`<hr><h3>Weather for the next ${data.course} meeting</h3><ul><li>Next Meeting: ${meetingDateStr}</li><li>Forecast Time: ${forecastDateStr}</li><li>Temperature: ${data.temperature}°F</li><li>Forecast: ${data.shortForecast}</li></ul>`);
       // })
-      .fail(function (data) {
-        $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
-      })
+      // .fail(function (data) {
+      //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
+      // })
     };
     </script>   
   </head>
@@ -41,7 +41,7 @@
             <label class="col-md-12">
               {% for c in cs_req %}
               <div> 
-                  <input type="checkbox" option value = "{{c}}" SELECTED>{{c}}</option>
+                  <input type="checkbox" option value = "{{c}}" name="courses"  SELECTED>{{c}}</option>
               </div>
               {% endfor %}
             </label>
