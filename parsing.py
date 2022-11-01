@@ -1,7 +1,5 @@
 "'this module reades into the courses.csv'"
 from queue import Empty
-from re import I
-from select import select
 import pandas as pd
 import course_requirements
 
