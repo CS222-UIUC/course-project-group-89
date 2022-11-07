@@ -1,7 +1,7 @@
 """This module will include testing for various majors for backend"""
 import unittest
 import pandas as pd
-import course_requirements
+# import course_requirements
 from parsing import df_, check_credit_hours, get_all_classes, sort_core_classes, remaining_classes
 
 # class TestSortCoreClasses(unittest.TestCase):
