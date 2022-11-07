@@ -19,7 +19,6 @@ df_cs_astronomy = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", 
 df_cs = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "MATH 241",
 "MATH 257", "CS 210", "CS 211", "CS 222", "CS 225", "CS 233",
 "CS 341", "CS 357", "CS 361", "CS 374", "CS 421"]})
-df_gen_ed = pd.DataFrame
 
 # Takes in 2 majors. Returns Courses in Both (Alphabetized A->Z)
 def merge(major1, major2):

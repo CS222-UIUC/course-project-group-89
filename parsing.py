@@ -126,7 +126,7 @@ def remaining_classes(selected_subjects, major):
     return difference
 
 # def sort_in_time_frame(start_time, end_time, df_classes):
-    
+
 def check_time_conflict(selected_sections):
     '''takes in list of selected class sections. returns true if there
     is no time conflict. returns false if there is a time conflict'''

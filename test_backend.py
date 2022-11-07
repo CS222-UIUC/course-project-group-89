@@ -2,7 +2,8 @@
 import unittest
 import pandas as pd
 # import course_requirements
-from parsing import df_, check_credit_hours, get_all_classes, sort_core_classes, remaining_classes, check_time_conflict
+from parsing import (df_, check_credit_hours, get_all_classes, sort_core_classes,
+                    remaining_classes, check_time_conflict)
 
 # class TestSortCoreClasses(unittest.TestCase):
 #     '''this test class is to test that it returns the proper dataframe of all core classes'''
