@@ -12,7 +12,7 @@
         window.location.href="./classinfo";  
     } 
     function sendPOST() {
-      let formData = { class: $("#class").val() };
+      let formData = { user_classes: $("#user_classes").val() };
       $.post("/class", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
@@ -36,19 +36,17 @@
     <div class="container">
       <h1>What Classes Have You Taken</h1>
       <div class="form-group row">
-        <label for="course1" class="exampleFormControlSelect2">Classes:</label>
+        <label for="user_classes" class="exampleFormControlSelect2">Classes:</label>
         <div class="checkboxes">
             <label class="col-md-12">
               {% for c in cs_req %}
               <div> 
-                  <input type="checkbox" option value = "{{c}}" name="courses"  SELECTED>{{c}}</option>
+                <input type="checkbox" id = "user_classes" option value = "{{c}}" name="user_classes"  SELECTED>{{c}}</option>
               </div>
               {% endfor %}
             </label>
         </div>
       </div>
-
-
       <button onclick="sendPOST();myFunction()" 
       class="btn btn-secondary">Submit</a>
       </button>

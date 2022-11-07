@@ -1,7 +1,7 @@
 """This module will include testing for various majors for backend"""
 import unittest
 import pandas as pd
-import course_requirements
+# import course_requirements
 from parsing import df_, check_credit_hours, get_all_classes, sort_core_classes, remaining_classes
 
 # class TestSortCoreClasses(unittest.TestCase):
@@ -58,26 +58,26 @@ from parsing import df_, check_credit_hours, get_all_classes, sort_core_classes,
 #                ['STAT 212'], ['STAT 400'], ['STAT 410'], ['STAT 425'], ['STAT 426']]
 #         self.assertCountEqual(core_classes.values.tolist(), ans)
 
-class TestMerge(unittest.TestCase):
-    """ this class is is to test certain aspects of the backend"""
-    def test_cs_stats(self):
-        """to test based on ggis + stats courses"""
-        common_courses = course_requirements.merge(
-            course_requirements.df_cs_ggis, course_requirements.df_cs_stats)
-        ans = []
-        self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
-    def test_cs_astr(self):
-        """to test ggis + astro courses"""
-        common_courses = course_requirements.merge(
-            course_requirements.df_cs_ggis, course_requirements.df_cs_astronomy)
-        ans = []
-        self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
-    def test_stat_astr(self):
-        """to test stat & astro merged courses"""
-        common_courses = course_requirements.merge(
-            course_requirements.df_cs_stats, course_requirements.df_cs_astronomy)
-        ans = []
-        self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
+# class TestMerge(unittest.TestCase):
+#     """ this class is is to test certain aspects of the backend"""
+#     def test_cs_stats(self):
+#         """to test based on ggis + stats courses"""
+#         common_courses = course_requirements.merge(
+#             course_requirements.df_cs_ggis, course_requirements.df_cs_stats)
+#         ans = []
+#         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
+#     def test_cs_astr(self):
+#         """to test ggis + astro courses"""
+#         common_courses = course_requirements.merge(
+#             course_requirements.df_cs_ggis, course_requirements.df_cs_astronomy)
+#         ans = []
+#         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
+#     def test_stat_astr(self):
+#         """to test stat & astro merged courses"""
+#         common_courses = course_requirements.merge(
+#             course_requirements.df_cs_stats, course_requirements.df_cs_astronomy)
+#         ans = []
+#         self.assertCountEqual(common_courses["technical requirements"].values.tolist(), ans)
 
 class TestCreditHours(unittest.TestCase):
     """ this class is is to test certain aspects of the backend"""
