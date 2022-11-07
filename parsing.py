@@ -46,10 +46,13 @@ def get_all_classes(df_course_list):
 #     list_to_return = df_to_return['Subject and Number'].tolist()
 #     return df_to_return
 
-df_user_backend = sort_core_classes("CS + MATH")
+# df_user_backend = sort_core_classes("STAT & CS")
 # print(df_user_backend)
-df_user_frontend = get_all_classes(df_user_backend)
+# print(type(df_user_backend))
+# print(df_user_backend.values.tolist())
+df_user_frontend = get_all_classes(sort_core_classes("STAT & CS"))
 # print(df_user_frontend)
+print(df_user_frontend.iloc[0].values.tolist())
 
 def sort_common_courses(user_one_courses, user_two_courses):
     '''takes 2 different user's DF of the courses they can take and
@@ -122,6 +125,8 @@ def remaining_classes(selected_subjects, major):
 
     return difference
 
+# def sort_in_time_frame(start_time, end_time, df_classes):
+    
 def check_time_conflict(selected_sections):
     '''takes in list of selected class sections. returns true if there
     is no time conflict. returns false if there is a time conflict'''
@@ -130,12 +135,8 @@ def check_time_conflict(selected_sections):
         for other_section in remaining_sections:
             if (section[20] >= other_section[20]
                 and section[20] <= other_section[20]):
-                hi = section[20]
-                print(hi)
                 return False
             if (section[21] >= other_section[21]
             and section[21] >= other_section[21]):
-                bye = section[20]
-                print(bye)
                 return False
     return True

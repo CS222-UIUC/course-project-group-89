@@ -9,11 +9,17 @@
     <title>CS 222: Scheduler</title>
     <script>
     function myFunction() {
-        window.location.href="./classinfo";  
-    } 
+        window.location.href="./friendclass";  
+    }
     function sendPOST() {
-      let formData = { user_classes: $("#user_classes").val() };
-      $.post("/class", formData)
+      let formData = { info: $("#info").val() };
+
+    // -------------------------------------------------
+      //THIS NEED TO BE CHANGED AND UPDATED FOR CS 222 WORK
+    // -------------------------------------------------
+
+    
+      $.post("/info", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
       //   let meetingDateStr = meetingDate.toLocaleString('en-US', {
@@ -30,27 +36,48 @@
       //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
       // })
     };
-    </script>   
+    </script>    
   </head>
   <body>
     <div class="container">
-      <h1>What Classes Have You Taken</h1>
+      <h1>Choose Your Wanted Start and End Time For Your Classes</h1>
       <div class="form-group row">
-        <label for="user_classes" class="exampleFormControlSelect2">Classes:</label>
-        <div class="checkboxes">
-            <label class="col-md-12">
-              {% for c in cs_req %}
-              <div> 
-                <input type="checkbox" id = "user_classes" option value = "{{c}}" name="user_classes"  SELECTED>{{c}}</option>
-              </div>
-              {% endfor %}
-            </label>
+        <div class="col-sm-10">
+            Choose Start Time:
+            <SELECT name="start_time" id="start_time">
+            {% for c in time_range %}
+            <option value= "{{c}}" SELECTED>{{c}}</option> 
+            {% endfor %}
+            </SELECT>
+        </div>
+      </div>
+      <h2>To</h2>
+      <div class="form-group row">
+        <div class="col-sm-10">
+            Choose End Time:
+            <SELECT name="end_time" id="end_time">
+            {% for c in time_range %}
+            <option value= "{{c}}" SELECTED>{{c}}</option> 
+            {% endfor %}
+            </SELECT>
+        </div>
+      </div>
+
+      <h1>Credit Hours</h1>
+      <div class="form-group row">
+        <div class="col-sm-10">
+            Choose How Many Credit Hours You Want:
+            <SELECT name="credit_hours" id="credit_hours">
+            {% for c in credit_hours %}
+            <option value= "{{c}}" SELECTED>{{c}}</option> 
+            {% endfor %}
+            </SELECT>
         </div>
       </div>
       <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary">Submit</a>
+      class="btn btn-secondary">
+      Submit</a> 
       </button>
-
       <div id="content">
       </div>
     </div>
