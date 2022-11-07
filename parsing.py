@@ -65,13 +65,18 @@ df_user1 = pd.DataFrame(columns = df_.columns.tolist())
 user1_selected_subjects = []
 
 def check_credit_hours(selected_classes, major_requirements, credit_limit):
-    '''Takes User1's df of selected courses. Returns names of
-    additional courses within credit limit'''
+    '''Takes User1's df of selected course sections. Returns a df of course
+    sections they can additionally take within credit limit'''
     num_credits = selected_classes['Credit Hours'].dropna().str.extract(r"(\d+)").astype(int).sum()
     credits_left = credit_limit - num_credits[0]
     major_requirements['Num Credits'] = (major_requirements['Credit Hours']
                                         .dropna().str.extract(r"(\d+)").astype(int))
     valid_courses = major_requirements.loc[major_requirements['Num Credits'] <= credits_left]
+    # ensures no selected classes get re-added
+    selected_subjects = selected_classes['Subject and Number'].tolist()
+    for subject in selected_subjects:
+        rows_overlap = valid_courses.loc[valid_courses['Subject and Number'] == subject].index
+        valid_courses.drop(rows_overlap, inplace=True)
     return valid_courses
 
 def remove_stat_equivalents(selected_subjects, list_differences):
@@ -121,4 +126,17 @@ def remaining_classes(selected_subjects, major):
     return difference
 
 # def sort_in_time_frame(start_time, end_time, df_classes):
-    
+
+def check_time_conflict(selected_sections):
+    '''takes in list of selected class sections. returns true if there
+    is no time conflict. returns false if there is a time conflict'''
+    for section in selected_sections:
+        remaining_sections = [x for x in selected_sections if x != section]
+        for other_section in remaining_sections:
+            if (section[20] >= other_section[20]
+                and section[20] <= other_section[20]):
+                return False
+            if (section[21] >= other_section[21]
+            and section[21] >= other_section[21]):
+                return False
+    return True
