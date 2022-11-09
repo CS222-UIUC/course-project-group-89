@@ -61,8 +61,8 @@ def checkboxes():
 def store_classes():
     "'checboxes for class.html'"
     print("hi")
-    courses = request.form.getlist("courses")
-    print("in main()POST, courses: ", courses)
+    classes = request.form.getlist("class")
+    print(classes)
     # with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
     #     curr_file.write(courses)
     #     curr_file.write("\n")

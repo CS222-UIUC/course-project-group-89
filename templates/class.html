@@ -10,9 +10,17 @@
     <script>
     function myFunction() {
         window.location.href="./classinfo";  
-    } 
+    }
     function sendPOST() {
-      let formData = { class: $("#class").val() };
+      var checkBox = document.getElementById("class");
+      let formData = { class: $('label[for=class]').text()};
+    
+
+    // -------------------------------------------------
+      //THIS NEED TO BE CHANGED AND UPDATED FOR CS 222 WORK
+    // -------------------------------------------------
+
+    
       $.post("/class", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
@@ -30,36 +38,33 @@
       //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
       // })
     };
-    </script>   
+    </script>    
   </head>
   <body>
     <div class="container">
-      <h1>What Classes Have You Taken</h1>
+      <h1>What Major Are You</h1>
       <div class="form-group row">
-        <label for="course1" class="exampleFormControlSelect2">Classes:</label>
-        <div class="checkboxes">
-            <label class="col-md-12">
+        <div class="col-sm-10">
+            Choose a Major 
+            <form>
               {% for c in cs_req %}
-              <div> 
-                  <input type="checkbox" option value = "{{c}}" name="courses"  SELECTED>{{c}}</option>
-              </div>
+                <input type = "checkbox" id = "class"  option value = "{{c}}"  SELECTED>
+                  <label for="class">{{c}}</label>
+                </option> 
               {% endfor %}
-            </label>
+          </form>
         </div>
       </div>
-
-
       <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary">Submit</a>
+      class="btn btn-secondary">Submit</a> 
       </button>
-
       <div id="content">
       </div>
     </div>
-    <script>
+    <!-- <script>
       $(document).ready(function(){
-        $('.selectpicker').selectpicker();
+        $('.selectpicker').selectpicker('selectAll');
       })
-    </script>
+    </script> -->
   </body>
 </html>
