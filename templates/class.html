@@ -37,20 +37,15 @@
       <h1>What Classes Have You Taken</h1>
       <div class="form-group row">
         <label for="user_classes" class="exampleFormControlSelect2">Classes:</label>
-        <div class="checkboxes">
             <label class="col-md-12">
-              {% for c in cs_req %}
-              <div> 
-                <input type="checkbox" id = "user_classes" option value = "{{c}}" name="user_classes"  SELECTED>{{c}}</option>
-              </div>
-              {% endfor %}
+              <form method="POST" action='/class'> 
+                {% for c in cs_req %}
+                <input type="checkbox" name = 'user_classes' option value = "{{c}}"  SELECTED>{{c}}</option>
+                {% endfor %}
+                <input class="btn btn-secondary" type="Submit">
+              </form>
             </label>
-        </div>
       </div>
-      <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary">Submit</a>
-      </button>
-
       <div id="content">
       </div>
     </div>

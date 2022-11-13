@@ -60,14 +60,13 @@ def checkboxes():
 @app.route('/class', methods=["POST"])
 def store_classes():
     "'checboxes for class.html'"
-    print("hi")
-    user_classes = request.form.getlist("user_classes")
+    user_classes = request.values.getlist('user_classes')
     print("in main(), POST, user_classes: ", user_classes)
     # with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
     #     curr_file.write(courses)
     #     curr_file.write("\n")
     # curr_file.close()
-    return render_template("class.html")
+    return class_info_main()
 
 @app.route('/classinfo', methods=["GET"])
 def class_info_main():
