@@ -1,5 +1,4 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
-import os
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -61,7 +60,7 @@ def store_classes():
     user_classes = request.values.getlist('user_classes')
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in user_classes:
-            curr_file.write("%s\n" % item)
+            curr_file.write(f'\n {item}')
         # curr_file.write("\n")
     curr_file.close()
     return class_info_main()
@@ -97,9 +96,9 @@ def friendmajor():
 @app.route('/friendmajor', methods=["POST"])
 def storefriendmajor():
     """For User 2, returns the major and stores it"""
-    friendmajor = request.form["friendmajor"]
+    friend_major = request.form["friendmajor"]
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-        curr_file.write(friendmajor)
+        curr_file.write(friend_major)
         curr_file.write("\n")
     curr_file.close()
     return render_template("friendmajor.html")
@@ -109,11 +108,10 @@ def storefriendmajor():
 def friendclasses():
     """For User 2, read last line to get major for User 2 & return classes"""
     major = ""
-    with open('store_user_input.txt') as curr_file:
+    with open('store_user_input.txt', 'r') as curr_file:
         for line in curr_file:
             pass
-        last_line = line
-    major = last_line
+        major = line
     cs_req = []
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
@@ -132,7 +130,7 @@ def storefriendclasses():
     friend_classes = request.values.getlist('seconduserclass')
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in friend_classes:
-            curr_file.write("%s\n" % item)
+            curr_file.write(f'\n {item}')
         curr_file.write("\n")
     curr_file.close()
     return render_template("friendclass.html")
@@ -165,10 +163,5 @@ def store_friends_class_info():
 @app.route('/classestotake', methods=["GET"])
 def choose_classes():
     """Print out the classes User 1 and 2 can take together"""
-    '''
-    Read Classes taken by each User
-    Call Backend function which returns classes they can take
-    Display in Check Box Format
-    '''
     cs_req = []
     return render_template("classestotake.html", cs_req= cs_req)
