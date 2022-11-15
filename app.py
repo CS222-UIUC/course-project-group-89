@@ -171,48 +171,18 @@ def choose_classes():
     with open('store_user_input.txt', encoding="utf8") as curr_file:
         line = None
         for line in curr_file:
-            print("line: ", line)
-            print("user_one_major: ", user_one_major)
-            print("user_two_major: ", user_two_major)
-            print(user_one_major != "")
-            print(user_two_major != "")
-            print(line[0:4] != "User")
-
             if line[0:4] == "User" and user_one_major == "":
-                print("I am here")
                 user_one_major = line
-
             elif user_one_major != "" and user_two_major == "" and line[0:4] != "User":
-                print("Sike I am here")
                 user_one_class.append(line)
-
             elif line[0:4] == "User" and user_one_major != "" and user_two_major == "":
-                print("Nope I am here")
                 user_two_major = line
-
             elif user_one_major != "" and user_two_major != "" and line[0:4] != "User":
-                print("are we here?")
                 user_two_class.append(line)
 
     curr_file.close()
-
-    print("before")
-    print("user one")
-    print(user_one_major)
-    print(user_one_class)
-    print("user two")
-    print(user_two_major)
-    print(user_two_class)
-
-    for i in range(0, len(user_one_class)):
-        user_one_class[i] = user_one_class[i][:len(user_one_class[i]) - 1]
+    for curr in user_one_class:
+        curr= curr[:len(curr) - 1]
     for i in range(0, len(user_two_class)):
         user_two_class[i] = user_two_class[i][:len(user_two_class[i]) - 1]
-    print("after")
-    print("user one")
-    print(user_one_major)
-    print(user_one_class)
-    print("user two")
-    print(user_two_major)
-    print(user_two_class)
     return render_template("classestotake.html", cs_req= [])
