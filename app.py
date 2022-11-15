@@ -58,6 +58,7 @@ def checkboxes():
 def store_classes():
     "'Based on checkboxes selected from checkboxes(), store the classes in txt'"
     user_classes = request.values.getlist('user_classes')
+    print(user_classes)
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in user_classes:
             curr_file.write(f'\n {item}')
