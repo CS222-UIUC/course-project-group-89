@@ -13,11 +13,7 @@ def sort_core_classes(major_):
 
     core_course_list = Empty #has list of all core courses  & their info
     if major_ == "CS + MATH":
-        # print("math major over here")
-        # print(course_requirements.MATH)
-        # print("math major over here")
         core_course_list = course_requirements.df_cs_math
-        # print(core_course_list)
     elif major_ == "STAT & CS":
         core_course_list = course_requirements.df_cs_stats
     elif major_ == "CS + ASTRO":
@@ -31,10 +27,12 @@ def get_all_classes(df_course_list):
     df_course_information = pd.DataFrame(columns = df_.columns.tolist())
     for course in df_course_list.values.tolist():
         entry = df_.loc[df_['Subject and Number'] == course[0]]
-        # print("entry: ", entry)
         df_course_information = pd.concat([df_course_information, entry])
     return df_course_information
 
+df_core_classes_ = sort_core_classes("CS + MATH")
+df_all_classes_ = get_all_classes(df_core_classes_)
+print(df_all_classes_.size)
 
 # def get_unique_classes(df_classes):
 #     '''this function returns a list of the unique core courses given someone's major'''
@@ -46,13 +44,8 @@ def get_all_classes(df_course_list):
 #     list_to_return = df_to_return['Subject and Number'].tolist()
 #     return df_to_return
 
-# df_user_backend = sort_core_classes("STAT & CS")
-# print(df_user_backend)
-# print(type(df_user_backend))
-# print(df_user_backend.values.tolist())
-df_user_frontend = get_all_classes(sort_core_classes("STAT & CS"))
-# print(df_user_frontend)
-print(df_user_frontend.iloc[0].values.tolist())
+# df_user_frontend = get_all_classes(sort_core_classes("STAT & CS"))
+# print(df_user_frontend.iloc[0].values.tolist())
 
 def sort_common_courses(user_one_courses, user_two_courses):
     '''takes 2 different user's DF of the courses they can take and
