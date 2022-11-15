@@ -1,11 +1,8 @@
-CS + ASTRO
+User 1: CS
 CS 124
 CS 128
 CS 173
-MATH 241
-CS + STAT
+User 2: Stats & CS
 CS 124
 CS 128
 CS 173
-
-
