@@ -108,7 +108,8 @@ def storefriendmajor():
 def friendclasses():
     """For User 2, read last line to get major for User 2 & return classes"""
     major = ""
-    with open('store_user_input.txt', 'r') as curr_file:
+    with open('store_user_input.txt', encoding="utf8") as curr_file:
+        line = None
         for line in curr_file:
             pass
         major = line
