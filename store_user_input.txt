@@ -1,5 +1,8 @@
 User 1: CS
+CS 124
+CS 128
+CS 173
 User 2: Stats & CS
-MATH 257
-CS 210
-CS 211
+CS 124
+CS 128
+CS 173

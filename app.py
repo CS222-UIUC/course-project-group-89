@@ -183,6 +183,6 @@ def choose_classes():
     curr_file.close()
     for curr in user_one_class:
         curr= curr[:len(curr) - 1]
-    for i in range(0, len(user_two_class)):
-        user_two_class[i] = user_two_class[i][:len(user_two_class[i]) - 1]
+    for curr in (user_two_class):
+        curr = curr[:len(curr) - 1]
     return render_template("classestotake.html", cs_req= [])
