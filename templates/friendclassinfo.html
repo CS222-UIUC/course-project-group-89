@@ -9,17 +9,17 @@
     <title>CS 222: Scheduler</title>
     <script>
     function myFunction() {
-        window.location.href="./friendclass";  
+        window.location.href="./classestotake";  
     }
     function sendPOST() {
-      let formData = { info: $("#info").val() };
+      let formData = { seconduserclassinfo: $("#seconduserclassinfo").val() };
 
     // -------------------------------------------------
       //THIS NEED TO BE CHANGED AND UPDATED FOR CS 222 WORK
     // -------------------------------------------------
 
     
-      $.post("/info", formData)
+      $.post("/seconduserclassinfo", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
       //   let meetingDateStr = meetingDate.toLocaleString('en-US', {

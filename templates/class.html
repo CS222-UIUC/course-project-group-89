@@ -39,10 +39,10 @@
         <label for="user_classes" class="exampleFormControlSelect2">Classes:</label>
             <label class="col-md-12">
               <form method="POST" action='/class'> 
-                {% for c in cs_req %}
-                <input type="checkbox" name = 'user_classes' option value = "{{c}}"  SELECTED>{{c}}</option>
-                {% endfor %}
-                <input class="btn btn-secondary" type="Submit">
+              {% for c in cs_req %}
+              <input type="checkbox" name = 'user_classes' option value = "{{c}}"  SELECTED>{{c}}</option>
+              {% endfor %}
+              <input class="btn btn-secondary" type="Submit">
               </form>
             </label>
       </div>

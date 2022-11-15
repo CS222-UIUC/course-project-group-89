@@ -8,15 +8,12 @@
 
     <title>CS 222: Scheduler</title>
     <script>
+    function myFunction() {
+        window.location.href="./friendclassinfo";  
+    } 
     function sendPOST() {
-      let formData = { class: $("#class").val() };
-
-    // -------------------------------------------------
-      //THIS NEED TO BE CHANGED AND UPDATED FOR CS 222 WORK
-    // -------------------------------------------------
-
-    
-      // $.post("/weather", formData)
+      let formData = { seconduserclass: $("#seconduserclass").val() };
+      $.post("/friendclass", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
       //   let meetingDateStr = meetingDate.toLocaleString('en-US', {
@@ -34,29 +31,21 @@
       // })
     };
     </script>   
-    
- 
   </head>
   <body>
     <div class="container">
-      <h1>What Classes Has Your Friend Taken</h1>
+      <h1>What Classes Have You Taken</h1>
       <div class="form-group row">
-        <label for="course1" class="exampleFormControlSelect2">Classes:</label>
-        <div class="checkboxes">
+        <label for="seconduserclass" class="exampleFormControlSelect2">Classes:</label>
             <label class="col-md-12">
-                    {% for c in cs_req %}
-                    <div> 
-                        <input type="checkbox" option value = "{{c}}" SELECTED>{{c}}</option>
-                    </div>
-                    {% endfor %}
-                  
+              <form method="POST" action='/friendclass'> 
+              {% for c in cs_req %}
+              <input type="checkbox" name = 'seconduserclass' option value = "{{c}}"  SELECTED>{{c}}</option>
+              {% endfor %}
+              <input class="btn btn-secondary" type="Submit">
+              </form>
             </label>
-        </div>
- 
       </div>
-
-      <button onclick="sendPOST();" class="btn btn-secondary">Submit</button>
-
       <div id="content">
       </div>
     </div>
