@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      h1   {color: rgb(240, 112, 38);}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -32,18 +35,21 @@
     };
     </script>   
   </head>
-  <body>
+  <body style="background-color:powderblue;">
     <div class="container">
+      <br>
       <h1>What Classes Have You Taken</h1>
       <div class="form-group row">
-        <label for="user_classes" class="exampleFormControlSelect2">Classes:</label>
-            <label class="col-md-12">
+            <label class="col-lg-12">
               <form method="POST" action='/class'> 
-              {% for c in cs_req %}
-              <input type="checkbox" name = 'user_classes' option value = "{{c}}"  SELECTED>{{c}}</option>
-              {% endfor %}
-              <input class="btn btn-secondary" type="Submit">
-              </form>
+                <label class="col-xs-6"  style="font-family:verdana;">
+                {% for c in cs_req %}
+                  <input type="checkbox" style="text-align:left;" name = 'user_classes' option value = "{{c}}"  SELECTED> {{c}}<br></option>
+                {% endfor %}
+                </label>
+                <br>
+              <input class="btn btn-secondary" style="font-family:verdana;" type="Submit">
+            </form>
             </label>
       </div>
       <div id="content">
