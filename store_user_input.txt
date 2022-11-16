@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 CS
 
  MATH 257
  CS 210
+=======
+User 1: CS
+CS 124
+CS 128
+CS 173
+User 2: Stats & CS
+CS 124
+CS 128
+CS 173
+>>>>>>> 1afbeda1ecdf4407a641821454245d80472f38b4
