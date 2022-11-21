@@ -37,19 +37,26 @@ def filter_based_on_time(df_courses, start_time, end_time):
     range user wants class to be in'''
     df_time = df_courses.copy()
     df_time = df_time[df_time['Start Time'] != 'ARRANGED']
-    df_time['Start Time Datetime'] = pd.to_datetime(df_time['Start Time'])
-    df_time['End Time Datetime'] = pd.to_datetime(df_time['End Time'])
+    # df_time['Start Time Datetime'] = pd.to_datetime(df_time['Start Time'])
+    # df_time['End Time Datetime'] = pd.to_datetime(df_time['End Time'])
     start_time_datetime = pd.to_datetime(start_time)
+    df_time['Start Time'] = pd.to_datetime(df_time['Start Time'])
+    df_time['End Time'] = pd.to_datetime(df_time['End Time'])
     end_time_datetime = pd.to_datetime(end_time)
-    df_time = df_time.loc[(df_time['Start Time Datetime'] >= start_time_datetime) &
-        (df_time['End Time Datetime'] <= end_time_datetime)]
+    # df_time = df_time.loc[(df_time['Start Time Datetime'] >= start_time_datetime) &
+    #     (df_time['End Time Datetime'] <= end_time_datetime)]
+    df_time = df_time.loc[(df_time['Start Time'] >= start_time_datetime) &
+        (df_time['End Time'] <= end_time_datetime)]
     return df_time
 
-# core_courses = sort_core_classes("CS + MATH")
-# all_classes = get_all_classes(core_courses)
-# start_time = '08:30 am'
-# end_time = '04:00 pm'
-# time_based = filter_based_on_time(all_classes, start_time, end_time)
+core_courses = sort_core_classes("CS + MATH")
+# print(core_courses)
+all_classes = get_all_classes(core_courses)
+# print(all_classes)
+start_time = '10:00 am'
+end_time = '12:00 pm'
+time_based = filter_based_on_time(all_classes, start_time, end_time)
+print(time_based)
 # print(time_based.iloc[0])
 
 # def get_unique_classes(df_classes):
