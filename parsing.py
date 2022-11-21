@@ -7,6 +7,8 @@ df_ = pd.read_csv('courses.csv')
 
 df_['Subject and Number'] = df_['Subject'] + " " + df_['Number'].map(str)
 df_ = df_.drop(columns = ['Subject', 'Number'])
+# df_['Start Time'] = df_['Start Time'].str.split(' ').str[0]
+# df_['End Time'] = df_['End Time'].str.split(' ').str[0]
 
 def sort_core_classes(major_):
     '''returns core classes given a major'''
@@ -30,9 +32,25 @@ def get_all_classes(df_course_list):
         df_course_information = pd.concat([df_course_information, entry])
     return df_course_information
 
-df_core_classes_ = sort_core_classes("CS + MATH")
-df_all_classes_ = get_all_classes(df_core_classes_)
-print(df_all_classes_.size)
+def filter_based_on_time(df_courses, start_time, end_time):
+    '''inputs dataframe with ALL course information and filters based on time
+    range user wants class to be in'''
+    df_time = df_courses.copy()
+    df_time = df_time[df_time['Start Time'] != 'ARRANGED']
+    df_time['Start Time Datetime'] = pd.to_datetime(df_time['Start Time'])
+    df_time['End Time Datetime'] = pd.to_datetime(df_time['End Time'])
+    start_time_datetime = pd.to_datetime(start_time)
+    end_time_datetime = pd.to_datetime(end_time)
+    df_time = df_time.loc[(df_time['Start Time Datetime'] >= start_time_datetime) &
+        (df_time['End Time Datetime'] <= end_time_datetime)]
+    return df_time
+
+# core_courses = sort_core_classes("CS + MATH")
+# all_classes = get_all_classes(core_courses)
+# start_time = '08:30 am'
+# end_time = '04:00 pm'
+# time_based = filter_based_on_time(all_classes, start_time, end_time)
+# print(time_based.iloc[0])
 
 # def get_unique_classes(df_classes):
 #     '''this function returns a list of the unique core courses given someone's major'''
