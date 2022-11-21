@@ -2,8 +2,8 @@
 import unittest
 import pandas as pd
 # import course_requirements
-from parsing import (df_, check_credit_hours, filter_based_on_time, get_all_classes, sort_core_classes,
-                    remaining_classes, check_time_conflict)
+from parsing import (df_, check_credit_hours, filter_based_on_time, get_all_classes,
+    sort_core_classes, remaining_classes, check_time_conflict)
 
 class TestSortCoreClasses(unittest.TestCase):
     '''this test class is to test that it returns the proper dataframe of all core classes'''
@@ -63,10 +63,12 @@ class TestFilterClassesBasedOnTime(unittest.TestCase):
         end_time = '3:30 pm'
         time_filtered_classes = filter_based_on_time(all_classes, start_time, end_time)
         first_entry = time_filtered_classes.iloc[0]
-        self.assertGreaterEqual(pd.to_datetime(first_entry['Start Time']), pd.to_datetime(start_time))
+        self.assertGreaterEqual(pd.to_datetime(first_entry['Start Time']),
+            pd.to_datetime(start_time))
         self.assertLessEqual(pd.to_datetime(first_entry['End Time']), pd.to_datetime(end_time))
         last_entry = time_filtered_classes.iloc[-1]
-        self.assertGreaterEqual(pd.to_datetime(last_entry['Start Time']), pd.to_datetime(start_time))
+        self.assertGreaterEqual(pd.to_datetime(last_entry['Start Time']),
+            pd.to_datetime(start_time))
         self.assertLessEqual(pd.to_datetime(last_entry['End Time']), pd.to_datetime(end_time))
     def test_cs_astro(self):
         '''test backend STAT & CS courses & filtering based on user selected times'''
@@ -76,10 +78,12 @@ class TestFilterClassesBasedOnTime(unittest.TestCase):
         end_time = '12:00 pm'
         time_filtered_classes = filter_based_on_time(all_classes, start_time, end_time)
         first_entry = time_filtered_classes.iloc[0]
-        self.assertGreaterEqual(pd.to_datetime(first_entry['Start Time']), pd.to_datetime(start_time))
+        self.assertGreaterEqual(pd.to_datetime(first_entry['Start Time']),
+            pd.to_datetime(start_time))
         self.assertLessEqual(pd.to_datetime(first_entry['End Time']), pd.to_datetime(end_time))
         last_entry = time_filtered_classes.iloc[-1]
-        self.assertGreaterEqual(pd.to_datetime(last_entry['Start Time']), pd.to_datetime(start_time))
+        self.assertGreaterEqual(pd.to_datetime(last_entry['Start Time']),
+            pd.to_datetime(start_time))
         self.assertLessEqual(pd.to_datetime(last_entry['End Time']), pd.to_datetime(end_time))
     def test_cs_stat(self):
         '''test backend on STAT & CS courses & filtering based on user selected times'''
@@ -89,10 +93,12 @@ class TestFilterClassesBasedOnTime(unittest.TestCase):
         end_time = '8:00 pm'
         time_filtered_classes = filter_based_on_time(all_classes, start_time, end_time)
         first_entry = time_filtered_classes.iloc[0]
-        self.assertGreaterEqual(pd.to_datetime(first_entry['Start Time']), pd.to_datetime(start_time))
+        self.assertGreaterEqual(pd.to_datetime(first_entry['Start Time']),
+            pd.to_datetime(start_time))
         self.assertLessEqual(pd.to_datetime(first_entry['End Time']), pd.to_datetime(end_time))
         last_entry = time_filtered_classes.iloc[-1]
-        self.assertGreaterEqual(pd.to_datetime(last_entry['Start Time']), pd.to_datetime(start_time))
+        self.assertGreaterEqual(pd.to_datetime(last_entry['Start Time']),
+            pd.to_datetime(start_time))
         self.assertLessEqual(pd.to_datetime(last_entry['End Time']), pd.to_datetime(end_time))
 # class TestMerge(unittest.TestCase):
 #     """ this class is is to test certain aspects of the backend"""
