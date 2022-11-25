@@ -44,6 +44,7 @@
   </head>
   <body style="background-color:powderblue;">
     <div class="container">
+      <br>
       <h1  style="font-family:verdana;">Choose Your Start and End Time For Your Classes</h1>
       <div class="form-group row">
         <div class="col-sm-10"  style="font-family:verdana;">
@@ -67,9 +68,9 @@
         </div>
       </div>
 
-      <h1>Credit Hours</h1>
+      <h1 style="font-family:verdana;">Credit Hours</h1>
       <div class="form-group row">
-        <div class="col-sm-10">
+        <div class="col-sm-10" style="font-family:verdana;">
             Choose How Many Credit Hours You Want:
             <SELECT name="credit_hours" id="credit_hours">
             {% for c in credit_hours %}
@@ -79,7 +80,7 @@
         </div>
       </div>
       <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary">
+      class="btn btn-secondary" style="font-family:verdana;">
       Submit</a> 
       </button>
       <div id="content">
