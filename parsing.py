@@ -53,9 +53,9 @@ core_courses = sort_core_classes("CS + MATH")
 # print(core_courses)
 all_classes = get_all_classes(core_courses)
 # print(all_classes)
-start_time = '10:00 am'
-end_time = '12:00 pm'
-time_based = filter_based_on_time(all_classes, start_time, end_time)
+START_TIME = '10:00 am'
+END_TIME = '12:00 pm'
+time_based = filter_based_on_time(all_classes, START_TIME, END_TIME)
 print(time_based)
 # print(time_based.iloc[0])
 
