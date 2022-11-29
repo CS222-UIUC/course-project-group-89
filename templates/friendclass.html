@@ -39,16 +39,13 @@
     <div class="container">
       <br>
       <h1 style="font-family:verdana;">What Classes Has Your Friend Taken</h1>
-      <div class="form-group row">
-        <label for="seconduserclass" class="exampleFormControlSelect2" style="font-family:verdana;">Classes:</label>
-            <label class="col-md-12" style="font-family:verdana;">
+      <div class="form-group row exampleFormControlSelect2 col-md-12" for="seconduserclass" style="font-family:verdana;">
               <form method="POST" action='/friendclass'> 
               {% for c in cs_req %}
               <input type="checkbox" name = 'seconduserclass' option value = "{{c}}"  SELECTED>{{c}}<br></option>
               {% endfor %}
               <input class="btn btn-secondary" type="Submit">
               </form>
-            </label>
             <br>
       </div>
       <div id="content">
