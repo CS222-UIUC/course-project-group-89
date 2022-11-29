@@ -31,7 +31,7 @@ def main():
     major = request.form["major"]
     print("in main(), major: ", major)
     with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
-        curr_file.write(major)
+        curr_file.write(f'User 1: {major}')
         curr_file.write("\n")
     curr_file.close()
     return render_template("index.html")
@@ -58,9 +58,10 @@ def checkboxes():
 def store_classes():
     "'Based on checkboxes selected from checkboxes(), store the classes in txt'"
     user_classes = request.values.getlist('user_classes')
+    print(user_classes)
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in user_classes:
-            curr_file.write(f'\n {item}')
+            curr_file.write(f'{item}\n')
         # curr_file.write("\n")
     curr_file.close()
     return class_info_main()
@@ -90,7 +91,7 @@ def store_class_info():
 @app.route('/friendmajor', methods=["GET"])
 def friendmajor():
     """Sends List of Majors to Frontend for User 2"""
-    cs_req = ["CS + GIS", "CS + ASTRO", "CS + STAT", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 @app.route('/friendmajor', methods=["POST"])
@@ -98,7 +99,7 @@ def storefriendmajor():
     """For User 2, returns the major and stores it"""
     friend_major = request.form["friendmajor"]
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-        curr_file.write(friend_major)
+        curr_file.write(f'User 2: {friend_major}')
         curr_file.write("\n")
     curr_file.close()
     return render_template("friendmajor.html")
@@ -131,10 +132,10 @@ def storefriendclasses():
     friend_classes = request.values.getlist('seconduserclass')
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in friend_classes:
-            curr_file.write(f'\n {item}')
-        curr_file.write("\n")
+            curr_file.write(f'{item}\n')
+        # curr_file.write("\n")
     curr_file.close()
-    return render_template("friendclass.html")
+    return friend_class_info_main()
 
 @app.route('/friendclassinfo', methods=["GET"])
 def friend_class_info_main():
@@ -158,11 +159,31 @@ def store_friends_class_info():
     #     curr_file.write(friend_classes)
     #     curr_file.write("\n")
     # curr_file.close()
-    return render_template('friendclassinfo.html')
+    return choose_classes()
 
 
 @app.route('/classestotake', methods=["GET"])
 def choose_classes():
     """Print out the classes User 1 and 2 can take together"""
-    cs_req = []
-    return render_template("classestotake.html", cs_req= cs_req)
+    user_one_class = []
+    user_two_class = []
+    user_one_major = ""
+    user_two_major = ""
+    with open('store_user_input.txt', encoding="utf8") as curr_file:
+        line = None
+        for line in curr_file:
+            if line[0:4] == "User" and user_one_major == "":
+                user_one_major = line
+            elif user_one_major != "" and user_two_major == "" and line[0:4] != "User":
+                user_one_class.append(line)
+            elif line[0:4] == "User" and user_one_major != "" and user_two_major == "":
+                user_two_major = line
+            elif user_one_major != "" and user_two_major != "" and line[0:4] != "User":
+                user_two_class.append(line)
+
+    curr_file.close()
+    for curr in user_one_class:
+        curr= curr[:len(curr) - 1]
+    for curr in (user_two_class):
+        curr = curr[:len(curr) - 1]
+    return render_template("classestotake.html", cs_req= [])

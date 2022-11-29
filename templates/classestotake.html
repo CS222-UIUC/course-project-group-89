@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      h1   {color: rgb(240, 112, 38);}
+      h2   {color: rgb(240, 112, 38);}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -32,11 +36,12 @@
     };
     </script>   
   </head>
-  <body>
+  <body style="background-color:powderblue;">
     <div class="container">
-      <h1>The following are the classes for your major that you can take with other User</h1>
-      <h1>Choose Which Class you want to take with other User</h1>
-      <div class="form-group row">
+      <br>
+      <h1 style="font-family:verdana;">The following are the classes for your major that you can take with other User</h1>
+      <h1 style="font-family:verdana;">Choose Which Class you want to take with other User</h1>
+      <div class="form-group row" style="font-family:verdana;">
         <label for="choose_classes" class="exampleFormControlSelect2">Classes:</label>
             <label class="col-md-12">
               <form method="POST" action='/class'> 

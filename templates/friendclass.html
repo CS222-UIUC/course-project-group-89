@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      h1   {color: rgb(240, 112, 38);}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -32,27 +35,29 @@
     };
     </script>   
   </head>
-  <body>
+  <body style="background-color:powderblue;">
     <div class="container">
-      <h1>What Classes Have You Taken</h1>
+      <br>
+      <h1 style="font-family:verdana;">What Classes Has Your Friend Taken</h1>
       <div class="form-group row">
-        <label for="seconduserclass" class="exampleFormControlSelect2">Classes:</label>
-            <label class="col-md-12">
+        <label for="seconduserclass" class="exampleFormControlSelect2" style="font-family:verdana;">Classes:</label>
+            <label class="col-md-12" style="font-family:verdana;">
               <form method="POST" action='/friendclass'> 
               {% for c in cs_req %}
-              <input type="checkbox" name = 'seconduserclass' option value = "{{c}}"  SELECTED>{{c}}</option>
+              <input type="checkbox" name = 'seconduserclass' option value = "{{c}}"  SELECTED>{{c}}<br></option>
               {% endfor %}
               <input class="btn btn-secondary" type="Submit">
               </form>
             </label>
+            <br>
       </div>
       <div id="content">
       </div>
     </div>
-    <script>
+    <!-- <script>
       $(document).ready(function(){
-        $('.selectpicker').selectpicker();
+        $('.selectpicker').selectpicker('selectAll');
       })
-    </script>
+    </script> -->
   </body>
 </html>
