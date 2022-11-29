@@ -1,6 +1,11 @@
+<!doctype html>
+<html lang="en">
 <title>Summary</title>
-<link rel="stylesheet" href="/table.css">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css')}}">
+</head>
 
+<h1>Classes Summary</h1>
 <body>
     <table id="classes-table" class="styled-table">
         <thead>
@@ -12,6 +17,14 @@
             </tr>
         </thead>
         <tbody>
+            {% for data in json_file %}
+            <tr>
+                <th>{{data.0}}</th>
+                <th>{{data.1}}</th>
+                <th>{{data.2}}</th>
+                <th>{{data.3}}</th>
+            </tr>
+            {% endfor %}
             <!--to be filled by javascript from finalclasses.json-->
         </tbody>
 
@@ -22,22 +35,22 @@
         const classesBody = document.querySelector("#classes-table > tbody");
 
         function loadClasses() {
-            const request = new XMLHttpRequest();
-            request.open("get", "../finalclasses.json");
-            request.onload = () => {
-                try {
-                    const json = JSON.parse(request.responseText);
-                    populateClasses(json);
-                } catch (e) {
-                    console.warn("could not load classes!");
-                }
-            };
-            request.send();
+            console.log('{{json_file}}')
+            populateClasses('{{json_file}}');
 
         }
 
         function populateClasses(json) {
             console.log(json);
+            
+            for (var i=0; i<json.length; i++) {
+                obj = json[i]
+                console.log(obj)
+                obj.slice(4)
+                console.log(obj);
+                obj = obj.slice(0,-4);
+                console.log(obj);
+            }
 
             json.forEach((row) => {
                 const tr = document.createElement("tr");
@@ -58,3 +71,4 @@
         document.addEventListener("DOMContentLoaded", () => {loadClasses(); });
     </script>
 </body>
+</html>

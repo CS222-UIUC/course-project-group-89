@@ -1,7 +1,2 @@
 User 1: CS
-CS 173
-CS 210
-User 2: CS
-CS 173
-MATH 241
 User 2: CS

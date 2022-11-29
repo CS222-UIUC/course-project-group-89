@@ -1,5 +1,6 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
 from flask import Flask, render_template, request
+import requests
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
@@ -187,3 +188,13 @@ def choose_classes():
     for curr in (user_two_class):
         curr = curr[:len(curr) - 1]
     return render_template("classestotake.html", cs_req= [])
+
+@app.route('/finaldisplay', methods=["POST", "GET"])
+def loadpage():
+    '''Load last page'''
+    json = [
+        ["123", "CS222", "9am", "10am"],
+        ["222", "CS225", "1pm", "3pm"]
+    ]
+    print(json)
+    return render_template("finaldisplay.html", json_file = json)
