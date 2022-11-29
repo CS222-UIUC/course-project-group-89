@@ -95,6 +95,8 @@ class TestCreditHours(unittest.TestCase):
         'MATH 231', 'MATH 241', 'MATH 257', 'STAT 107', 'STAT 400', 'STAT 410', 'STAT 425']
         ans = ["CS 233", "CS 341", "CS 340", "CS 357", "MATH 415",
         "MATH 416", "CS 374","CS 421", "STAT 426"]
+
+        
         calculated = remaining_classes(selected_subjects, 'STAT & CS')
         self.assertCountEqual(calculated, ans)
     def test_remove_same_requirements_cs(self):

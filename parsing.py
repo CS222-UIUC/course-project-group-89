@@ -104,7 +104,7 @@ def remove_cs_equivalents(selected_subjects, list_differences):
     return list_differences
 
 def remaining_classes(selected_subjects, major):
-    '''selected_subjects => user1_selected_subjects or user2_selected_subjects,
+    '''selected_subjects => a list of subject names (ex. [CS 124, CS 225])
     returns list of remaining classes from requirements excluding selected_subjects'''
     list_requirements = sort_core_classes(major)["technical requirements"].tolist()
     difference = []
