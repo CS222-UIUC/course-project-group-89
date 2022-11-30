@@ -46,6 +46,7 @@ def checkboxes():
     with open('store_user_input.txt', encoding="utf8") as curr_file:
         major = curr_file.readline().strip('\n')
     cs_req = []
+    
     major = major[8:]
     print("checkboxes major: ", major)
     print("checkboxes len of major: ", len(major))
