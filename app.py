@@ -203,8 +203,8 @@ def choose_classes():
 
 
     # remaining_classes_user_one.append(remaining_classes_user_two)
-    remaining_classes_user_one = np.concatenate((remaining_classes_user_one, remaining_classes_user_two))
-    print(remaining_classes_user_one)
+    rem = np.concatenate((remaining_classes_user_one, remaining_classes_user_two))
+    print(rem)
     remaining_classes_for_everyone = []
-    remaining_classes_for_everyone = [*set(remaining_classes_user_one)]
+    remaining_classes_for_everyone = [*set(rem)]
     return render_template("classestotake.html", cs_req= remaining_classes_for_everyone)
