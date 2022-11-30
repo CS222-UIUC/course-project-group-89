@@ -25,7 +25,7 @@ class_cs_ggis = ["Needs to be Removed"]
 @app.route('/')
 def dropdown():
     """Sends List of Majors to Frontend"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('index.html', cs_req=cs_req)
 
 @app.route('/major', methods=["POST"])
@@ -53,7 +53,7 @@ def checkboxes():
         cs_req = class_cs_astro
     elif major == "CS + GGIS":
         cs_req = class_cs_ggis
-    elif major == "Stats & CS":
+    elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
         cs_req = class_cs
@@ -63,13 +63,15 @@ def checkboxes():
 @app.route('/class', methods=["POST"])
 def store_classes():
     "'Based on checkboxes selected from checkboxes(), store the classes in txt'"
-    user_classes = request.values.getlist('user_classes')
+    user_classes = request.form.getlist('class')
+    # user_classes = request.form["class"]
     print(user_classes)
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in user_classes:
             curr_file.write(f'{item}\n')
         # curr_file.write("\n")
     curr_file.close()
+    # return render_template("class.html")
     return class_info_main()
 
 @app.route('/classinfo', methods=["GET"])
@@ -83,9 +85,11 @@ def class_info_main():
 
     return render_template('classinfo.html', time_range=time_range, credit_hours = credit_hours)
 
-@app.route('/classinfo', methods=["POST"])
+@app.route('/info', methods=["POST"])
 def store_class_info():
     """Store User 1 info for start, end, and # of credit hrs"""
+    temp = request.form["info"]
+    print(temp)
     # user_classes = request.values.getlist('user_classes')
     # with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
     #     for item in user_classes:
@@ -97,7 +101,7 @@ def store_class_info():
 @app.route('/friendmajor', methods=["GET"])
 def friendmajor():
     """Sends List of Majors to Frontend for User 2"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 @app.route('/friendmajor', methods=["POST"])
@@ -128,7 +132,7 @@ def friendclasses():
         cs_req = class_cs_astro
     elif major == "CS + GGIS":
         cs_req = class_cs_ggis
-    elif major == "Stats & CS":
+    elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
         cs_req = class_cs

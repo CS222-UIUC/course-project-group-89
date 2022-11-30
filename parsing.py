@@ -14,7 +14,7 @@ def sort_core_classes(major_):
     core_course_list = Empty #has list of all core courses  & their info
     if major_ == "CS + MATH":
         core_course_list = course_requirements.df_cs_math
-    elif major_ == "Stats & CS":
+    elif major_ == "STAT & CS":
         core_course_list = course_requirements.df_cs_stats
     elif major_ == "CS + ASTRO":
         core_course_list = course_requirements.df_cs_astronomy
