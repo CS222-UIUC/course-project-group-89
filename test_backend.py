@@ -25,7 +25,7 @@ class TestSortCoreClasses(unittest.TestCase):
         self.assertCountEqual(core_classes.values.tolist(), ans)
     def test_cs_stat(self):
         '''test backend on STAT & CS courses'''
-        core_classes = sort_core_classes("Stats & CS")
+        core_classes = sort_core_classes("STAT & CS")
         ans = [['CS 124'], ['CS 128'], ['CS 173'], ['CS 222'], ['CS 225'], ['MATH 241'],
                ['MATH 231'], ['CS 233'], ['CS 341'], ['CS 340'], ['CS 357'], ['MATH 257'],
                ['MATH 415'], ['MATH 416'], ['CS 374'], ['CS 421'], ['STAT 107'], ['STAT 200'],
@@ -48,7 +48,7 @@ class TestGetAllClasses(unittest.TestCase):
         self.assertEqual(all_classes.size, ans)
     def test_cs_stat(self):
         '''test backend on STAT & CS courses & getting their information'''
-        core_classes = sort_core_classes("Stats & CS")
+        core_classes = sort_core_classes("STAT & CS")
         all_classes = get_all_classes(core_classes)
         ans = 8892
         self.assertEqual(all_classes.size, ans)
@@ -142,7 +142,7 @@ class TestCreditHours(unittest.TestCase):
         "MATH 416", "CS 374","CS 421", "STAT 426"]
 
 
-        calculated = remaining_classes(selected_subjects, 'Stats & CS')
+        calculated = remaining_classes(selected_subjects, 'STAT & CS')
         self.assertCountEqual(calculated, ans)
     def test_remove_same_requirements_cs(self):
         """gets rid of all CS341/CS233 classes after user1 selects CS340"""
@@ -150,7 +150,7 @@ class TestCreditHours(unittest.TestCase):
         'MATH 231', 'MATH 241', 'MATH 257', 'STAT 107', 'STAT 200', 'STAT 212',
         'STAT 400', 'STAT 410', 'STAT 425', 'CS 340']
         ans = ["CS 357", "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 426"]
-        calculated = remaining_classes(selected_subjects, 'Stats & CS')
+        calculated = remaining_classes(selected_subjects, 'STAT & CS')
         self.assertCountEqual(calculated, ans)
     def test_time_conflict_beginning(self):
         '''determines if there's a time conflict in the user's selected classes'''
