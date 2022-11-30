@@ -1,6 +1,5 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
 from flask import Flask, render_template, request
-import requests
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
