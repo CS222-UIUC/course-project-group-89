@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<title>Summary</title>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css')}}">
+</head>
+
+<h1>Classes Summary</h1>
+<body>
+    <table id="classes-table" class="styled-table">
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Class Name</th>
+                <th>Start Time</th>
+                <th>End time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in json_file %}
+            <tr>
+                <th>{{data.0}}</th>
+                <th>{{data.1}}</th>
+                <th>{{data.2}}</th>
+                <th>{{data.3}}</th>
+            </tr>
+            {% endfor %}
+            <!--to be filled by javascript from finalclasses.json-->
+        </tbody>
+
+    </table>
+
+
+    <script type="text/javascript">
+        const classesBody = document.querySelector("#classes-table > tbody");
+
+        function loadClasses() {
+            console.log('{{json_file}}')
+            populateClasses('{{json_file}}');
+
+        }
+
+        function populateClasses(json) {
+            console.log(json);
+            
+            for (var i=0; i<json.length; i++) {
+                obj = json[i]
+                console.log(obj)
+                obj.slice(4)
+                console.log(obj);
+                obj = obj.slice(0,-4);
+                console.log(obj);
+            }
+
+            json.forEach((row) => {
+                const tr = document.createElement("tr");
+
+                row.forEach((cell) => {
+                    const td = document.createElement("td");
+                    td.textContent = cell;
+                    tr.appendChild(td);
+
+                });
+                classesBody.appendChild(tr);
+            });
+
+            
+
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {loadClasses(); });
+    </script>
+</body>
+</html>

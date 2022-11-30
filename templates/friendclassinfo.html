@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      h1   {color: rgb(240, 112, 38);}
+      h2   {color: rgb(240, 112, 38);}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -17,11 +21,12 @@
     };
     </script>    
   </head>
-  <body>
+  <body style="background-color:powderblue;">
     <div class="container">
-      <h1>Choose Your Wanted Start and End Time For Your Classes</h1>
+      <br>
+      <h1 style="font-family:verdana;">Choose Your Friend's Start and End Time For Classes</h1>
       <div class="form-group row">
-        <div class="col-sm-10">
+        <div class="col-sm-10" style="font-family:verdana;">
             Choose Start Time:
             <SELECT name="start_time" id="start_time">
             {% for c in time_range %}
@@ -32,7 +37,7 @@
       </div>
       <h2>To</h2>
       <div class="form-group row">
-        <div class="col-sm-10">
+        <div class="col-sm-10" style="font-family:verdana;">
             Choose End Time:
             <SELECT name="end_time" id="end_time">
             {% for c in time_range %}
@@ -42,9 +47,9 @@
         </div>
       </div>
 
-      <h1>Credit Hours</h1>
+      <h1 style="font-family:verdana;">Credit Hours</h1>
       <div class="form-group row">
-        <div class="col-sm-10">
+        <div class="col-sm-10" style="font-family:verdana;">
             Choose How Many Credit Hours You Want:
             <SELECT name="credit_hours" id="credit_hours">
             {% for c in credit_hours %}
@@ -54,7 +59,7 @@
         </div>
       </div>
       <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary">
+      class="btn btn-secondary" style="font-family:verdana;">
       Submit</a> 
       </button>
       <div id="content">

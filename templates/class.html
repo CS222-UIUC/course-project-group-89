@@ -24,18 +24,14 @@
     <div class="container">
       <br>
       <h1>What Classes Have You Taken</h1>
-      <div class="form-group row">
-            <label class="col-lg-12">
+      <div class="form-group row" style="font-family:verdana;">
               <form method="POST" action='/class'> 
-                <label class="col-xs-6"  style="font-family:verdana;">
                 {% for c in cs_req %}
                   <input type="checkbox" style="text-align:left;" name = 'user_classes' option value = "{{c}}"  SELECTED> {{c}}<br></option>
                 {% endfor %}
-                </label>
                 <br>
               <input class="btn btn-secondary" style="font-family:verdana;" type="Submit" onclick="sendPOST();MyFunction()">
             </form>
-            </label>
       </div>
       <div id="content">
       </div>

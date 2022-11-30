@@ -212,3 +212,14 @@ def choose_classes():
     remaining_classes_for_everyone = []
     remaining_classes_for_everyone = [*set(rem)]
     return render_template("classestotake.html", cs_req= remaining_classes_for_everyone)
+
+
+@app.route('/finaldisplay', methods=["POST", "GET"])
+def loadpage():
+    '''Load last page'''
+    json = [
+        ["123", "CS222", "9am", "10am"],
+        ["222", "CS225", "1pm", "3pm"]
+    ]
+    print(json)
+    return render_template("finaldisplay.html", json_file = json)
