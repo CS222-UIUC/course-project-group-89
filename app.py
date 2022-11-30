@@ -1,7 +1,8 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
 from flask import Flask, render_template, request
-from parsing import remaining_classes
 import numpy as np
+from parsing import remaining_classes
+
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
@@ -42,7 +43,6 @@ def main():
 def checkboxes():
     "'Based on major stores in txt file, send a list of classes to the front end'"
     major = ""
-    
     with open('store_user_input.txt', encoding="utf8") as curr_file:
         major = curr_file.readline().strip('\n')
     cs_req = []
