@@ -1,5 +1,2 @@
-User 1: CS
-CS 173
-MATH 241
-CS 173
-MATH 241
+User 1: Stats & CS
+User 2: CS + ASTRO
