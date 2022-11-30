@@ -1,2 +1,2 @@
-User 1: CS
-User 2: CS
+User 1: Stats & CS
+User 2: CS + ASTRO
