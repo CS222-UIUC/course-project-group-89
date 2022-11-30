@@ -63,7 +63,7 @@ def checkboxes():
 @app.route('/class', methods=["POST"])
 def store_classes():
     "'Based on checkboxes selected from checkboxes(), store the classes in txt'"
-    user_classes = request.form.getlist('class')
+    user_classes = request.form.getlist('user_classes')
     # user_classes = request.form["class"]
     print(user_classes)
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
@@ -72,7 +72,7 @@ def store_classes():
         # curr_file.write("\n")
     curr_file.close()
     # return render_template("class.html")
-    return class_info_main()
+    return redirect(url_for('class_info_main'))
 
 @app.route('/classinfo', methods=["GET"])
 def class_info_main():
@@ -88,14 +88,19 @@ def class_info_main():
 @app.route('/info', methods=["POST"])
 def store_class_info():
     """Store User 1 info for start, end, and # of credit hrs"""
-    temp = request.form["info"]
-    print(temp)
-    # user_classes = request.values.getlist('user_classes')
-    # with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-    #     for item in user_classes:
-    #         curr_file.write("%s\n" % item)
-    #     curr_file.write("\n")
-    # curr_file.close()
+    s_time = request.form["start_time"]
+    end_time = request.form["end_time"]
+    c_hours = request.form["credit_hour"]
+    items = []
+    items.append(s_time)
+    items.append(end_time)
+    items.append(c_hours)
+    print(items)
+    with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
+        for item in items:
+            curr_file.write("%s\n" % item)
+        curr_file.write("\n")
+    curr_file.close()
     return render_template('classinfo.html')
 
 @app.route('/friendmajor', methods=["GET"])

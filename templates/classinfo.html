@@ -18,11 +18,13 @@
     
     }
     function sendPOST() {
+      console.log("popcorn")
       let formData = { 
         start_time:  $("#start_time").val(),
         end_time:    $("#end_time").val(),
         credit_hour: $("#credit_hours").val()
       };
+      console.log(formData)
       $.post("/info", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
@@ -49,7 +51,7 @@
       <div class="form-group row">
         <div class="col-sm-10"  style="font-family:verdana;">
             Choose Start Time:
-            <SELECT name="start_time" id="info">
+            <SELECT name="start_time" id="start_time">
             {% for c in time_range %}
             <option value= "{{c}}" SELECTED>{{c}}</option> 
             {% endfor %}
@@ -60,7 +62,7 @@
       <div class="form-group row">
         <div class="col-sm-10"  style="font-family:verdana;">
             Choose End Time:
-            <SELECT name="end_time" id="info">
+            <SELECT name="end_time" id="end_time">
             {% for c in time_range %}
             <option value= "{{c}}" SELECTED>{{c}}</option> 
             {% endfor %}
@@ -72,14 +74,14 @@
       <div class="form-group row">
         <div class="col-sm-10" style="font-family:verdana;">
             Choose How Many Credit Hours You Want:
-            <SELECT name="credit_hours" id="info">
+            <SELECT name="credit_hours" id="credit_hours">
             {% for c in credit_hours %}
             <option value= "{{c}}" SELECTED>{{c}}</option> 
             {% endfor %}
             </SELECT>
         </div>
       </div>
-      <button onclick="sendPOST;myFunction()" 
+      <button onclick="sendPOST();myFunction()" 
       class="btn btn-secondary">
       Submit</a> 
       </button>

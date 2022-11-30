@@ -1,2 +1,7 @@
-User 1: Stats & CS
-User 2: CS + ASTRO
+User 1: CS
+CS 128
+CS 173
+9 pm
+9 pm
+18
+
