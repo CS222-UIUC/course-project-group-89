@@ -1,5 +1,5 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
 from parsing import remaining_classes
 
@@ -25,7 +25,7 @@ class_cs_ggis = ["Needs to be Removed"]
 @app.route('/')
 def dropdown():
     """Sends List of Majors to Frontend"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('index.html', cs_req=cs_req)
 
 @app.route('/major', methods=["POST"])
@@ -53,7 +53,7 @@ def checkboxes():
         cs_req = class_cs_astro
     elif major == "CS + GGIS":
         cs_req = class_cs_ggis
-    elif major == "Stats & CS":
+    elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
         cs_req = class_cs
@@ -70,7 +70,8 @@ def store_classes():
             curr_file.write(f'{item}\n')
         # curr_file.write("\n")
     curr_file.close()
-    return class_info_main()
+    
+    return redirect(url_for('class_info_main'))
 
 @app.route('/classinfo', methods=["GET"])
 def class_info_main():
@@ -97,7 +98,7 @@ def store_class_info():
 @app.route('/friendmajor', methods=["GET"])
 def friendmajor():
     """Sends List of Majors to Frontend for User 2"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "Stats & CS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 @app.route('/friendmajor', methods=["POST"])
@@ -128,7 +129,7 @@ def friendclasses():
         cs_req = class_cs_astro
     elif major == "CS + GGIS":
         cs_req = class_cs_ggis
-    elif major == "Stats & CS":
+    elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
         cs_req = class_cs
