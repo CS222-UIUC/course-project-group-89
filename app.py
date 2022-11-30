@@ -207,5 +207,4 @@ def choose_classes():
     print(remaining_classes_user_one)
     remaining_classes_for_everyone = []
     remaining_classes_for_everyone = [*set(remaining_classes_user_one)]
-    # Order them nicely somehow
     return render_template("classestotake.html", cs_req= remaining_classes_for_everyone)
