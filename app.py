@@ -1,5 +1,8 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
 from flask import Flask, render_template, request
+import numpy as np
+from parsing import remaining_classes
+
 
 app = Flask(__name__)
 class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
@@ -40,9 +43,12 @@ def main():
 def checkboxes():
     "'Based on major stores in txt file, send a list of classes to the front end'"
     major = ""
-    with open("store_user_input.txt", "r", encoding="utf8") as curr_file:
-        major = curr_file.readline().rstrip()
+    with open('store_user_input.txt', encoding="utf8") as curr_file:
+        major = curr_file.readline().strip('\n')
     cs_req = []
+    major = major[8:]
+    print("checkboxes major: ", major)
+    print("checkboxes len of major: ", len(major))
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
     elif major == "CS + GGIS":
@@ -114,6 +120,9 @@ def friendclasses():
         for line in curr_file:
             pass
         major = line
+    print("friendclasses() major: ", major)
+    print("friendclasses() len of major: ", len(major))
+    major = major[8:].strip('\n')
     cs_req = []
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
@@ -186,4 +195,27 @@ def choose_classes():
         curr= curr[:len(curr) - 1]
     for curr in (user_two_class):
         curr = curr[:len(curr) - 1]
-    return render_template("classestotake.html", cs_req= [])
+    remaining_classes_user_one = []
+    remaining_classes_user_one = remaining_classes(user_one_class, user_one_major)
+
+    remaining_classes_user_two = []
+    remaining_classes_user_two = remaining_classes(user_two_class, user_two_major)
+
+
+    # remaining_classes_user_one.append(remaining_classes_user_two)
+    rem = np.concatenate((remaining_classes_user_one, remaining_classes_user_two))
+    print(rem)
+    remaining_classes_for_everyone = []
+    remaining_classes_for_everyone = [*set(rem)]
+    return render_template("classestotake.html", cs_req= remaining_classes_for_everyone)
+
+
+@app.route('/finaldisplay', methods=["POST", "GET"])
+def loadpage():
+    '''Load last page'''
+    json = [
+        ["123", "CS222", "9am", "10am"],
+        ["222", "CS225", "1pm", "3pm"]
+    ]
+    print(json)
+    return render_template("finaldisplay.html", json_file = json)

@@ -16,10 +16,12 @@ def sort_core_classes(major_):
     core_course_list = Empty #has list of all core courses  & their info
     if major_ == "CS + MATH":
         core_course_list = course_requirements.df_cs_math
-    elif major_ == "STAT & CS":
+    elif major_ == "Stats & CS":
         core_course_list = course_requirements.df_cs_stats
     elif major_ == "CS + ASTRO":
         core_course_list = course_requirements.df_cs_astronomy
+    else:
+        core_course_list = course_requirements.df_cs
 
     return core_course_list
 
@@ -53,9 +55,9 @@ core_courses = sort_core_classes("CS + MATH")
 # print(core_courses)
 all_classes = get_all_classes(core_courses)
 # print(all_classes)
-start_time = '10:00 am'
-end_time = '12:00 pm'
-time_based = filter_based_on_time(all_classes, start_time, end_time)
+START_TIME = '10:00 am'
+END_TIME = '12:00 pm'
+time_based = filter_based_on_time(all_classes, START_TIME, END_TIME)
 print(time_based)
 # print(time_based.iloc[0])
 
@@ -129,8 +131,9 @@ def remove_cs_equivalents(selected_subjects, list_differences):
     return list_differences
 
 def remaining_classes(selected_subjects, major):
-    '''selected_subjects => user1_selected_subjects or user2_selected_subjects,
+    '''selected_subjects => a list of subject names (ex. [CS 124, CS 225])
     returns list of remaining classes from requirements excluding selected_subjects'''
+    print("major in parsing.py: ", major)
     list_requirements = sort_core_classes(major)["technical requirements"].tolist()
     difference = []
 
