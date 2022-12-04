@@ -11,30 +11,38 @@
 
     <title>CS 222: Scheduler</title>
     <script>
-    function myFunction() {
-        window.location.href="./friendclassinfo";  
-    } 
-    function sendPOST() {
-      let formData = { seconduserclass: $("#seconduserclass").val() };
-      $.post("/friendclass", formData)
-    };
-    </script>   
+    // function myFunction() {
+    //     window.location.href="./friendclassinfo";  
+    // } 
+    // function sendPOST() {
+    //   let formData = { seconduserclass: $("#seconduserclass").val() };
+    //   $.post("/friendclass", formData)
+    // };
+  </script>   
   </head>
   <body style="background-color:powderblue;">
     <div class="container">
       <br>
-      <h1 style="font-family:verdana;">What Classes Has Your Friend Taken</h1>
-      <div class="form-group row exampleFormControlSelect2 col-md-12" for="seconduserclass" style="font-family:verdana;">
+      <h1>What Classes Have You Taken</h1>
+      <div class="form-group row" style="font-family:verdana;">
               <form method="POST" action='/friendclass'> 
-              {% for c in cs_req %}
-              <input type="checkbox" name = 'seconduserclass' option value = "{{c}}"  SELECTED>{{c}}<br></option>
-              {% endfor %}
-              <input class="btn btn-secondary" type="Submit">
-              </form>
-            <br>
+                {% for c in cs_req %}
+                  <input type="checkbox" style="text-align:left;" name = 'user_classes' option value = "{{c}}"  SELECTED> {{c}}<br></option>
+                {% endfor %}
+                <br>
+              <input class="btn btn-secondary" style="font-family:verdana;" type="submit">
+            </form>
       </div>
       <div id="content">
       </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $('.selectpicker').selectpicker();
+      })
+    </script>
+  </body>
+</html>
     </div>
     <!-- <script>
       $(document).ready(function(){
