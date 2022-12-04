@@ -5,7 +5,6 @@ User 1 End Time: 09:00 PM
 User 1 Credit Hours: 18
 User 2: CS
 CS 124
-CS 128
 User 2 Start Time: 08:00 AM
 User 2 End Time: 09:00 PM
 User 2 Credit Hours: 18

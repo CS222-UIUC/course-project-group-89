@@ -205,6 +205,7 @@ def store_friends_class_info():
     items.append(s_time)
     items.append(end_time)
     items.append(c_hours)
+    counter = 0
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for curr in items:
             if counter == 0:
@@ -234,7 +235,7 @@ def choose_classes():
 
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
-
+    print("hi: ", user_two_major)
     smart_two = get_all_classes(sort_core_classes(user_two_major))
     temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
 
@@ -314,6 +315,31 @@ def helper_fun_two(para):
         frames = [store_two, curr_df]
         store_two = pd.concat(frames)
     rem = pd.concat([store_one, store_two], ignore_index=True)
+    col = [
+        "Year",
+        "Term",
+        "YearTerm",
+        "Description",
+        "Credit Hours",
+        "Section Info",
+        "Degree Attributes",
+        "Schedule Information",
+        "CRN",
+        "Section",
+        "Status Code",
+        "Part of Term",
+        "Section Title",
+        "Section Credit Hours",
+        "Section Status",
+        "Enrollment Status",
+        "Type",
+        "Type Code",
+        "Days of Week",
+        "Room",
+        "Building",
+        "Instructors"
+    ]
+    rem = rem.drop(col, axis = 1)
     return rem
 
 @app.route('/finaldisplay', methods=["POST", "GET"])
