@@ -286,6 +286,7 @@ def helper_function():
     return return_val
 
 def edit_class(user_one_class, user_two_class):
+    """Edit user_one_class and user_two_class """
     for curr in user_one_class:
         curr = curr[:len(curr) - 1]
     for curr in (user_two_class):
