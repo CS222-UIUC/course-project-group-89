@@ -1,8 +1,7 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
-from flask import Flask, render_template, request, redirect, url_for
 import time
+from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
-import numpy as np
 from parsing import filter_based_on_time, get_all_classes, remaining_classes, sort_core_classes
 
 
@@ -220,6 +219,61 @@ def store_friends_class_info():
 @app.route('/classestotake', methods=["GET"])
 def choose_classes():
     """Print out the classes User 1 and 2 can take together"""
+    return_val = helper_function()
+    user_one_class = return_val[0]
+    user_two_class = return_val[1]
+    user_one_major = return_val[2]
+    user_two_major = return_val[3]
+    user_one_class_info = return_val[4]
+    user_two_class_info = return_val[5]
+
+    for curr in user_one_class:
+        curr= curr[:len(curr) - 1]
+    for curr in (user_two_class):
+        curr = curr[:len(curr) - 1]
+    rem_class_one = []
+    rem_class_one = remaining_classes(user_one_class, user_one_major)
+
+    rem_class_two = []
+    rem_class_two = remaining_classes(user_two_class, user_two_major)
+
+    temp_part_one = sort_core_classes(user_one_major)
+    temp_part_two = get_all_classes(temp_part_one)
+
+    temp_one = filter_based_on_time(temp_part_two, user_one_class_info[0], user_one_class_info[1])
+
+    temp_part_one = sort_core_classes(user_two_major)
+    temp_part_two = get_all_classes(temp_part_one)
+    temp_two = filter_based_on_time(temp_part_two, user_two_class_info[0], user_two_class_info[1])
+    print(rem_class_one)
+    print(" ")
+    print(rem_class_two)
+    print(' ')
+    print(temp_one)
+    store_one = pd.DataFrame()
+    store_two = pd.DataFrame()
+    for i in range(0, len(rem_class_one)):
+        if i == 1:
+            store_one = temp_one.loc[temp_two["Subject and Number"] == rem_class_one[i]]
+        else:
+            curr_df = temp_one.loc[temp_two["Subject and Number"] == rem_class_one[i]]
+            frames = [store_one, curr_df]
+            store_one = pd.concat(frames)
+  
+    for i in range(0, len(rem_class_two)):
+        if i == 1:
+            store_two = temp_two.loc[temp_two["Subject and Number"] == rem_class_two[i]]
+        else:
+            curr_df = temp_two.loc[temp_two["Subject and Number"] ==  rem_class_two[i]]
+            frames = [store_two, curr_df]
+            store_two = pd.concat(frames)
+
+    rem = pd.concat([store_one, store_two], ignore_index=True)
+    print(rem)
+    rem = rem.drop_duplicates()
+    return render_template("classestotake.html", json_file= rem.to_numpy())
+
+def helper_function():
     user_one_class = []
     user_two_class = []
     user_one_class_info = []
@@ -250,48 +304,11 @@ def choose_classes():
                 user_two_class_info.append(line[17:].strip("\n"))
             elif line[0:21] == "User 2 Credit Hours: ":
                 user_two_class_info.append(line[21:].strip("\n"))
-
     curr_file.close()
-    for curr in user_one_class:
-        curr= curr[:len(curr) - 1]
-    for curr in (user_two_class):
-        curr = curr[:len(curr) - 1]
-    remaining_classes_user_one = []
-    remaining_classes_user_one = remaining_classes(user_one_class, user_one_major)
-
-    remaining_classes_user_two = []
-    remaining_classes_user_two = remaining_classes(user_two_class, user_two_major)
-
-    temp_one = filter_based_on_time(get_all_classes(sort_core_classes(user_one_major)), user_one_class_info[0], user_one_class_info[1])
-    temp_two = filter_based_on_time(get_all_classes(sort_core_classes(user_two_major)), user_two_class_info[0], user_two_class_info[1])
-    print(remaining_classes_user_one)
-    print(" ")
-    print(remaining_classes_user_two)
-    print(' ')
-    print(temp_one)
-    store_one = pd.DataFrame()
-    store_two = pd.DataFrame()
-    for i in range(0, len(remaining_classes_user_one)):
-        if i == 1:
-            store_one = temp_one.loc[temp_two["Subject and Number"] == remaining_classes_user_one[i]]
-        else:
-            x = temp_one.loc[temp_two["Subject and Number"] == remaining_classes_user_one[i]]
-            frames = [store_one, x]
-            store_one = pd.concat(frames)
-    
-    for i in range(0, len(remaining_classes_user_two)):
-        if i == 1:
-            store_two = temp_two.loc[temp_two["Subject and Number"] == remaining_classes_user_two[i]]
-        else:
-            x = temp_two.loc[temp_two["Subject and Number"] ==  remaining_classes_user_two[i]]
-            frames = [store_two, x]
-            store_two = pd.concat(frames)
-
-    rem = pd.concat([store_one, store_two], ignore_index=True)
-    print(rem)
-    rem = rem.drop_duplicates()
-    return render_template("classestotake.html", json_file= rem.to_numpy())
-
+    return_val = [    user_one_class, user_two_class, 
+    user_one_major, user_two_major, 
+    user_one_class_info, user_two_class_info]
+    return return_val
 
 @app.route('/finaldisplay', methods=["POST", "GET"])
 def loadpage():
