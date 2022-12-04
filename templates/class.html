@@ -11,14 +11,14 @@
 
     <title>CS 222: Scheduler</title>
     <script>
-    function myFunction() {
-        window.location.href="./classinfo";  
-    } 
-    function sendPOST() {
-      let formData = { user_classes: $("#user_classes").val() };
-      $.post("/class", formData)
-    };
-    </script>   
+    // function myFunction() {
+    //     window.location.href="./classinfo";  
+    // } 
+    // function sendPOST() {
+    //   let formData = { user_classes: $("#user_classes").val() };
+    //   $.post("/class", formData)
+    // };
+  </script>   
   </head>
   <body style="background-color:powderblue;">
     <div class="container">
@@ -30,7 +30,7 @@
                   <input type="checkbox" style="text-align:left;" name = 'user_classes' option value = "{{c}}"  SELECTED> {{c}}<br></option>
                 {% endfor %}
                 <br>
-              <input class="btn btn-secondary" style="font-family:verdana;" type="Submit" onclick="sendPOST();MyFunction()">
+              <input class="btn btn-secondary" style="font-family:verdana;" type="submit">
             </form>
       </div>
       <div id="content">

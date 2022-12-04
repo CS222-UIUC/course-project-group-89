@@ -1,7 +1,8 @@
 '''this module renders a template and has two functions (testing for emily 10/1/22)'''
-from flask import Flask, render_template, request
-import numpy as np
-from parsing import remaining_classes
+import time
+from flask import Flask, render_template, request, redirect, url_for
+import pandas as pd
+from parsing import filter_based_on_time, get_all_classes, remaining_classes, sort_core_classes
 
 
 app = Flask(__name__)
@@ -32,7 +33,6 @@ def dropdown():
 def main():
     "'This recives the major from dropdown and stores it in txt file'"
     major = request.form["major"]
-    print("in main(), major: ", major)
     with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
         curr_file.write(f'User 1: {major}')
         curr_file.write("\n")
@@ -46,9 +46,7 @@ def checkboxes():
     with open('store_user_input.txt', encoding="utf8") as curr_file:
         major = curr_file.readline().strip('\n')
     cs_req = []
-    major = major[8:]
-    print("checkboxes major: ", major)
-    print("checkboxes len of major: ", len(major))
+    major = major[8:].strip('\n')
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
     elif major == "CS + GGIS":
@@ -63,22 +61,34 @@ def checkboxes():
 @app.route('/class', methods=["POST"])
 def store_classes():
     "'Based on checkboxes selected from checkboxes(), store the classes in txt'"
-    user_classes = request.form.getlist('class')
+    user_classes = request.form.getlist('user_classes')
     # user_classes = request.form["class"]
-    print(user_classes)
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in user_classes:
             curr_file.write(f'{item}\n')
         # curr_file.write("\n")
     curr_file.close()
     # return render_template("class.html")
-    return class_info_main()
+    return redirect(url_for('class_info_main'))
 
 @app.route('/classinfo', methods=["GET"])
 def class_info_main():
     """Send the options for start and end time and # of credit hrs"""
-    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm",
-    "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
+    time_range = [
+        "08:00 AM", "08:30 AM",
+        "09:00 AM", "09:30 AM",
+        "10:00 AM", "10:30 AM",
+        "11:00 AM", "11:30 AM",
+        "12:00 PM", "12:30 PM",
+        "01:00 PM", "01:30 PM",
+        "02:00 PM", "02:30 PM",
+        "03:00 PM", "03:30 PM",
+        "04:00 PM", "04:30 PM",
+        "05:00 PM", "05:30 PM",
+        "06:00 PM", "06:30 PM",
+        "07:00 PM", "07:30 PM",
+        "08:00 PM", "08:30 PM",
+        "09:00 PM"]
 
     credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
     14, 15, 16, 17, 18]
@@ -88,14 +98,26 @@ def class_info_main():
 @app.route('/info', methods=["POST"])
 def store_class_info():
     """Store User 1 info for start, end, and # of credit hrs"""
-    temp = request.form["info"]
-    print(temp)
-    # user_classes = request.values.getlist('user_classes')
-    # with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-    #     for item in user_classes:
-    #         curr_file.write("%s\n" % item)
-    #     curr_file.write("\n")
-    # curr_file.close()
+    s_time = request.form["start_time"]
+    end_time = request.form["end_time"]
+    c_hours = request.form["credit_hour"]
+    items = []
+    items.append(s_time)
+    items.append(end_time)
+    items.append(c_hours)
+    counter = 0
+    with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
+        for curr in items:
+            if counter == 0:
+                curr_file.write(f"User 1 Start Time: {curr}")
+                counter = counter + 1
+            elif counter == 1:
+                curr_file.write(f"User 1 End Time: {curr}")
+                counter = counter + 1
+            else:
+                curr_file.write(f"User 1 Credit Hours: {curr}")
+            curr_file.write("\n")
+    curr_file.close()
     return render_template('classinfo.html')
 
 @app.route('/friendmajor', methods=["GET"])
@@ -114,7 +136,6 @@ def storefriendmajor():
     curr_file.close()
     return render_template("friendmajor.html")
 
-
 @app.route('/friendclass', methods=["GET"])
 def friendclasses():
     """For User 2, read last line to get major for User 2 & return classes"""
@@ -124,8 +145,6 @@ def friendclasses():
         for line in curr_file:
             pass
         major = line
-    print("friendclasses() major: ", major)
-    print("friendclasses() len of major: ", len(major))
     major = major[8:].strip('\n')
     cs_req = []
     if major == "CS + ASTRO":
@@ -142,19 +161,32 @@ def friendclasses():
 @app.route('/friendclass', methods=["POST"])
 def storefriendclasses():
     """Store User 2's classes taken"""
-    friend_classes = request.values.getlist('seconduserclass')
+    friend_classes = request.values.getlist('user_classes')
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for item in friend_classes:
             curr_file.write(f'{item}\n')
         # curr_file.write("\n")
     curr_file.close()
-    return friend_class_info_main()
+    return redirect(url_for('friend_class_info_main'))
 
 @app.route('/friendclassinfo', methods=["GET"])
 def friend_class_info_main():
     """Send User 2's class option to frontend"""
-    time_range = ["8 am", "9 am", "10 am", "11 am", "12 pm",
-    "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm", "8 pm", "9 pm"]
+    time_range = [
+        "08:00 AM", "08:30 AM",
+        "09:00 AM", "09:30 AM",
+        "10:00 AM", "10:30 AM",
+        "11:00 AM", "11:30 AM",
+        "12:00 PM", "12:30 PM",
+        "01:00 PM", "1:30 PM",
+        "02:00 PM", "02:30 PM",
+        "03:00 PM", "03:30 PM",
+        "04:00 PM", "04:30 PM",
+        "05:00 PM", "05:30 PM",
+        "06:00 PM", "06:30 PM",
+        "07:00 PM", "07:30 PM",
+        "08:00 PM", "08:30 PM",
+        "09:00 PM"]
 
     credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
     14, 15, 16, 17, 18]
@@ -163,25 +195,64 @@ def friend_class_info_main():
     time_range=time_range, credit_hours = credit_hours)
 
 
-@app.route('/friendclassinfo', methods=["POST"])
+@app.route('/friendinfo', methods=["POST"])
 def store_friends_class_info():
     """Store User 2's class info"""
-    # friend_classes = request.values.getlist('user_classes')
-    # print("in main(), POST, friend_classes: ", friend_classes)
-    # with open("store_user_input.txt", "w+", encoding="utf8") as curr_file:
-    #     curr_file.write(friend_classes)
-    #     curr_file.write("\n")
-    # curr_file.close()
-    return choose_classes()
+    s_time = request.form["start_time"]
+    end_time = request.form["end_time"]
+    c_hours = request.form["credit_hour"]
+    items = []
+    items.append(s_time)
+    items.append(end_time)
+    items.append(c_hours)
+    with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
+        for curr in items:
+            if counter == 0:
+                curr_file.write(f"User 2 Start Time: {curr}")
+                counter = counter + 1
+            elif counter == 1:
+                curr_file.write(f"User 2 End Time: {curr}")
+                counter = counter + 1
+            else:
+                curr_file.write(f"User 2 Credit Hours: {curr}")
+            curr_file.write("\n")
+        curr_file.write("\n")
+    curr_file.close()
+    return render_template('friendclassinfo.html')
 
 
 @app.route('/classestotake', methods=["GET"])
 def choose_classes():
     """Print out the classes User 1 and 2 can take together"""
+    return_val = helper_function()
+    user_one_class = return_val[0]
+    user_two_class = return_val[1]
+    user_one_major = return_val[2]
+    user_two_major = return_val[3]
+    user_one_class_info = return_val[4]
+    user_two_class_info = return_val[5]
+
+    smart_one = get_all_classes(sort_core_classes(user_one_major))
+    temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
+
+    smart_two = get_all_classes(sort_core_classes(user_two_major))
+    temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
+
+    para = [user_one_class, user_one_major, temp_one,
+    temp_two, user_two_class, user_two_major]
+
+    rem = helper_fun_two(para)
+    return render_template("classestotake.html", json_file= rem.drop_duplicates().to_numpy())
+
+def helper_function():
+    """Helper function for choose_classes"""
     user_one_class = []
     user_two_class = []
+    user_one_class_info = []
     user_one_major = ""
     user_two_major = ""
+    user_two_class_info = []
+    time.sleep(2)
     with open('store_user_input.txt', encoding="utf8") as curr_file:
         line = None
         for line in curr_file:
@@ -189,37 +260,68 @@ def choose_classes():
                 user_one_major = line
             elif user_one_major != "" and user_two_major == "" and line[0:4] != "User":
                 user_one_class.append(line)
+            elif line[0:19] == "User 1 Start Time: ":
+                user_one_class_info.append(line[19:].strip("\n"))
+            elif line[0:17] == "User 1 End Time: ":
+                user_one_class_info.append(line[17:].strip("\n"))
+            elif line[0:21] == "User 1 Credit Hours: ":
+                user_one_class_info.append(line[21:].strip("\n"))
             elif line[0:4] == "User" and user_one_major != "" and user_two_major == "":
                 user_two_major = line
             elif user_one_major != "" and user_two_major != "" and line[0:4] != "User":
                 user_two_class.append(line)
-
+            elif line[0:19] == "User 2 Start Time: ":
+                user_two_class_info.append(line[19:].strip("\n"))
+            elif line[0:17] == "User 2 End Time: ":
+                user_two_class_info.append(line[17:].strip("\n"))
+            elif line[0:21] == "User 2 Credit Hours: ":
+                user_two_class_info.append(line[21:].strip("\n"))
     curr_file.close()
+    temp = edit_class(user_one_class, user_two_class)
+    user_one_class = temp[0]
+    user_two_class = temp[1]
+    return_val = [user_one_class, user_two_class,
+    user_one_major, user_two_major,
+    user_one_class_info, user_two_class_info]
+    return return_val
+
+def edit_class(user_one_class, user_two_class):
+    """Edit user_one_class and user_two_class """
     for curr in user_one_class:
-        curr= curr[:len(curr) - 1]
+        curr = curr[:len(curr) - 1]
     for curr in (user_two_class):
         curr = curr[:len(curr) - 1]
-    remaining_classes_user_one = []
-    remaining_classes_user_one = remaining_classes(user_one_class, user_one_major)
+    answer = [user_one_class, user_two_class]
+    return answer
 
-    remaining_classes_user_two = []
-    remaining_classes_user_two = remaining_classes(user_two_class, user_two_major)
+def helper_fun_two(para):
+    """Cut Down on Branches"""
+    user_one_class = para[0]
+    user_one_major = para[1]
+    temp_one = para[2]
+    temp_two = para[3]
+    user_two_class = para[4]
+    user_two_major = para[5]
+    store_one = pd.DataFrame()
+    store_two = pd.DataFrame()
+    for curr in remaining_classes(user_one_class, user_one_major):
+        curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
+        frames = [store_one, curr_df]
+        store_one = pd.concat(frames)
 
-
-    # remaining_classes_user_one.append(remaining_classes_user_two)
-    rem = np.concatenate((remaining_classes_user_one, remaining_classes_user_two))
-    print(rem)
-    remaining_classes_for_everyone = []
-    remaining_classes_for_everyone = [*set(rem)]
-    return render_template("classestotake.html", cs_req= remaining_classes_for_everyone)
-
+    for curr in remaining_classes(user_two_class, user_two_major):
+        curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
+        frames = [store_two, curr_df]
+        store_two = pd.concat(frames)
+    rem = pd.concat([store_one, store_two], ignore_index=True)
+    return rem
 
 @app.route('/finaldisplay', methods=["POST", "GET"])
 def loadpage():
     '''Load last page'''
     json = [
-        ["123", "CS222", "9am", "10am"],
-        ["222", "CS225", "1pm", "3pm"]
+        ["123", "CS222", "9AM", "10AM"],
+        ["222", "CS225", "1PM", "3PM"]
     ]
     print(json)
     return render_template("finaldisplay.html", json_file = json)

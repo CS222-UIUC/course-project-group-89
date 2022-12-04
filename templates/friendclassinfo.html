@@ -12,63 +12,85 @@
 
     <title>CS 222: Scheduler</title>
     <script>
-    function myFunction() {
-        window.location.href="./classestotake";  
-    }
-    function sendPOST() {
-      let formData = { seconduserclassinfo: $("#seconduserclassinfo").val() };
-      $.post("/seconduserclassinfo", formData)
-    };
-    </script>    
-  </head>
-  <body style="background-color:powderblue;">
-    <div class="container">
-      <br>
-      <h1 style="font-family:verdana;">Choose Your Friend's Start and End Time For Classes</h1>
-      <div class="form-group row">
-        <div class="col-sm-10" style="font-family:verdana;">
-            Choose Start Time:
-            <SELECT name="start_time" id="start_time">
-            {% for c in time_range %}
-            <option value= "{{c}}" SELECTED>{{c}}</option> 
-            {% endfor %}
-            </SELECT>
+      function myFunction() {
+        console.log("HI")
+          window.location.href="./classestotake";  
+      }
+      function sendPOST() {
+        console.log("popcorn")
+        let formData = { 
+          start_time:  $("#start_time").val(),
+          end_time:    $("#end_time").val(),
+          credit_hour: $("#credit_hours").val()
+        };
+        console.log(formData)
+        $.post("/friendinfo", formData)
+        // .done(function (data) {
+        //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
+        //   let meetingDateStr = meetingDate.toLocaleString('en-US', {
+        //     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
+        //   })
+  
+        //   let forecastDate = new Date(Date.parse(data.forecastTime));
+        //   let forecastDateStr = forecastDate.toLocaleString('en-US', {
+        //     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
+        //   })        
+        //   $("#content").html(`<hr><h3>Weather for the next ${data.course} meeting</h3><ul><li>Next Meeting: ${meetingDateStr}</li><li>Forecast Time: ${forecastDateStr}</li><li>Temperature: ${data.temperature}°F</li><li>Forecast: ${data.shortForecast}</li></ul>`);
+        // })
+        // .fail(function (data) {
+        //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
+        // })
+      }
+      </script>    
+    </head>
+    <body style="background-color:powderblue;">
+      <div class="container">
+        <br>
+        <h1  style="font-family:verdana;">Choose Your Start and End Time For Your Classes</h1>
+        <div class="form-group row">
+          <div class="col-sm-10"  style="font-family:verdana;">
+              Choose Start Time:
+              <SELECT name="start_time" id="start_time">
+              {% for c in time_range %}
+              <option value= "{{c}}" SELECTED>{{c}}</option> 
+              {% endfor %}
+              </SELECT>
+          </div>
+        </div>
+        <h2 style="font-family:verdana;">To</h2>
+        <div class="form-group row">
+          <div class="col-sm-10"  style="font-family:verdana;">
+              Choose End Time:
+              <SELECT name="end_time" id="end_time">
+              {% for c in time_range %}
+              <option value= "{{c}}" SELECTED>{{c}}</option> 
+              {% endfor %}
+              </SELECT>
+          </div>
+        </div>
+  
+        <h1 style="font-family:verdana;">Credit Hours</h1>
+        <div class="form-group row">
+          <div class="col-sm-10" style="font-family:verdana;">
+              Choose How Many Credit Hours You Want:
+              <SELECT name="credit_hours" id="credit_hours">
+              {% for c in credit_hours %}
+              <option value= "{{c}}" SELECTED>{{c}}</option> 
+              {% endfor %}
+              </SELECT>
+          </div>
+        </div>
+        <button onclick="sendPOST();myFunction()" 
+        class="btn btn-secondary">
+        Submit</a> 
+        </button>
+        <div id="content">
         </div>
       </div>
-      <h2>To</h2>
-      <div class="form-group row">
-        <div class="col-sm-10" style="font-family:verdana;">
-            Choose End Time:
-            <SELECT name="end_time" id="end_time">
-            {% for c in time_range %}
-            <option value= "{{c}}" SELECTED>{{c}}</option> 
-            {% endfor %}
-            </SELECT>
-        </div>
-      </div>
-
-      <h1 style="font-family:verdana;">Credit Hours</h1>
-      <div class="form-group row">
-        <div class="col-sm-10" style="font-family:verdana;">
-            Choose How Many Credit Hours You Want:
-            <SELECT name="credit_hours" id="credit_hours">
-            {% for c in credit_hours %}
-            <option value= "{{c}}" SELECTED>{{c}}</option> 
-            {% endfor %}
-            </SELECT>
-        </div>
-      </div>
-      <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary" style="font-family:verdana;">
-      Submit</a> 
-      </button>
-      <div id="content">
-      </div>
-    </div>
-    <!-- <script>
-      $(document).ready(function(){
-        $('.selectpicker').selectpicker('selectAll');
-      })
-    </script> -->
-  </body>
-</html>
+      <!-- <script>
+        $(document).ready(function(){
+          $('.selectpicker').selectpicker('selectAll');
+        })
+      </script> -->
+    </body>
+  </html>

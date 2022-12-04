@@ -1,65 +1,74 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <style>
-      h1   {color: rgb(240, 112, 38);}
-      h2   {color: rgb(240, 112, 38);}
-    </style>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<title>Summary</title>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css')}}">
+</head>
 
-    <title>CS 222: Scheduler</title>
-    <script>
-    // function myFunction() {
-    //     window.location.href="./classinfo";  
-    // } 
+<h1>Classes Summary</h1>
+<body>
+    <table id="classes-table" class="styled-table">
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Class Name</th>
+                <th>Start Time</th>
+                <th>End time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in json_file %}
+            <tr>
+                <th>{{data.0}}</th>
+                <th>{{data.1}}</th>
+                <th>{{data.2}}</th>
+                <th>{{data.3}}</th>
+            </tr>
+            {% endfor %}
+            <!--to be filled by javascript from finalclasses.json-->
+        </tbody>
 
-    function sendPOST() {
-      let formData = { choose_classes: $("#choose_classes").val() };
-      $.post("/classestotake", formData)
-      // .done(function (data) {
-      //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));
-      //   let meetingDateStr = meetingDate.toLocaleString('en-US', {
-      //     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
-      //   })
+    </table>
 
-      //   let forecastDate = new Date(Date.parse(data.forecastTime));
-      //   let forecastDateStr = forecastDate.toLocaleString('en-US', {
-      //     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'
-      //   })        
-      //   $("#content").html(`<hr><h3>Weather for the next ${data.course} meeting</h3><ul><li>Next Meeting: ${meetingDateStr}</li><li>Forecast Time: ${forecastDateStr}</li><li>Temperature: ${data.temperature}°F</li><li>Forecast: ${data.shortForecast}</li></ul>`);
-      // })
-      // .fail(function (data) {
-      //   $("#content").html(`<hr><h3>Error</h3><p>${JSON.stringify(data)}</p>`);
-      // })
-    };
-    </script>   
-  </head>
-  <body style="background-color:powderblue;">
-    <div class="container">
-      <br>
-      <h1 style="font-family:verdana;">The following are the classes for your major that you can take with other User</h1>
-      <h1 style="font-family:verdana;">Choose Which Class you want to take with other User</h1>
-      <div class="form-group row" style="font-family:verdana;">
-        <label for="choose_classes" class="exampleFormControlSelect2">Classes:</label>
-            <label class="col-md-12">
-              <form method="POST" action='/finaldisplay'> 
-              {% for c in cs_req %}
-              <input type="checkbox" name = 'choose_classes' option value = "{{c}}"  SELECTED>{{c}}</option>
-              {% endfor %}
-              <input class="btn btn-secondary" type="Submit">
-              </form>
-            </label>
-      </div>
-      <div id="content">
-      </div>
-    </div>
-    <script>
-      $(document).ready(function(){
-        $('.selectpicker').selectpicker();
-      })
+
+    <script type="text/javascript">
+        const classesBody = document.querySelector("#classes-table > tbody");
+
+        function loadClasses() {
+            console.log('{{json_file}}')
+            populateClasses('{{json_file}}');
+
+        }
+
+        function populateClasses(json) {
+            console.log(json);
+            
+            for (var i=0; i<json.length; i++) {
+                obj = json[i]
+                console.log(obj)
+                obj.slice(4)
+                console.log(obj);
+                obj = obj.slice(0,-4);
+                console.log(obj);
+            }
+
+            json.forEach((row) => {
+                const tr = document.createElement("tr");
+
+                row.forEach((cell) => {
+                    const td = document.createElement("td");
+                    td.textContent = cell;
+                    tr.appendChild(td);
+
+                });
+                classesBody.appendChild(tr);
+            });
+
+            
+
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {loadClasses(); });
     </script>
-  </body>
+</body>
 </html>
