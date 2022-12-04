@@ -105,14 +105,17 @@ def store_class_info():
     items.append(s_time)
     items.append(end_time)
     items.append(c_hours)
+    counter = 0
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-        for i in range(0, len(items)):
-            if i == 0:
-                curr_file.write(f"User 1 Start Time: {items[i]}")
-            elif i == 1:
-                curr_file.write(f"User 1 End Time: {items[i]}")
+        for curr in items:
+            if counter == 0:
+                curr_file.write(f"User 1 Start Time: {curr}")
+                counter = counter + 1
+            elif counter == 1:
+                curr_file.write(f"User 1 End Time: {curr}")
+                counter = counter + 1
             else:
-                curr_file.write(f"User 1 Credit Hours: {items[i]}")
+                curr_file.write(f"User 1 Credit Hours: {curr}")
             curr_file.write("\n")
     curr_file.close()
     return render_template('classinfo.html')
@@ -203,13 +206,15 @@ def store_friends_class_info():
     items.append(end_time)
     items.append(c_hours)
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
-        for i in range(0, len(items)):
-            if i == 0:
-                curr_file.write(f"User 2 Start Time: {items[i]}")
-            elif i == 1:
-                curr_file.write(f"User 2 End Time: {items[i]}")
+        for curr in items:
+            if counter == 0:
+                curr_file.write(f"User 2 Start Time: {curr}")
+                counter = counter + 1
+            elif counter == 1:
+                curr_file.write(f"User 2 End Time: {curr}")
+                counter = counter + 1
             else:
-                curr_file.write(f"User 2 Credit Hours: {items[i]}")
+                curr_file.write(f"User 2 Credit Hours: {curr}")
             curr_file.write("\n")
         curr_file.write("\n")
     curr_file.close()
@@ -226,44 +231,22 @@ def choose_classes():
     user_two_major = return_val[3]
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
-    rem_class_one = []
-    rem_class_two = []
     store_one = pd.DataFrame()
     store_two = pd.DataFrame()
-    counter = 0
-
-    for curr in user_one_class:
-        curr= curr[:len(curr) - 1]
-    for curr in (user_two_class):
-        curr = curr[:len(curr) - 1]
-
-    rem_class_one = remaining_classes(user_one_class, user_one_major)
-    rem_class_two = remaining_classes(user_two_class, user_two_major)
-
-    smart_one = sort_core_classes(user_one_major)
-    smart_one = get_all_classes(smart_one)
+    smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
 
-    smart_two = sort_core_classes(user_two_major)
-    smart_two = get_all_classes(smart_two)
+    smart_two = get_all_classes(sort_core_classes(user_two_major))
     temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
-    for curr in rem_class_one:
-        if counter == 0:
-            store_one = temp_one.loc[temp_two["Subject and Number"] == curr]
-            counter = 1
-        else:
-            curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
-            frames = [store_one, curr_df]
-            store_one = pd.concat(frames)
+    for curr in remaining_classes(user_one_class, user_one_major):
+        curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
+        frames = [store_one, curr_df]
+        store_one = pd.concat(frames)
     counter = 0
-    for curr in rem_class_two:
-        if counter == 0:
-            store_two = temp_two.loc[temp_two["Subject and Number"] == curr]
-            counter = 1
-        else:
-            curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
-            frames = [store_two, curr_df]
-            store_two = pd.concat(frames)
+    for curr in remaining_classes(user_two_class, user_two_major):
+        curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
+        frames = [store_two, curr_df]
+        store_two = pd.concat(frames)
 
     rem = pd.concat([store_one, store_two], ignore_index=True)
     print(rem)
@@ -303,6 +286,10 @@ def helper_function():
             elif line[0:21] == "User 2 Credit Hours: ":
                 user_two_class_info.append(line[21:].strip("\n"))
     curr_file.close()
+    for curr in user_one_class:
+        curr = curr[:len(curr) - 1]
+    for curr in (user_two_class):
+        curr = curr[:len(curr) - 1]
     return_val = [user_one_class, user_two_class,
     user_one_major, user_two_major,
     user_one_class_info, user_two_class_info]
