@@ -252,7 +252,7 @@ def helper_function():
     user_one_major = ""
     user_two_major = ""
     user_two_class_info = []
-    time.sleep(2) # Sleep for 3 seconds
+    time.sleep(2)
     with open('store_user_input.txt', encoding="utf8") as curr_file:
         line = None
         for line in curr_file:
@@ -277,14 +277,21 @@ def helper_function():
             elif line[0:21] == "User 2 Credit Hours: ":
                 user_two_class_info.append(line[21:].strip("\n"))
     curr_file.close()
-    for curr in user_one_class:
-        curr = curr[:len(curr) - 1]
-    for curr in (user_two_class):
-        curr = curr[:len(curr) - 1]
+    temp = edit_class(user_one_class, user_two_class)
+    user_one_class = temp[0]
+    user_two_class = temp[1]
     return_val = [user_one_class, user_two_class,
     user_one_major, user_two_major,
     user_one_class_info, user_two_class_info]
     return return_val
+
+def edit_class(user_one_class, user_two_class):
+    for curr in user_one_class:
+        curr = curr[:len(curr) - 1]
+    for curr in (user_two_class):
+        curr = curr[:len(curr) - 1]
+    answer = [user_one_class, user_two_class]
+    return answer
 
 def helper_fun_two(para):
     """Cut Down on Branches"""
