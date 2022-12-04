@@ -226,45 +226,42 @@ def choose_classes():
     user_two_major = return_val[3]
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
+    rem_class_one = []
+    rem_class_two = []
+    store_one = pd.DataFrame()
+    store_two = pd.DataFrame()
+    counter = 0
 
     for curr in user_one_class:
         curr= curr[:len(curr) - 1]
     for curr in (user_two_class):
         curr = curr[:len(curr) - 1]
-    rem_class_one = []
-    rem_class_one = remaining_classes(user_one_class, user_one_major)
 
-    rem_class_two = []
+    rem_class_one = remaining_classes(user_one_class, user_one_major)
     rem_class_two = remaining_classes(user_two_class, user_two_major)
 
-    temp_part_one = sort_core_classes(user_one_major)
-    temp_part_two = get_all_classes(temp_part_one)
+    smart_one = sort_core_classes(user_one_major)
+    smart_one = get_all_classes(smart_one)
+    temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
 
-    temp_one = filter_based_on_time(temp_part_two, user_one_class_info[0], user_one_class_info[1])
-
-    temp_part_one = sort_core_classes(user_two_major)
-    temp_part_two = get_all_classes(temp_part_one)
-    temp_two = filter_based_on_time(temp_part_two, user_two_class_info[0], user_two_class_info[1])
-    print(rem_class_one)
-    print(" ")
-    print(rem_class_two)
-    print(' ')
-    print(temp_one)
-    store_one = pd.DataFrame()
-    store_two = pd.DataFrame()
-    for i in range(0, len(rem_class_one)):
-        if i == 1:
-            store_one = temp_one.loc[temp_two["Subject and Number"] == rem_class_one[i]]
+    smart_two = sort_core_classes(user_two_major)
+    smart_two = get_all_classes(smart_two)
+    temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
+    for curr in rem_class_one:
+        if counter == 0:
+            store_one = temp_one.loc[temp_two["Subject and Number"] == curr]
+            counter = 1
         else:
-            curr_df = temp_one.loc[temp_two["Subject and Number"] == rem_class_one[i]]
+            curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
             frames = [store_one, curr_df]
             store_one = pd.concat(frames)
-  
-    for i in range(0, len(rem_class_two)):
-        if i == 1:
-            store_two = temp_two.loc[temp_two["Subject and Number"] == rem_class_two[i]]
+    counter = 0
+    for curr in rem_class_two:
+        if counter == 0:
+            store_two = temp_two.loc[temp_two["Subject and Number"] == curr]
+            counter = 1
         else:
-            curr_df = temp_two.loc[temp_two["Subject and Number"] ==  rem_class_two[i]]
+            curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
             frames = [store_two, curr_df]
             store_two = pd.concat(frames)
 
@@ -274,6 +271,7 @@ def choose_classes():
     return render_template("classestotake.html", json_file= rem.to_numpy())
 
 def helper_function():
+    """Helper function forchoose_classes"""
     user_one_class = []
     user_two_class = []
     user_one_class_info = []
@@ -305,8 +303,8 @@ def helper_function():
             elif line[0:21] == "User 2 Credit Hours: ":
                 user_two_class_info.append(line[21:].strip("\n"))
     curr_file.close()
-    return_val = [    user_one_class, user_two_class, 
-    user_one_major, user_two_major, 
+    return_val = [user_one_class, user_two_class,
+    user_one_major, user_two_major,
     user_one_class_info, user_two_class_info]
     return return_val
 
