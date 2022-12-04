@@ -231,30 +231,21 @@ def choose_classes():
     user_two_major = return_val[3]
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
-    store_one = pd.DataFrame()
-    store_two = pd.DataFrame()
+
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
 
     smart_two = get_all_classes(sort_core_classes(user_two_major))
     temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
-    for curr in remaining_classes(user_one_class, user_one_major):
-        curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
-        frames = [store_one, curr_df]
-        store_one = pd.concat(frames)
-    counter = 0
-    for curr in remaining_classes(user_two_class, user_two_major):
-        curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
-        frames = [store_two, curr_df]
-        store_two = pd.concat(frames)
 
-    rem = pd.concat([store_one, store_two], ignore_index=True)
-    print(rem)
-    rem = rem.drop_duplicates()
-    return render_template("classestotake.html", json_file= rem.to_numpy())
+    para = [user_one_class, user_one_major, temp_one,
+    temp_two, user_two_class, user_two_major]
+
+    rem = helper_fun_two(para)
+    return render_template("classestotake.html", json_file= rem.drop_duplicates().to_numpy())
 
 def helper_function():
-    """Helper function forchoose_classes"""
+    """Helper function for choose_classes"""
     user_one_class = []
     user_two_class = []
     user_one_class_info = []
@@ -294,6 +285,28 @@ def helper_function():
     user_one_major, user_two_major,
     user_one_class_info, user_two_class_info]
     return return_val
+
+def helper_fun_two(para):
+    """Cut Down on Branches"""
+    user_one_class = para[0]
+    user_one_major = para[1]
+    temp_one = para[2]
+    temp_two = para[3]
+    user_two_class = para[4]
+    user_two_major = para[5]
+    store_one = pd.DataFrame()
+    store_two = pd.DataFrame()
+    for curr in remaining_classes(user_one_class, user_one_major):
+        curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
+        frames = [store_one, curr_df]
+        store_one = pd.concat(frames)
+
+    for curr in remaining_classes(user_two_class, user_two_major):
+        curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
+        frames = [store_two, curr_df]
+        store_two = pd.concat(frames)
+    rem = pd.concat([store_one, store_two], ignore_index=True)
+    return rem
 
 @app.route('/finaldisplay', methods=["POST", "GET"])
 def loadpage():
