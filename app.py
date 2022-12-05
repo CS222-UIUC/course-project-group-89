@@ -6,27 +6,30 @@ from parsing import filter_based_on_time, get_all_classes, remaining_classes, so
 
 
 app = Flask(__name__)
-class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
-    "CS 210", "CS 211", "CS 222", "CS 225", "CS 233", "CS 341",
-    "CS 357", "CS 361", "CS 374", "CS 421"]
+class_cs =  ["CS 124", "CS 128", "CS 173", "CS 210", "CS 211", "CS 222",
+    "CS 225", "CS 233", "CS 341", "CS 357", "CS 361", "CS 374", "CS 421",
+     "MATH 241", "MATH 257",]
 
 class_cs_stats =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "MATH 241", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257",
-    "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200",
+    "CS 233", "CS 341", "CS 340",  "CS 357", "CS 374","CS 421",  "MATH 241", "MATH 257",
+    "MATH 415", "MATH 416", "STAT 107", "STAT 200",
      "STAT 212", "STAT 400", "STAT 410", "STAT 425", "STAT 426"]
 
 class_cs_astro =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374",
-    "CS 421", "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
-    "PHYS 211", "PHYS 212", "MATH 241", "ASTR 210", "ASTR 310", "ASTR 404",
+    "CS 233", "CS 341", "CS 340", "CS 361", "CS 374", "CS 421",
+    "STAT 200", "STAT 212",  "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
+   "MATH 241", "PHYS 211", "PHYS 212","ASTR 210", "ASTR 310", "ASTR 404",
     "ASTR 405", "ASTR 406", "ASTR 414"]
 
-class_cs_ggis = ["Needs to be Removed"]
+class_cs_math =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
+     "CS 233", "CS 341", "CS 340",  "CS 357",  "CS 374","CS 421", "MATH 241", "MATH 257",
+    "MATH 415", "MATH 416","MATH 347", "MATH 412", "MATH 414", "MATH 417",
+    "MATH 418", "MATH 423", "MATH 432", "MATH 448", "MATH 482", "MATH 484", "MATH 496"]
 
 @app.route('/')
 def dropdown():
     """Sends List of Majors to Frontend"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
+    cs_req = ["CS + MATH", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('index.html', cs_req=cs_req)
 
 @app.route('/major', methods=["POST"])
@@ -49,8 +52,8 @@ def checkboxes():
     major = major[8:].strip('\n')
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
-    elif major == "CS + GGIS":
-        cs_req = class_cs_ggis
+    elif major == "CS + MATH":
+        cs_req = class_cs_math
     elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
@@ -123,7 +126,7 @@ def store_class_info():
 @app.route('/friendmajor', methods=["GET"])
 def friendmajor():
     """Sends List of Majors to Frontend for User 2"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
+    cs_req = ["CS + MATH", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 @app.route('/friendmajor', methods=["POST"])
@@ -149,8 +152,8 @@ def friendclasses():
     cs_req = []
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
-    elif major == "CS + GGIS":
-        cs_req = class_cs_ggis
+    elif major == "CS + MATH":
+        cs_req = class_cs_math
     elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
