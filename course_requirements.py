@@ -9,10 +9,9 @@ df_cs_stats = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 
 "CS 225","MATH 241", "MATH 231", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257", "MATH 415",
 "MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200", "STAT 212", "STAT 400", "STAT 410",
 "STAT 425", "STAT 426"]})
-df_cs_math = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-     "CS 233", "CS 341", "CS 340",  "CS 357",  "CS 374","CS 421", "MATH 241", "MATH 257",
-    "MATH 415", "MATH 416","MATH 347", "MATH 412", "MATH 414", "MATH 417", 
-    "MATH 418", "MATH 423", "MATH 432", "MATH 448", "MATH 482", "MATH 484", "MATH 496"]})
+df_cs_math = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222",
+"CS 225","CS 233", "CS 341", "CS 340",  "CS 357", "CS 374", "CS 421", "CS 450",
+"MATH 220", "MATH 231","MATH 241", "MATH 257", "MATH 416",]})
 df_cs_astronomy = pd.DataFrame({"technical requirements" : ["CS 124", "CS 128", "CS 173", "CS 222",
 "CS 225",  "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374", "CS 421",
 "MATH 221","MATH 220", "MATH 225", "MATH 257", "MATH 231", "PHYS 211", "PHYS 212", "MATH 241",
