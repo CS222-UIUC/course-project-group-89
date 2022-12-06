@@ -6,30 +6,27 @@ from parsing import filter_based_on_time, get_all_classes, remaining_classes, so
 
 
 app = Flask(__name__)
-class_cs =  ["CS 124", "CS 128", "CS 173", "CS 210", "CS 211", "CS 222",
-    "CS 225", "CS 233", "CS 341", "CS 357", "CS 361", "CS 374", "CS 421",
-     "MATH 241", "MATH 257",]
+class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
+    "CS 210", "CS 211", "CS 222", "CS 225", "CS 233", "CS 341",
+    "CS 357", "CS 361", "CS 374", "CS 421"]
 
 class_cs_stats =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "CS 233", "CS 341", "CS 340",  "CS 357", "CS 374","CS 421",  "MATH 241", "MATH 257",
-    "MATH 415", "MATH 416", "STAT 107", "STAT 200",
+    "MATH 241", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257",
+    "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200",
      "STAT 212", "STAT 400", "STAT 410", "STAT 425", "STAT 426"]
 
 class_cs_astro =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "CS 233", "CS 341", "CS 340", "CS 361", "CS 374", "CS 421",
-    "STAT 200", "STAT 212",  "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
-   "MATH 241", "PHYS 211", "PHYS 212","ASTR 210", "ASTR 310", "ASTR 404",
+    "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374",
+    "CS 421", "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
+    "PHYS 211", "PHYS 212", "MATH 241", "ASTR 210", "ASTR 310", "ASTR 404",
     "ASTR 405", "ASTR 406", "ASTR 414"]
 
-class_cs_math =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-     "CS 233", "CS 341", "CS 340",  "CS 357",  "CS 374","CS 421", "MATH 241", "MATH 257",
-    "MATH 415", "MATH 416","MATH 347", "MATH 412", "MATH 414", "MATH 417",
-    "MATH 418", "MATH 423", "MATH 432", "MATH 448", "MATH 482", "MATH 484", "MATH 496"]
+class_cs_ggis = ["Needs to be Removed"]
 
 @app.route('/')
 def dropdown():
     """Sends List of Majors to Frontend"""
-    cs_req = ["CS + MATH", "CS + ASTRO", "STAT & CS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('index.html', cs_req=cs_req)
 
 @app.route('/major', methods=["POST"])
@@ -52,8 +49,8 @@ def checkboxes():
     major = major[8:].strip('\n')
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
-    elif major == "CS + MATH":
-        cs_req = class_cs_math
+    elif major == "CS + GGIS":
+        cs_req = class_cs_ggis
     elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
@@ -126,7 +123,7 @@ def store_class_info():
 @app.route('/friendmajor', methods=["GET"])
 def friendmajor():
     """Sends List of Majors to Frontend for User 2"""
-    cs_req = ["CS + MATH", "CS + ASTRO", "STAT & CS", "CS"]
+    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 @app.route('/friendmajor', methods=["POST"])
@@ -152,8 +149,8 @@ def friendclasses():
     cs_req = []
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
-    elif major == "CS + MATH":
-        cs_req = class_cs_math
+    elif major == "CS + GGIS":
+        cs_req = class_cs_ggis
     elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
@@ -281,9 +278,9 @@ def helper_function():
             elif line[0:21] == "User 2 Credit Hours: ":
                 user_two_class_info.append(line[21:].strip("\n"))
     curr_file.close()
-    temp = edit_class(user_one_class, user_two_class)
-    user_one_class = temp[0]
-    user_two_class = temp[1]
+    # temp = edit_class(user_one_class, user_two_class)
+    # user_one_class = temp[0]
+    # user_two_class = temp[1]
     return_val = [user_one_class, user_two_class,
     user_one_major, user_two_major,
     user_one_class_info, user_two_class_info]
@@ -291,24 +288,37 @@ def helper_function():
 
 def edit_class(user_one_class, user_two_class):
     """Edit user_one_class and user_two_class """
+    update_one = []
+    update_two = []
     for curr in user_one_class:
-        curr = curr[:len(curr) - 1]
-    for curr in (user_two_class):
-        curr = curr[:len(curr) - 1]
-    answer = [user_one_class, user_two_class]
+        print("Edit curr one len: ", len(curr))
+        update_one.append(curr[:-1])
+
+    for curr in user_two_class:
+        print("Edit curr two len: ", len(curr))
+        update_two.append(curr[:-1])
+    
+    answer = [update_one, update_two]
+    print("answer: ", answer)
     return answer
 
 def helper_fun_two(para):
     """Cut Down on Branches"""
+    temp_class = []
     user_one_class = para[0]
     user_one_major = para[1]
     temp_one = para[2]
     temp_two = para[3]
     user_two_class = para[4]
     user_two_major = para[5]
+    temp_class = edit_class(user_one_class, user_two_class)
+    user_one_class = temp_class[0]
+    user_two_class = temp_class[1]
+
     store_one = pd.DataFrame()
     store_two = pd.DataFrame()
     for curr in remaining_classes(user_one_class, user_one_major):
+
         curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
         frames = [store_one, curr_df]
         store_one = pd.concat(frames)
@@ -318,6 +328,7 @@ def helper_fun_two(para):
         frames = [store_two, curr_df]
         store_two = pd.concat(frames)
     rem = pd.concat([store_one, store_two], ignore_index=True)
+    rem = rem[rem["Type"] == "Lecture"]
     col = [
         "Year",
         "Term",
@@ -335,7 +346,6 @@ def helper_fun_two(para):
         "Section Credit Hours",
         "Section Status",
         "Enrollment Status",
-        "Type",
         "Type Code",
         "Days of Week",
         "Room",
@@ -343,6 +353,8 @@ def helper_fun_two(para):
         "Instructors"
     ]
     rem = rem.drop(col, axis = 1)
+    # rem = rem.drop_duplicates(subset = "Name")
+    print(rem)
     return rem
 
 @app.route('/finaldisplay', methods=["POST", "GET"])
