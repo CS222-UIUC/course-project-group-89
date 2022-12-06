@@ -235,7 +235,7 @@ def choose_classes():
 
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
-    print("hi: ", user_two_major)
+
     smart_two = get_all_classes(sort_core_classes(user_two_major))
     temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
 

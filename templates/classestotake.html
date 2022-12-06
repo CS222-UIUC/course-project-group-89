@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='table.css')}}">
 </head>
 
-<h1>Classes Summary</h1>
+<h1>Classes To Take</h1>
 <body>
     <table id="classes-table" class="styled-table">
         <thead>
             <tr>
                 <th>Class Name</th>
+                <th>Type</th>
                 <th>Start Time</th>
                 <th>End time</th>
                 <th>Class ID</th>
@@ -23,6 +24,7 @@
                 <th>{{data.1}}</th>
                 <th>{{data.2}}</th>
                 <th>{{data.3}}</th>
+                <th>{{data.4}}</th>
             </tr>
             {% endfor %}
             <!--to be filled by javascript from finalclasses.json-->
