@@ -269,7 +269,7 @@ def helper_function():
                 user_one_class_info.append(line[21:].strip("\n"))
             elif line[0:4] == "User" and user_one_major != "" and user_two_major == "":
                 user_two_major = line
-            elif user_one_major != "" and user_two_major != "" and line[0:4] != "User":
+            elif user_one_major != "" and user_two_major != "" and line[0:4] != "User" and not line.isspace:
                 user_two_class.append(line)
             elif line[0:19] == "User 2 Start Time: ":
                 user_two_class_info.append(line[19:].strip("\n"))
@@ -355,13 +355,3 @@ def helper_fun_two(para):
     # rem = rem.drop_duplicates(subset = "Name")
     print(rem)
     return rem
-
-@app.route('/finaldisplay', methods=["POST", "GET"])
-def loadpage():
-    '''Load last page'''
-    json = [
-        ["123", "CS222", "9AM", "10AM"],
-        ["222", "CS225", "1PM", "3PM"]
-    ]
-    print(json)
-    return render_template("finaldisplay.html", json_file = json)

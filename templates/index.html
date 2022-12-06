@@ -3,6 +3,40 @@
   <head>
     <style>
       h1   {color: rgb(240, 112, 38);}
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 1em;
+      }
+      .sectionbody {
+        background-color: powderblue;
+        border-radius: 8px;
+      }
+      .col-sm-10 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .align {
+        width: auto;
+        margin-right: 1.5em;
+        font-weight: bold;
+      }
+      h1 {
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .alignbutton {
+        text-align: center;
+        margin-bottom: 1em;
+      }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,24 +54,28 @@
     };
     </script>    
   </head>
-  <body style="background-color:powderblue;">
+  <body>
     <div class="container">
       <br>
       <h1 style="font-family:verdana;">What Major Are You</h1>
-      <div class="form-group row">
-        <div class="col-sm-10" style="font-family:verdana;">
-            Choose a Major: 
-            <SELECT name="major" id="major">
+      
+      <div class="sectionbody">
+        <div class="form-group row">
+          <div class="col-sm-10" style="font-family:verdana;">
+            <div class="align"> Choose a Major:</div>
+            <SELECT name="major" id="major" class="rounded">
             {% for c in cs_req %}
             <option value= "{{c}}" SELECTED>{{c}}</option> 
             {% endfor %}
             </SELECT>
+          </div>
         </div>
-      </div>
-      <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary" style="font-family:verdana;">Submit</a> 
-      </button>
-      <div id="content">
+        <div class="alignbutton">
+          <button onclick="sendPOST();myFunction()" 
+          class="btn btn-secondary" style="font-family:verdana;">Submit</a> 
+          </button>
+        </div>
+        <div id="content"></div>
       </div>
     </div>
     <!-- <script>
