@@ -297,7 +297,6 @@ def edit_class(user_one_class, user_two_class):
     for curr in user_two_class:
         print("Edit curr two len: ", len(curr))
         update_two.append(curr[:-1])
-    
     answer = [update_one, update_two]
     print("answer: ", answer)
     return answer
