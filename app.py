@@ -317,17 +317,21 @@ def helper_fun_two(para):
     store_one = pd.DataFrame()
     store_two = pd.DataFrame()
     for curr in remaining_classes(user_one_class, user_one_major):
-
+        print("HI", curr)
         curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
         frames = [store_one, curr_df]
         store_one = pd.concat(frames)
 
+    print("1:", store_one)
     for curr in remaining_classes(user_two_class, user_two_major):
+        print("HI@", curr)
         curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
+        print(curr_df["Type"])
         frames = [store_two, curr_df]
         store_two = pd.concat(frames)
+    print("2:", store_two)
     rem = pd.concat([store_one, store_two], ignore_index=True)
-    rem = rem[rem["Type"] == "Lecture"]
+    rem = rem[(rem["Type"] == "Lecture") | (rem["Type"] == "Online") | (rem["Type"] == "Lecture-Discussion")]
     col = [
         "Year",
         "Term",

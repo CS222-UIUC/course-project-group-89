@@ -140,9 +140,9 @@ def remaining_classes(selected_subjects, major):
     for element in list_requirements:
         if element not in selected_subjects:
             difference.append(element)
-
     difference = remove_stat_equivalents(selected_subjects, difference)
     difference = remove_cs_equivalents(selected_subjects, difference)
+    print(difference)
 
     return difference
 
