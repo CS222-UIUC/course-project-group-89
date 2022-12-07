@@ -32,6 +32,10 @@ def get_all_classes(df_course_list):
         df_course_information = pd.concat([df_course_information, entry])
     return df_course_information
 
+hi = sort_core_classes("CS + MATH")
+hi_2 = get_all_classes(hi)
+print(hi)
+
 def filter_based_on_time(df_courses, start_time, end_time):
     '''inputs dataframe with ALL course information and filters based on time
     range user wants class to be in'''
@@ -56,7 +60,7 @@ all_classes = get_all_classes(core_courses)
 start_time = '10:00 am'
 end_time = '12:00 pm'
 time_based = filter_based_on_time(all_classes, start_time, end_time)
-print(time_based)
+# print(time_based)
 # print(time_based.iloc[0])
 
 # def get_unique_classes(df_classes):
