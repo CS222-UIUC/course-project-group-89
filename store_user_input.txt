@@ -2,15 +2,14 @@ User 1: CS + ASTRO
 CS 124
 CS 128
 CS 173
-User 1 Start Time: 11:00 AM
-User 1 End Time: 03:00 PM
-User 1 Credit Hours: 15
-User 2: STAT & CS
+CS 222
+User 1 Start Time: 08:00 AM
+User 1 End Time: 09:00 PM
+User 2: CS + MATH
 CS 124
 CS 128
 CS 173
 CS 222
-User 2 Start Time: 09:00 AM
-User 2 End Time: 07:30 PM
-User 2 Credit Hours: 17
+User 2 Start Time: 08:00 AM
+User 2 End Time: 09:00 PM
 

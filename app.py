@@ -96,21 +96,16 @@ def class_info_main():
         "08:00 PM", "08:30 PM",
         "09:00 PM"]
 
-    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-    14, 15, 16, 17, 18]
-
-    return render_template('classinfo.html', time_range=time_range, credit_hours = credit_hours)
+    return render_template('classinfo.html', time_range=time_range)
 
 @app.route('/info', methods=["POST"])
 def store_class_info():
     """Store User 1 info for start, end, and # of credit hrs"""
     s_time = request.form["start_time"]
     end_time = request.form["end_time"]
-    c_hours = request.form["credit_hour"]
     items = []
     items.append(s_time)
     items.append(end_time)
-    items.append(c_hours)
     counter = 0
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for curr in items:
@@ -120,8 +115,6 @@ def store_class_info():
             elif counter == 1:
                 curr_file.write(f"User 1 End Time: {curr}")
                 counter = counter + 1
-            else:
-                curr_file.write(f"User 1 Credit Hours: {curr}")
             curr_file.write("\n")
     curr_file.close()
     return render_template('classinfo.html')
@@ -194,11 +187,9 @@ def friend_class_info_main():
         "08:00 PM", "08:30 PM",
         "09:00 PM"]
 
-    credit_hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-    14, 15, 16, 17, 18]
 
     return render_template('friendclassinfo.html',
-    time_range=time_range, credit_hours = credit_hours)
+    time_range=time_range)
 
 
 @app.route('/friendinfo', methods=["POST"])
@@ -206,11 +197,9 @@ def store_friends_class_info():
     """Store User 2's class info"""
     s_time = request.form["start_time"]
     end_time = request.form["end_time"]
-    c_hours = request.form["credit_hour"]
     items = []
     items.append(s_time)
     items.append(end_time)
-    items.append(c_hours)
     counter = 0
     with open("store_user_input.txt", "a", encoding="utf8") as curr_file:
         for curr in items:
@@ -220,8 +209,6 @@ def store_friends_class_info():
             elif counter == 1:
                 curr_file.write(f"User 2 End Time: {curr}")
                 counter = counter + 1
-            else:
-                curr_file.write(f"User 2 Credit Hours: {curr}")
             curr_file.write("\n")
         curr_file.write("\n")
     curr_file.close()
@@ -239,6 +226,9 @@ def choose_classes():
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
 
+
+    print("user_one_class_info: ", user_one_class_info)
+    print("user_two_class_info: ", user_two_class_info)
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
     print("hi: ", user_two_major)
@@ -271,8 +261,6 @@ def helper_function():
                 user_one_class_info.append(line[19:].strip("\n"))
             elif line[0:17] == "User 1 End Time: ":
                 user_one_class_info.append(line[17:].strip("\n"))
-            elif line[0:21] == "User 1 Credit Hours: ":
-                user_one_class_info.append(line[21:].strip("\n"))
             elif line[0:4] == "User" and user_one_major != "" and user_two_major == "":
                 user_two_major = line
             elif user_one_major != "" and user_two_major != "" and line[0:4] != "User":
@@ -281,8 +269,6 @@ def helper_function():
                 user_two_class_info.append(line[19:].strip("\n"))
             elif line[0:17] == "User 2 End Time: ":
                 user_two_class_info.append(line[17:].strip("\n"))
-            elif line[0:21] == "User 2 Credit Hours: ":
-                user_two_class_info.append(line[21:].strip("\n"))
     curr_file.close()
     # temp = edit_class(user_one_class, user_two_class)
     # user_one_class = temp[0]

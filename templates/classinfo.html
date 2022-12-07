@@ -58,8 +58,7 @@
     function sendPOST() {
       let formData = { 
         start_time:  $("#start_time").val(),
-        end_time:    $("#end_time").val(),
-        credit_hour: $("#credit_hours").val()
+        end_time:    $("#end_time").val()
       };
       console.log(formData)
       $.post("/info", formData)
@@ -108,17 +107,6 @@
                 {% endfor %}
                 </SELECT>
             </div>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-10" style="font-family:verdana;">
-            <div class="align">Choose How Many Credit Hours You Want:</div>
-              <SELECT name="credit_hours" id="credit_hours">
-              {% for c in credit_hours %}
-              <option value= "{{c}}" SELECTED>{{c}}</option> 
-              {% endfor %}
-              </SELECT>
           </div>
         </div>
 
