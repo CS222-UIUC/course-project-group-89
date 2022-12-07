@@ -3,6 +3,31 @@
   <head>
     <style>
       h1   {color: rgb(240, 112, 38);}
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 1em;
+      }
+      .sectionbody {
+        background-color: powderblue;
+        border-radius: 8px;
+      }
+      .col-sm-10 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      h1 {
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,20 +45,22 @@
     // };
   </script>   
   </head>
-  <body style="background-color:powderblue;">
+  <body>
     <div class="container">
       <br>
       <h1>What Classes Have You Taken</h1>
-      <div class="form-group row" style="font-family:verdana;">
-              <form method="POST" action='/friendclass'> 
-                {% for c in cs_req %}
-                  <input type="checkbox" style="text-align:left;" name = 'user_classes' option value = "{{c}}"  SELECTED> {{c}}<br></option>
-                {% endfor %}
-                <br>
-              <input class="btn btn-secondary" style="font-family:verdana;" type="submit">
-            </form>
-      </div>
-      <div id="content">
+
+      <div class="sectionbody">
+        <div class="form-group row" style="font-family:verdana;">
+                <form method="POST" action='/friendclass'> 
+                  {% for c in cs_req %}
+                    <input type="checkbox" style="text-align:left;" name = 'user_classes' option value = "{{c}}"  SELECTED> {{c}}<br></option>
+                  {% endfor %}
+                  <br>
+                <input class="btn btn-secondary" style="font-family:verdana;" type="submit">
+              </form>
+        </div>
+        <div id="content"></div>
       </div>
     </div>
     <script>

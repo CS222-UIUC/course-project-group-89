@@ -4,6 +4,44 @@
     <style>
       h1   {color: rgb(240, 112, 38);}
       h2   {color: rgb(240, 112, 38);}
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 1em;
+      }
+      .sectionbody {
+        background-color: powderblue;
+        border-radius: 8px;
+      }
+      .col-sm-10 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .align {
+        margin-right: 1.5em;
+        font-weight: bold;
+      }
+      h1, h2 {
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .alignbutton {
+        text-align: center;
+        margin-bottom: 1em;
+      }
+      .times {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,7 +56,6 @@
     
     }
     function sendPOST() {
-      console.log("popcorn")
       let formData = { 
         start_time:  $("#start_time").val(),
         end_time:    $("#end_time").val(),
@@ -44,49 +81,55 @@
     }
     </script>    
   </head>
-  <body style="background-color:powderblue;">
+  <body>
     <div class="container">
       <br>
-      <h1  style="font-family:verdana;">Choose Your Start and End Time For Your Classes</h1>
-      <div class="form-group row">
-        <div class="col-sm-10"  style="font-family:verdana;">
-            Choose Start Time:
-            <SELECT name="start_time" id="start_time">
-            {% for c in time_range %}
-            <option value= "{{c}}" SELECTED>{{c}}</option> 
-            {% endfor %}
-            </SELECT>
+      <h1  style="font-family:verdana;">Choose Start/End Time For Classes</h1>
+      
+      <div class="sectionbody">
+        <div class="times">
+          <div class="form-group row">
+            <div class="col-sm-10"  style="font-family:verdana;">
+              <div class="align">Choose Start Time:</div>
+                <SELECT name="start_time" id="start_time">
+                {% for c in time_range %}
+                <option value= "{{c}}" SELECTED>{{c}}</option> 
+                {% endfor %}
+                </SELECT>
+            </div>
+          </div>
+          <h2 style="font-family:verdana;">To</h2>
+          <div class="form-group row">
+            <div class="col-sm-10"  style="font-family:verdana;">
+              <div class="align">Choose End Time:</div>
+                <SELECT name="end_time" id="end_time">
+                {% for c in time_range %}
+                <option value= "{{c}}" SELECTED>{{c}}</option> 
+                {% endfor %}
+                </SELECT>
+            </div>
+          </div>
         </div>
-      </div>
-      <h2 style="font-family:verdana;">To</h2>
-      <div class="form-group row">
-        <div class="col-sm-10"  style="font-family:verdana;">
-            Choose End Time:
-            <SELECT name="end_time" id="end_time">
-            {% for c in time_range %}
-            <option value= "{{c}}" SELECTED>{{c}}</option> 
-            {% endfor %}
-            </SELECT>
+
+        <div class="form-group row">
+          <div class="col-sm-10" style="font-family:verdana;">
+            <div class="align">Choose How Many Credit Hours You Want:</div>
+              <SELECT name="credit_hours" id="credit_hours">
+              {% for c in credit_hours %}
+              <option value= "{{c}}" SELECTED>{{c}}</option> 
+              {% endfor %}
+              </SELECT>
+          </div>
         </div>
+
+        <div class="alignbutton">
+          <button onclick="sendPOST();myFunction()" 
+          class="btn btn-secondary">Submit</a></button>
+        </div>
+
+        <div id="content"></div>
       </div>
 
-      <h1 style="font-family:verdana;">Credit Hours</h1>
-      <div class="form-group row">
-        <div class="col-sm-10" style="font-family:verdana;">
-            Choose How Many Credit Hours You Want:
-            <SELECT name="credit_hours" id="credit_hours">
-            {% for c in credit_hours %}
-            <option value= "{{c}}" SELECTED>{{c}}</option> 
-            {% endfor %}
-            </SELECT>
-        </div>
-      </div>
-      <button onclick="sendPOST();myFunction()" 
-      class="btn btn-secondary">
-      Submit</a> 
-      </button>
-      <div id="content">
-      </div>
     </div>
     <!-- <script>
       $(document).ready(function(){

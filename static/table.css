@@ -8,7 +8,7 @@
 }
 
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: rgb(240, 112, 38);
   color: #ffffff;
   text-align: left;
 }
@@ -17,7 +17,7 @@ h1 {
   font-family: sans-serif;
   margin: auto;
   text-align: center;
-  color: #009879;
+  color: rgb(240, 112, 38);
   padding-bottom: 0.5em;
 }
 
@@ -35,10 +35,10 @@ h1 {
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid rgb(240, 112, 38);
 }
 
 .styled-table tbody tr.active-row {
   font-weight: bold;
-  color: #009879;
+  color: rgb(240, 112, 38);
 }

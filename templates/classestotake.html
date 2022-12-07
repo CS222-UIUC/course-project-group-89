@@ -37,7 +37,6 @@
         const classesBody = document.querySelector("#classes-table > tbody");
 
         function loadClasses() {
-            console.log('{{json_file}}')
             populateClasses('{{json_file}}');
 
         }
@@ -54,17 +53,23 @@
                 console.log(obj);
             }
 
-            json.forEach((row) => {
+            if (json.length <= 2) {
                 const tr = document.createElement("tr");
-
-                row.forEach((cell) => {
-                    const td = document.createElement("td");
-                    td.textContent = cell;
-                    tr.appendChild(td);
-
-                });
+                tr.textContent = "No classes in common.";
                 classesBody.appendChild(tr);
-            });
+            } else {
+                json.forEach((row) => {
+                    const tr = document.createElement("tr");
+
+                    row.forEach((cell) => {
+                        const td = document.createElement("td");
+                        td.textContent = cell;
+                        tr.appendChild(td);
+
+                    });
+                    classesBody.appendChild(tr);
+                });
+            }
 
             
 

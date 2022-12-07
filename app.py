@@ -228,11 +228,10 @@ def choose_classes():
     return_val = helper_function()
     user_one_class = return_val[0]
     user_two_class = return_val[1]
-    user_one_major = return_val[2]
-    user_two_major = return_val[3]
+    user_one_major = return_val[2].split(":")[1].strip()
+    user_two_major = return_val[3].split(":")[1].strip()
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
-
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
 
@@ -317,17 +316,23 @@ def helper_fun_two(para):
     store_one = pd.DataFrame()
     store_two = pd.DataFrame()
     for curr in remaining_classes(user_one_class, user_one_major):
-
+        print("HI", curr)
         curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
         frames = [store_one, curr_df]
         store_one = pd.concat(frames)
 
+    print("1:", store_one)
     for curr in remaining_classes(user_two_class, user_two_major):
+        print("HI@", curr)
         curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
+        print(curr_df["Type"])
         frames = [store_two, curr_df]
         store_two = pd.concat(frames)
+    print("2:", store_two)
     rem = pd.concat([store_one, store_two], ignore_index=True)
-    rem = rem[rem["Type"] == "Lecture"]
+    rem = rem[(rem["Type"] == "Lecture") |
+    (rem["Type"] == "Online") |
+    (rem["Type"] == "Lecture-Discussion")]
     col = [
         "Year",
         "Term",
@@ -355,13 +360,3 @@ def helper_fun_two(para):
     # rem = rem.drop_duplicates(subset = "Name")
     print(rem)
     return rem
-
-@app.route('/finaldisplay', methods=["POST", "GET"])
-def loadpage():
-    '''Load last page'''
-    json = [
-        ["123", "CS222", "9AM", "10AM"],
-        ["222", "CS225", "1PM", "3PM"]
-    ]
-    print(json)
-    return render_template("finaldisplay.html", json_file = json)

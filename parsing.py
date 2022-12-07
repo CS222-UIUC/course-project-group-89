@@ -12,7 +12,6 @@ df_ = df_.drop(columns = ['Subject', 'Number'])
 
 def sort_core_classes(major_):
     '''returns core classes given a major'''
-
     core_course_list = Empty #has list of all core courses  & their info
     if major_ == "CS + MATH":
         core_course_list = course_requirements.df_cs_math
@@ -140,9 +139,9 @@ def remaining_classes(selected_subjects, major):
     for element in list_requirements:
         if element not in selected_subjects:
             difference.append(element)
-
     difference = remove_stat_equivalents(selected_subjects, difference)
     difference = remove_cs_equivalents(selected_subjects, difference)
+    print(difference)
 
     return difference
 
