@@ -6,27 +6,30 @@ from parsing import filter_based_on_time, get_all_classes, remaining_classes, so
 
 
 app = Flask(__name__)
-class_cs =  ["CS 124", "CS 128", "CS 173", "MATH 241", "MATH 257",
-    "CS 210", "CS 211", "CS 222", "CS 225", "CS 233", "CS 341",
-    "CS 357", "CS 361", "CS 374", "CS 421"]
+class_cs =  ["CS 124", "CS 128", "CS 173", "CS 210", "CS 211", "CS 222",
+    "CS 225", "CS 233", "CS 341", "CS 357", "CS 361", "CS 374", "CS 421",
+     "MATH 241", "MATH 257",]
 
 class_cs_stats =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "MATH 241", "CS 233", "CS 341", "CS 340",  "CS 357", "MATH 257",
-    "MATH 415", "MATH 416", "CS 374","CS 421", "STAT 107", "STAT 200",
+    "CS 233", "CS 341", "CS 340",  "CS 357", "CS 374","CS 421",  "MATH 241", "MATH 257",
+    "MATH 415", "MATH 416", "STAT 107", "STAT 200",
      "STAT 212", "STAT 400", "STAT 410", "STAT 425", "STAT 426"]
 
 class_cs_astro =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
-    "CS 233", "CS 341", "CS 340", "STAT 200", "STAT 212", "CS 361", "CS 374",
-    "CS 421", "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
-    "PHYS 211", "PHYS 212", "MATH 241", "ASTR 210", "ASTR 310", "ASTR 404",
+    "CS 233", "CS 341", "CS 340", "CS 361", "CS 374", "CS 421",
+    "STAT 200", "STAT 212",  "MATH 221", "MATH 220", "MATH 225", "MATH 257", "MATH 231",
+   "MATH 241", "PHYS 211", "PHYS 212","ASTR 210", "ASTR 310", "ASTR 404",
     "ASTR 405", "ASTR 406", "ASTR 414"]
 
-class_cs_ggis = ["Needs to be Removed"]
+class_cs_math =  ["CS 124", "CS 128", "CS 173", "CS 222", "CS 225",
+     "CS 233", "CS 341", "CS 340",  "CS 357",  "CS 374","CS 421", "MATH 241", "MATH 257",
+    "MATH 415", "MATH 416","MATH 347", "MATH 412", "MATH 414", "MATH 417",
+    "MATH 418", "MATH 423", "MATH 432", "MATH 448", "MATH 482", "MATH 484", "MATH 496"]
 
 @app.route('/')
 def dropdown():
     """Sends List of Majors to Frontend"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
+    cs_req = ["CS + MATH", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('index.html', cs_req=cs_req)
 
 @app.route('/major', methods=["POST"])
@@ -47,10 +50,13 @@ def checkboxes():
         major = curr_file.readline().strip('\n')
     cs_req = []
     major = major[8:].strip('\n')
+    print("major: ", major)
+    print("len(major): ", len(major))
+    print("type(major): ", type(major))
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
-    elif major == "CS + GGIS":
-        cs_req = class_cs_ggis
+    elif major == "CS + MATH":
+        cs_req = class_cs_math
     elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
@@ -123,7 +129,7 @@ def store_class_info():
 @app.route('/friendmajor', methods=["GET"])
 def friendmajor():
     """Sends List of Majors to Frontend for User 2"""
-    cs_req = ["CS + GGIS", "CS + ASTRO", "STAT & CS", "CS"]
+    cs_req = ["CS + MATH", "CS + ASTRO", "STAT & CS", "CS"]
     return render_template('friendmajor.html', cs_req=cs_req)
 
 @app.route('/friendmajor', methods=["POST"])
@@ -149,8 +155,8 @@ def friendclasses():
     cs_req = []
     if major == "CS + ASTRO":
         cs_req = class_cs_astro
-    elif major == "CS + GGIS":
-        cs_req = class_cs_ggis
+    elif major == "CS + MATH":
+        cs_req = class_cs_math
     elif major == "STAT & CS":
         cs_req = class_cs_stats
     else:
@@ -228,13 +234,14 @@ def choose_classes():
     return_val = helper_function()
     user_one_class = return_val[0]
     user_two_class = return_val[1]
-    user_one_major = return_val[2].split(":")[1].strip()
-    user_two_major = return_val[3].split(":")[1].strip()
+    user_one_major = return_val[2]
+    user_two_major = return_val[3]
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
+
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
-
+    print("hi: ", user_two_major)
     smart_two = get_all_classes(sort_core_classes(user_two_major))
     temp_two = filter_based_on_time(smart_two, user_two_class_info[0], user_two_class_info[1])
 
@@ -315,24 +322,20 @@ def helper_fun_two(para):
 
     store_one = pd.DataFrame()
     store_two = pd.DataFrame()
+    print("temp_one")
+    print(temp_one)
     for curr in remaining_classes(user_one_class, user_one_major):
-        print("HI", curr)
+        print("curr: ", curr)
         curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
         frames = [store_one, curr_df]
         store_one = pd.concat(frames)
 
-    print("1:", store_one)
     for curr in remaining_classes(user_two_class, user_two_major):
-        print("HI@", curr)
         curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
-        print(curr_df["Type"])
         frames = [store_two, curr_df]
         store_two = pd.concat(frames)
-    print("2:", store_two)
     rem = pd.concat([store_one, store_two], ignore_index=True)
-    rem = rem[(rem["Type"] == "Lecture") |
-    (rem["Type"] == "Online") |
-    (rem["Type"] == "Lecture-Discussion")]
+    rem = rem[rem["Type"] == "Lecture"]
     col = [
         "Year",
         "Term",
@@ -357,6 +360,17 @@ def helper_fun_two(para):
         "Instructors"
     ]
     rem = rem.drop(col, axis = 1)
+    rem['Name'] = rem['Name'].str.replace('amp;','')
     # rem = rem.drop_duplicates(subset = "Name")
     print(rem)
     return rem
+
+@app.route('/finaldisplay', methods=["POST", "GET"])
+def loadpage():
+    '''Load last page'''
+    json = [
+        ["123", "CS222", "9AM", "10AM"],
+        ["222", "CS225", "1PM", "3PM"]
+    ]
+    print(json)
+    return render_template("finaldisplay.html", json_file = json)
