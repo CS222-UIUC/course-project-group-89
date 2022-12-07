@@ -290,14 +290,11 @@ def edit_class(user_one_class, user_two_class):
     update_one = []
     update_two = []
     for curr in user_one_class:
-        print("Edit curr one len: ", len(curr))
         update_one.append(curr[:-1])
 
     for curr in user_two_class:
-        print("Edit curr two len: ", len(curr))
         update_two.append(curr[:-1])
     answer = [update_one, update_two]
-    print("answer: ", answer)
     return answer
 
 def helper_fun_two(para):
@@ -316,19 +313,14 @@ def helper_fun_two(para):
     store_one = pd.DataFrame()
     store_two = pd.DataFrame()
     for curr in remaining_classes(user_one_class, user_one_major):
-        print("HI", curr)
-        curr_df = temp_one.loc[temp_two["Subject and Number"] == curr]
+        curr_df = temp_one.loc[temp_one["Subject and Number"] == curr]
         frames = [store_one, curr_df]
         store_one = pd.concat(frames)
 
-    print("1:", store_one)
     for curr in remaining_classes(user_two_class, user_two_major):
-        print("HI@", curr)
         curr_df = temp_two.loc[temp_two["Subject and Number"] ==  curr]
-        print(curr_df["Type"])
         frames = [store_two, curr_df]
         store_two = pd.concat(frames)
-    print("2:", store_two)
     rem = pd.concat([store_one, store_two], ignore_index=True)
     rem = rem[(rem["Type"] == "Lecture") |
     (rem["Type"] == "Online") |
@@ -358,5 +350,4 @@ def helper_fun_two(para):
     ]
     rem = rem.drop(col, axis = 1)
     # rem = rem.drop_duplicates(subset = "Name")
-    print(rem)
     return rem

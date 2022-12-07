@@ -51,8 +51,7 @@
     <title>CS 222: Scheduler</title>
     <script>
     function myFunction() {
-      console.log("HI")
-        window.location.href="./friendmajor";  
+      window.location.href="./friendmajor";  
     
     }
     function sendPOST() {
@@ -61,7 +60,7 @@
         end_time:    $("#end_time").val(),
         credit_hour: $("#credit_hours").val()
       };
-      console.log(formData)
+
       $.post("/info", formData)
       // .done(function (data) {
       //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));

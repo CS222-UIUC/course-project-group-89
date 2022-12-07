@@ -35,22 +35,11 @@
         const classesBody = document.querySelector("#classes-table > tbody");
 
         function loadClasses() {
-            console.log('{{json_file}}')
             populateClasses('{{json_file}}');
 
         }
 
         function populateClasses(json) {
-            console.log(json);
-            
-            for (var i=0; i<json.length; i++) {
-                obj = json[i]
-                console.log(obj)
-                obj.slice(4)
-                console.log(obj);
-                obj = obj.slice(0,-4);
-                console.log(obj);
-            }
 
             json.forEach((row) => {
                 const tr = document.createElement("tr");

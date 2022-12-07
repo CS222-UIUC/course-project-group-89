@@ -42,16 +42,6 @@
         }
 
         function populateClasses(json) {
-            console.log(json);
-            
-            for (var i=0; i<json.length; i++) {
-                obj = json[i]
-                console.log(obj)
-                obj.slice(4)
-                console.log(obj);
-                obj = obj.slice(0,-4);
-                console.log(obj);
-            }
 
             if (json.length <= 2) {
                 const tr = document.createElement("tr");

@@ -59,7 +59,7 @@
           end_time:    $("#end_time").val(),
           credit_hour: $("#credit_hours").val()
         };
-        console.log(formData)
+
         $.post("/friendinfo", formData)
         // .done(function (data) {
         //   let meetingDate = new Date(Date.parse(data.nextCourseMeeting));

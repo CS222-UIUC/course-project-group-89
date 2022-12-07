@@ -51,14 +51,10 @@ def filter_based_on_time(df_courses, start_time, end_time):
     return df_time
 
 core_courses = sort_core_classes("CS + MATH")
-# print(core_courses)
 all_classes = get_all_classes(core_courses)
-# print(all_classes)
 START_TIME = '10:00 am'
 END_TIME = '12:00 pm'
 time_based = filter_based_on_time(all_classes, START_TIME, END_TIME)
-print(time_based)
-# print(time_based.iloc[0])
 
 # def get_unique_classes(df_classes):
 #     '''this function returns a list of the unique core courses given someone's major'''
@@ -69,9 +65,6 @@ print(time_based)
 #     list_to_return: converts all 'Subject and Number' items in column into list to return
 #     list_to_return = df_to_return['Subject and Number'].tolist()
 #     return df_to_return
-
-# df_user_frontend = get_all_classes(sort_core_classes("STAT & CS"))
-# print(df_user_frontend.iloc[0].values.tolist())
 
 def sort_common_courses(user_one_courses, user_two_courses):
     '''takes 2 different user's DF of the courses they can take and
@@ -91,7 +84,6 @@ def check_credit_hours(selected_classes, major_requirements, credit_limit):
     major_requirements['Num Credits'] = (major_requirements['Credit Hours']
                                         .dropna().str.extract(r"(\d+)").astype(int))
     valid_courses = major_requirements.loc[major_requirements['Num Credits'] <= credits_left]
-    # ensures no selected classes get re-added
     selected_subjects = selected_classes['Subject and Number'].tolist()
     for subject in selected_subjects:
         rows_overlap = valid_courses.loc[valid_courses['Subject and Number'] == subject].index
@@ -132,7 +124,6 @@ def remove_cs_equivalents(selected_subjects, list_differences):
 def remaining_classes(selected_subjects, major):
     '''selected_subjects => a list of subject names (ex. [CS 124, CS 225])
     returns list of remaining classes from requirements excluding selected_subjects'''
-    print("major in parsing.py: ", major)
     list_requirements = sort_core_classes(major)["technical requirements"].tolist()
     difference = []
 
@@ -141,11 +132,8 @@ def remaining_classes(selected_subjects, major):
             difference.append(element)
     difference = remove_stat_equivalents(selected_subjects, difference)
     difference = remove_cs_equivalents(selected_subjects, difference)
-    print(difference)
 
     return difference
-
-# def sort_in_time_frame(start_time, end_time, df_classes):
 
 def check_time_conflict(selected_sections):
     '''takes in list of selected class sections. returns true if there
