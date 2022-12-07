@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<title>Summary</title>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css')}}">
+</head>
+
+<h1>Classes To Take</h1>
+<body>
+    <table id="classes-table" class="styled-table">
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Type</th>
+                <th>Start Time</th>
+                <th>End time</th>
+                <th>Class ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in json_file %}
+            <tr>
+                <th>{{data.0}}</th>
+                <th>{{data.1}}</th>
+                <th>{{data.2}}</th>
+                <th>{{data.3}}</th>
+                <th>{{data.4}}</th>
+            </tr>
+            {% endfor %}
+            <!--to be filled by javascript from finalclasses.json-->
+        </tbody>
+
+    </table>
+
+
+    <script type="text/javascript">
+        const classesBody = document.querySelector("#classes-table > tbody");
+
+        function loadClasses() {
+            populateClasses('{{json_file}}');
+
+        }
+
+        function populateClasses(json) {
+            console.log(json);
+            
+            for (var i=0; i<json.length; i++) {
+                obj = json[i]
+                console.log(obj)
+                obj.slice(4)
+                console.log(obj);
+                obj = obj.slice(0,-4);
+                console.log(obj);
+            }
+
+            if (json.length <= 2) {
+                const tr = document.createElement("tr");
+                tr.textContent = "No classes in common.";
+                classesBody.appendChild(tr);
+            } else {
+                json.forEach((row) => {
+                    const tr = document.createElement("tr");
+
+                    row.forEach((cell) => {
+                        const td = document.createElement("td");
+                        td.textContent = cell;
+                        tr.appendChild(td);
+
+                    });
+                    classesBody.appendChild(tr);
+                });
+            }
+
+            
+
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {loadClasses(); });
+    </script>
+</body>
+</html>
