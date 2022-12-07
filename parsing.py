@@ -12,7 +12,6 @@ df_ = df_.drop(columns = ['Subject', 'Number'])
 
 def sort_core_classes(major_):
     '''returns core classes given a major'''
-
     core_course_list = Empty #has list of all core courses  & their info
     if major_ == "CS + MATH":
         core_course_list = course_requirements.df_cs_math

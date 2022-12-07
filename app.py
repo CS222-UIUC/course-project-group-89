@@ -228,11 +228,10 @@ def choose_classes():
     return_val = helper_function()
     user_one_class = return_val[0]
     user_two_class = return_val[1]
-    user_one_major = return_val[2]
-    user_two_major = return_val[3]
+    user_one_major = return_val[2].split(":")[1].strip()
+    user_two_major = return_val[3].split(":")[1].strip()
     user_one_class_info = return_val[4]
     user_two_class_info = return_val[5]
-
     smart_one = get_all_classes(sort_core_classes(user_one_major))
     temp_one = filter_based_on_time(smart_one, user_one_class_info[0], user_one_class_info[1])
 
