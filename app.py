@@ -268,7 +268,7 @@ def helper_function():
                 user_one_class_info.append(line[21:].strip("\n"))
             elif line[0:4] == "User" and user_one_major != "" and user_two_major == "":
                 user_two_major = line
-            elif user_one_major != "" and user_two_major != "" and line[0:4] != "User" and not line.isspace:
+            elif user_one_major != "" and user_two_major != "" and line[0:4] != "User":
                 user_two_class.append(line)
             elif line[0:19] == "User 2 Start Time: ":
                 user_two_class_info.append(line[19:].strip("\n"))
@@ -330,7 +330,9 @@ def helper_fun_two(para):
         store_two = pd.concat(frames)
     print("2:", store_two)
     rem = pd.concat([store_one, store_two], ignore_index=True)
-    rem = rem[(rem["Type"] == "Lecture") | (rem["Type"] == "Online") | (rem["Type"] == "Lecture-Discussion")]
+    rem = rem[(rem["Type"] == "Lecture") |
+    (rem["Type"] == "Online") |
+    (rem["Type"] == "Lecture-Discussion")]
     col = [
         "Year",
         "Term",
